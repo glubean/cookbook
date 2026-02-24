@@ -1,0 +1,5 @@
+{
+  "by-name": { "q": "phone", "minResults": 1 },
+  "by-category": { "q": "laptops", "minResults": 1 },
+  "empty-query": { "q": "", "minResults": 0 }
+}

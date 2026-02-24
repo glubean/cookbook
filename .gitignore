@@ -1,0 +1,13 @@
+# User-specific overrides — create these locally, never commit them
+.env.local
+.env.local.secrets
+.env.*.secrets
+.env.secrets
+
+# Local test data overrides (per-user, not committed)
+*.local.json
+
+# Runtime artifacts
+.glubean/
+results/
+*.result.json

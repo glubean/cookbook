@@ -1,0 +1,19 @@
+{
+  "imports": {
+    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.11.7",
+    "smee-client": "npm:smee-client@^2.0.1"
+  },
+  "tasks": {
+    "explore:dummyjson": "glubean run explore/dummyjson --result-json results/dummyjson.result.json",
+    "explore:github:smoke": "glubean run explore/github/smoke --result-json results/github-smoke.result.json",
+    "explore:github:advanced": "glubean run explore/github/advanced --result-json results/github-advanced.result.json",
+    "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
+    "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
+  },
+  "glubean": {
+    "run": {
+      "exploreDir": "explore",
+      "testDir": "tests"
+    }
+  }
+}

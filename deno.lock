@@ -1,0 +1,78 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@glubean/sdk@0.11": "0.11.1",
+    "jsr:@std/cli@1": "1.0.27",
+    "npm:@jsr/glubean__sdk@~0.11.7": "0.11.7",
+    "npm:ky@^1.14.0": "1.14.3",
+    "npm:smee-client@^2.0.1": "2.0.4"
+  },
+  "jsr": {
+    "@glubean/runner@0.11.4": {
+      "integrity": "f1e3f5bb0ac4a5137deaa34fdcbfe093dce8e00e108ab952a488bcf18f750bdf",
+      "dependencies": [
+        "jsr:@glubean/sdk",
+        "jsr:@std/cli",
+        "npm:ky"
+      ]
+    },
+    "@glubean/sdk@0.11.1": {
+      "integrity": "927d7fb3124d98b6485762d54ed6f11662b7becf101a25553da8fc1b4cce2ecf"
+    },
+    "@std/cli@1.0.27": {
+      "integrity": "eba97edd0891871a7410e835dd94b3c260c709cca5983df2689c25a71fbe04de"
+    }
+  },
+  "npm": {
+    "@jsr/glubean__sdk@0.11.7": {
+      "integrity": "sha512-/LSXJoI4+l/FVVNRT4MR6PRbJ66IEVPEX4Qiw6DkwrZkuhZurIFzy8WaZWt36yER9IyFlCAAQGgyLF0m3dLf7A==",
+      "dependencies": [
+        "@jsr/std__path",
+        "@jsr/std__yaml"
+      ],
+      "tarball": "https://npm.jsr.io/~/11/@jsr/glubean__sdk/0.11.7.tgz"
+    },
+    "@jsr/std__internal@1.0.12": {
+      "integrity": "sha512-6xReMW9p+paJgqoFRpOE2nogJFvzPfaLHLIlyADYjKMUcwDyjKZxryIbgcU+gxiTygn8yCjld1HoI0ET4/iZeA==",
+      "tarball": "https://npm.jsr.io/~/11/@jsr/std__internal/1.0.12.tgz"
+    },
+    "@jsr/std__path@1.1.4": {
+      "integrity": "sha512-SK4u9H6NVTfolhPdlvdYXfNFefy1W04AEHWJydryYbk+xqzNiVmr5o7TLJLJFqwHXuwMRhwrn+mcYeUfS0YFaA==",
+      "dependencies": [
+        "@jsr/std__internal"
+      ],
+      "tarball": "https://npm.jsr.io/~/11/@jsr/std__path/1.1.4.tgz"
+    },
+    "@jsr/std__yaml@1.0.12": {
+      "integrity": "sha512-pz/BisWZWH16JvLJBwrNwUwfIsRnf9qniMrmI6Z3vIAcVRVFcA5+i4o6z6QqsMKqFzjlB66WZE+jSyujT/RvRg==",
+      "tarball": "https://npm.jsr.io/~/11/@jsr/std__yaml/1.0.12.tgz"
+    },
+    "commander@12.1.0": {
+      "integrity": "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA=="
+    },
+    "eventsource@2.0.2": {
+      "integrity": "sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA=="
+    },
+    "ky@1.14.3": {
+      "integrity": "sha512-9zy9lkjac+TR1c2tG+mkNSVlyOpInnWdSMiue4F+kq8TwJSgv6o8jhLRg8Ho6SnZ9wOYUq/yozts9qQCfk7bIw=="
+    },
+    "smee-client@2.0.4": {
+      "integrity": "sha512-RxXCs0mfaxpI8JF4SeTM51XtRiprzW5g20HVt4aTQ36EB+RaN0aj0m/4EbXLGdfPlqahQ09d3UnJYmALN2CbYw==",
+      "dependencies": [
+        "commander",
+        "eventsource",
+        "validator"
+      ],
+      "bin": true
+    },
+    "validator@13.15.26": {
+      "integrity": "sha512-spH26xU080ydGggxRyR1Yhcbgx+j3y5jbNXk/8L+iRvdIEQ4uTRH2Sgf2dokud6Q4oAtsbNvJ1Ft+9xmm6IZcA=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@jsr/glubean__sdk@~0.11.7",
+      "npm:smee-client@^2.0.1"
+    ]
+  }
+}
