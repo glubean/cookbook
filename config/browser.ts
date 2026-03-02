@@ -10,7 +10,12 @@ import type { InstrumentedPage } from "@glubean/browser";
  */
 export const { chrome } = configure({
   plugins: {
-    chrome: browser({ launch: true }),
+    chrome: browser({
+      launch: true,
+      launchOptions: {
+        headless: false
+      },
+    }),
   },
 });
 
@@ -29,6 +34,8 @@ export const { chrome } = configure({
  * Screenshots are captured on failure by default.
  */
 export const browserTest = test.extend({
+  // Plugin fixtures need an explicit `use` type annotation so TypeScript
+  // can infer the fixture value (here `InstrumentedPage`) for test callbacks.
   page: async (ctx, use: (instance: InstrumentedPage) => Promise<void>) => {
     const pg = await chrome.newPage(ctx);
     try {
