@@ -1,6 +1,10 @@
 {
   "imports": {
-    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.11.7",
+    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.12.0",
+    "@glubean/browser": "npm:@jsr/glubean__browser@^0.4.0",
+    "ai": "npm:ai@^4",
+    "@ai-sdk/openai": "npm:@ai-sdk/openai@^1",
+    "zod": "npm:zod@^3",
     "smee-client": "npm:smee-client@^2.0.1"
   },
   "tasks": {
@@ -8,12 +12,15 @@
     "explore:github:smoke": "glubean run explore/github/smoke --result-json results/github-smoke.result.json",
     "explore:github:advanced": "glubean run explore/github/advanced --result-json results/github-advanced.result.json",
     "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
+    "explore:ai-contracts": "glubean run explore/ai-contracts --result-json results/ai-contracts.result.json",
+    "explore:browser": "glubean run explore/browser --result-json results/browser.result.json",
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "glubean": {
     "run": {
       "exploreDir": "explore",
-      "testDir": "tests"
+      "testDir": "tests",
+      "permissions": ["--allow-read", "--allow-env", "--allow-write", "--allow-run"]
     }
   }
 }
