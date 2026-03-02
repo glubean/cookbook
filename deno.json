@@ -1,11 +1,11 @@
 {
   "imports": {
-    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.12.0",
-    "@glubean/browser": "npm:@jsr/glubean__browser@^0.4.0",
-    "ai": "npm:ai@^4",
-    "@ai-sdk/openai": "npm:@ai-sdk/openai@^1",
-    "zod": "npm:zod@^3",
-    "smee-client": "npm:smee-client@^2.0.1"
+    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.12.1",
+    "@glubean/browser": "npm:@jsr/glubean__browser@^0.4.2",
+    "ai": "npm:ai@^4.3.19",
+    "@ai-sdk/openai": "npm:@ai-sdk/openai@^1.3.24",
+    "zod": "npm:zod@^3.25.76",
+    "smee-client": "npm:smee-client@^2.0.4"
   },
   "tasks": {
     "explore:dummyjson": "glubean run explore/dummyjson --result-json results/dummyjson.result.json",

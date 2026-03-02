@@ -1,0 +1,5 @@
+{
+  "label": "neutral-feedback",
+  "input": "The package arrived on time. It works as described in the listing.",
+  "expectedSentiment": "neutral"
+}

@@ -13,7 +13,7 @@ export const { chrome } = configure({
     chrome: browser({
       launch: true,
       launchOptions: {
-        headless: false
+        headless: true
       },
     }),
   },

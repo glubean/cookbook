@@ -1,0 +1,5 @@
+{
+  "label": "negative-review",
+  "input": "Terrible experience. The product broke after two days and support never responded.",
+  "expectedSentiment": "negative"
+}

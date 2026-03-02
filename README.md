@@ -90,11 +90,24 @@ No token required:
   explore/github/smoke/public.test.ts     shared config, public API
   explore/github/smoke/users.test.ts      test.each + fromDir
 
+Browser automation (needs Chrome):
+  explore/browser/login.test.ts           form fill + navigation + assertions
+  explore/browser/scrape.test.ts          data extraction with evaluate()
+  explore/browser/dynamic.test.ts         dropdowns, checkboxes, lazy content
+
 Needs token:
   explore/github/advanced/auth.test.ts    auth + multi-step
   explore/stripe/webhook.test.ts          webhook E2E (+ tunnel)
 
+AI contract testing (needs OpenAI key):
+  explore/ai-contracts/basic.test.ts      schema + semantic assertions
+  explore/ai-contracts/regression.test.ts golden dataset with test.each
+  explore/ai-contracts/consistency.test.ts N-runs stability check
+  explore/ai-contracts/judge.test.ts      LLM-as-judge evaluation
+
 Project structure patterns:
+  config/ai.ts                            shared AI plugin via definePlugin()
+  config/browser.ts                       shared browser plugin via configure()
   config/github-api.ts                    shared HTTP client via configure()
   utils/stripe.ts                         pure helper functions for tests
 ```
@@ -107,11 +120,20 @@ Project structure patterns:
 | Data-driven named cases (`pick`) | [`dummyjson/search.test.ts`](explore/dummyjson/search.test.ts)         |
 | Data-driven file cases (`each`)  | [`github/smoke/users.test.ts`](explore/github/smoke/users.test.ts)     |
 | Shared HTTP config (`configure`) | [`config/github-api.ts`](config/github-api.ts)                         |
+| Browser plugin config            | [`config/browser.ts`](config/browser.ts)                                |
+| Browser login flow               | [`browser/login.test.ts`](explore/browser/login.test.ts)               |
+| Browser data extraction          | [`browser/scrape.test.ts`](explore/browser/scrape.test.ts)             |
+| Browser dynamic content          | [`browser/dynamic.test.ts`](explore/browser/dynamic.test.ts)           |
 | Authenticated requests           | [`github/advanced/auth.test.ts`](explore/github/advanced/auth.test.ts) |
 | Multi-step state flow            | [`github/advanced/auth.test.ts`](explore/github/advanced/auth.test.ts) |
 | Error handling                   | [`dummyjson/errors.test.ts`](explore/dummyjson/errors.test.ts)         |
 | Pagination checks                | [`dummyjson/pagination.test.ts`](explore/dummyjson/pagination.test.ts) |
 | Webhook setup/teardown           | [`stripe/webhook.test.ts`](explore/stripe/webhook.test.ts)             |
+| AI schema contract               | [`ai-contracts/basic.test.ts`](explore/ai-contracts/basic.test.ts)     |
+| AI golden dataset regression     | [`ai-contracts/regression.test.ts`](explore/ai-contracts/regression.test.ts) |
+| AI consistency (N runs)          | [`ai-contracts/consistency.test.ts`](explore/ai-contracts/consistency.test.ts) |
+| LLM-as-judge                     | [`ai-contracts/judge.test.ts`](explore/ai-contracts/judge.test.ts)     |
+| AI plugin config (`definePlugin`)| [`config/ai.ts`](config/ai.ts)                                         |
 | Pure test utilities              | [`utils/stripe.ts`](utils/stripe.ts)                                   |
 
 ## Git-safe local data

@@ -1,0 +1,5 @@
+{
+  "label": "positive-review",
+  "input": "This product is absolutely fantastic, best purchase I've made all year!",
+  "expectedSentiment": "positive"
+}

@@ -11,3 +11,4 @@
 .glubean/
 results/
 *.result.json
+.claude/
