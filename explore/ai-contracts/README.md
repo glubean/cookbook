@@ -16,9 +16,9 @@ patterns work with any provider (Anthropic, Google, local models).
 ```bash
 # Editor — click ▶ next to any test(
 # CLI
-glubean run explore/ai-contracts
-# Deno Task
-deno task explore:ai-contracts
+npx glubean run explore/ai-contracts
+# npm script
+npm run explore:ai-contracts
 ```
 
 ## Recipes

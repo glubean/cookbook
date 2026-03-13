@@ -1,26 +1,20 @@
 {
-  "imports": {
-    "@glubean/sdk": "npm:@jsr/glubean__sdk@^0.12.1",
-    "@glubean/browser": "npm:@jsr/glubean__browser@^0.4.2",
-    "ai": "npm:ai@^4.3.19",
-    "@ai-sdk/openai": "npm:@ai-sdk/openai@^1.3.24",
-    "zod": "npm:zod@^3.25.76",
-    "smee-client": "npm:smee-client@^2.0.4"
-  },
-  "tasks": {
+  "name": "@glubean/cookbook",
+  "private": true,
+  "type": "module",
+  "scripts": {
     "explore:dummyjson": "glubean run explore/dummyjson --result-json results/dummyjson.result.json",
     "explore:github:smoke": "glubean run explore/github/smoke --result-json results/github-smoke.result.json",
     "explore:github:advanced": "glubean run explore/github/advanced --result-json results/github-advanced.result.json",
     "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
     "explore:ai-contracts": "glubean run explore/ai-contracts --result-json results/ai-contracts.result.json",
-    "explore:browser": "glubean run explore/browser --result-json results/browser.result.json",
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
-  "glubean": {
-    "run": {
-      "exploreDir": "explore",
-      "testDir": "tests",
-      "permissions": ["--allow-read", "--allow-env", "--allow-write", "--allow-run"]
-    }
+  "dependencies": {
+    "@glubean/sdk": "file:../nodev/packages/sdk",
+    "@glubean/cli": "file:../nodev/packages/cli"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
   }
 }

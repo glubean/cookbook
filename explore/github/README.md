@@ -5,7 +5,7 @@ multi-step flows.
 
 > **How to run?** See
 > [Start](../../README.md#start-recommended-click--in-editor) for all ways to
-> run (editor ▶, CLI, Deno Tasks, Glubean panel).
+> run (editor ▶, CLI, npm scripts, Glubean panel).
 
 ## smoke/ — No setup required
 
