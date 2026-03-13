@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": ["explore/**/*.ts", "tests/**/*.ts", "config/**/*.ts", "utils/**/*.ts"],
+  "exclude": ["explore/browser/**", "config/browser.ts", "explore/ai-contracts/**", "config/ai.ts", "explore/stripe/**", "utils/stripe.ts"]
+}

@@ -36,18 +36,15 @@ repository.
 4. Or run from the **Glubean panel** in the sidebar (Tasks section) if you
    prefer panel-driven execution.
 
-On first run, the extension auto-installs Deno and the Glubean CLI. This is a
-one-time setup that typically takes 1–3 minutes depending on your network. After
-that, every run is instant. If setup stalls, click the status bar hint:
-**Glubean: Setup needed**.
+No build step needed — the extension runs TypeScript directly.
 
 ### Option B: CLI-first
 
-If you prefer terminal workflow, install CLI first, then run:
+If you prefer terminal workflow:
 
 ```bash
-curl -fsSL https://glubean.com/install.sh | sh
-glubean run explore/dummyjson
+npm install
+npx glubean run explore/dummyjson
 ```
 
 CLI runs always write a machine-readable result file to:
@@ -63,19 +60,18 @@ If you want a stable custom artifact path (for scripts/CI), pass
 glubean run explore/dummyjson --result-json results/dummyjson.result.json
 ```
 
-### Option C: Deno Tasks (scriptable + VS Code Task runner)
+### Option C: npm scripts
 
-This repository includes ready-made tasks in `deno.json`:
+This repository includes ready-made scripts in `package.json`:
 
 ```bash
-deno task explore:dummyjson
-deno task explore:github:smoke
-deno task explore:smoke
+npm run explore:dummyjson
+npm run explore:github:smoke
+npm run explore:smoke
 ```
 
-You can run the same tasks from VS Code with **Tasks: Run Task**. Each task
-writes a stable artifact under `results/*.result.json` and also updates
-`.glubean/last-run.result.json`.
+Each script writes a stable artifact under `results/*.result.json` and also
+updates `.glubean/last-run.result.json`.
 
 ## Path map
 

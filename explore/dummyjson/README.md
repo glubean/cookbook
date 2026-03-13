@@ -17,18 +17,13 @@ DummyJSON is a public fake API, so you can run everything here without tokens.
 4. Or run from the **Glubean panel** in the sidebar (Tasks section) if you
    prefer panel-driven execution.
 
-On first run, the extension auto-installs Deno and the Glubean CLI. This is a
-one-time setup that typically takes 1–3 minutes depending on your network. After
-that, every run is instant. If setup stalls, click the status bar hint:
-**Glubean: Setup needed**.
+No build step needed — the extension runs TypeScript directly.
 
 ### Option B: CLI-first
 
-Install CLI and run all DummyJSON recipes:
-
 ```bash
-curl -fsSL https://glubean.com/install.sh | sh
-glubean run explore/dummyjson
+npm install
+npx glubean run explore/dummyjson
 ```
 
 CLI runs always write a machine-readable result file to:
@@ -44,15 +39,11 @@ If you want a stable custom artifact path (for scripts/CI), pass
 glubean run explore/dummyjson --result-json results/dummyjson.result.json
 ```
 
-### Option C: Deno Tasks
-
-Use the preconfigured task:
+### Option C: npm scripts
 
 ```bash
-deno task explore:dummyjson
+npm run explore:dummyjson
 ```
-
-In VS Code, you can also run it via **Tasks: Run Task**.
 
 ## Recipes
 

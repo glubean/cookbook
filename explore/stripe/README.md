@@ -4,7 +4,7 @@ Advanced recipe for webhook end-to-end testing with setup/teardown.
 
 > **How to run?** See
 > [Start](../../README.md#start-recommended-click--in-editor) for all ways to
-> run (editor ▶, CLI, Deno Tasks, Glubean panel).
+> run (editor ▶, CLI, npm scripts, Glubean panel).
 
 This is intentionally focused on one pattern:
 

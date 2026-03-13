@@ -41,17 +41,26 @@ export const webhookDelivery = test("stripe-webhook-delivery")
       resolveHook = res;
     });
 
-    const server = Deno.serve({ port: 0 }, async (req) => {
-      const body = await req.text();
-      const headers: Record<string, string> = {};
-      req.headers.forEach((v, k) => {
-        headers[k] = v;
+    const server = await new Promise<import("node:http").Server>((resolve) => {
+      const srv = import("node:http").then(({ createServer }) => {
+        const s = createServer((req, res) => {
+          let body = "";
+          req.on("data", (c) => (body += c));
+          req.on("end", () => {
+            const headers: Record<string, string> = {};
+            for (const [k, v] of Object.entries(req.headers)) {
+              if (typeof v === "string") headers[k] = v;
+            }
+            resolveHook({ headers, body });
+            res.end("ok");
+          });
+        });
+        s.listen(0, () => resolve(s));
+        return s;
       });
-      resolveHook({ headers, body });
-      return new Response("ok");
     });
 
-    const { port } = server.addr as Deno.NetAddr;
+    const port = (server.address() as { port: number }).port;
     log(`Local server listening on :${port}`);
 
     const smee = new SmeeClient({
@@ -125,5 +134,5 @@ export const webhookDelivery = test("stripe-webhook-delivery")
       log(`Deleted webhook endpoint: ${state.endpointId}`);
     }
     state.events.close();
-    await state.server.shutdown();
+    state.server.close();
   });

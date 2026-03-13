@@ -22,7 +22,7 @@ export const getProduct = test(
   { id: "dj-get-product", name: "GET product", tags: ["smoke"] },
   async ({ http, expect, log }) => {
     const product = await http
-      .get(`${API}/products/1`)
+      .get(`${API}/products/2`)
       .json<{ id: number; title: string; price: number; rating: number }>();
 
     expect(product.id).toBe(1);
