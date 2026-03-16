@@ -8,13 +8,21 @@
     "explore:github:advanced": "glubean run explore/github/advanced --result-json results/github-advanced.result.json",
     "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
     "explore:ai-contracts": "glubean run explore/ai-contracts --result-json results/ai-contracts.result.json",
+    "explore:session-scope": "glubean run explore/session-scope --result-json results/session-scope.result.json",
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "dependencies": {
-    "@glubean/sdk": "file:../nodev/packages/sdk",
-    "@glubean/cli": "file:../nodev/packages/cli"
+    "@glubean/cli": "^0.1.14",
+    "@glubean/sdk": "^0.1.14",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "typescript": "^5.7.0"
-  }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
