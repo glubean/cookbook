@@ -12,6 +12,7 @@
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "dependencies": {
+    "@glubean/browser": "^0.1.6",
     "@glubean/cli": "^0.1.14",
     "@glubean/sdk": "^0.1.14",
     "zod": "^4.3.6"
