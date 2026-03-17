@@ -8,7 +8,7 @@
  *   - Logging output to the trace viewer
  *
  * Run:
- *   glubean run explore/dummyjson
+ *   npx glubean run explore/dummyjson
  */
 import { test } from "@glubean/sdk";
 

@@ -15,17 +15,20 @@ This is intentionally focused on one pattern:
 
 ## Setup required
 
-Add these values to `.env.secrets` at the project root:
+Copy `.env.secrets.example` to `.env.secrets`, then make sure your host
+environment has these values exported (or replace them locally in the copied
+file). The real `.env.secrets` file is gitignored and should never be
+committed.
 
 ```bash
-STRIPE_SECRET_KEY=sk_test_...
-SMEE_URL=https://smee.io/your-channel
+STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+SMEE_URL=${SMEE_URL}
 ```
 
 ## Run
 
 ```bash
-glubean run explore/stripe
+npx glubean run explore/stripe
 ```
 
 ## Recipe

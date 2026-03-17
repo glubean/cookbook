@@ -1,0 +1,13 @@
+testCases:
+  - id: 1
+    label: mascara
+    minPrice: 1
+    category: beauty
+  - id: 2
+    label: eyeshadow
+    minPrice: 1
+    category: beauty
+  - id: 3
+    label: powder
+    minPrice: 1
+    category: fragrances

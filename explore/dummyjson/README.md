@@ -36,7 +36,7 @@ If you want a stable custom artifact path (for scripts/CI), pass
 `--result-json`:
 
 ```bash
-glubean run explore/dummyjson --result-json results/dummyjson.result.json
+npx glubean run explore/dummyjson --result-json results/dummyjson.result.json
 ```
 
 ### Option C: npm scripts
@@ -51,8 +51,14 @@ npm run explore:dummyjson
 | ------------------------------------------ | ---------- | ------------------------------ |
 | [`smoke.test.ts`](smoke.test.ts)           | Zero setup | basic `test`, assertions, logs |
 | [`search.test.ts`](search.test.ts)         | Zero setup | `test.pick` + `fromDir.merge`  |
+| [`csv.test.ts`](csv.test.ts)               | Zero setup | `fromCsv` + `test.each`        |
+| [`yaml.test.ts`](yaml.test.ts)             | Zero setup | `fromYaml` + `test.each`       |
 | [`pagination.test.ts`](pagination.test.ts) | Zero setup | pagination assertions          |
 | [`errors.test.ts`](errors.test.ts)         | Zero setup | error handling assertions      |
+| [`validate.test.ts`](validate.test.ts)     | Zero setup | `ctx.validate()` + Zod         |
+| [`diagnostics.test.ts`](diagnostics.test.ts) | Zero setup | metrics + events + warnings    |
+| [`polling.test.ts`](polling.test.ts)       | Zero setup | `ctx.pollUntil()`              |
+| [`skip.test.ts`](skip.test.ts)             | Zero setup | `ctx.skip()`                   |
 
 ## When to use
 

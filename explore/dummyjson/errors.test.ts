@@ -1,21 +1,15 @@
 /**
  * DummyJSON expected-error pattern.
  *
- * The SDK's HTTP client throws on non-2xx responses, so try/catch is
- * the idiomatic way to assert expected failures like 404 or 401.
+ * The SDK's HTTP client returns the response by default, even on 4xx/5xx.
+ * That means expected failures like 404 can be asserted directly.
  *
  * Run:
- *   glubean run explore/dummyjson/errors.test.ts
+ *   npx glubean run explore/dummyjson/errors.test.ts
  */
 import { test } from "@glubean/sdk";
 
 const API = "https://dummyjson.com";
-
-type HttpLikeError = {
-  message?: string;
-  response?: { status?: number };
-  status?: number;
-};
 
 export const assertNotFound = test(
   {
@@ -24,21 +18,13 @@ export const assertNotFound = test(
     tags: ["smoke", "errors"],
   },
   async ({ http, expect, log }) => {
-    let status: number | undefined;
-    let message = "";
+    const res = await http.get(`${API}/products/0`);
 
-    try {
-      await http.get(`${API}/products/0`).json();
+    expect(res).toHaveStatus(404);
 
-      // This line should never run. If it runs, the request did not fail.
-      expect("request should fail").toBe("request failed as expected");
-    } catch (error) {
-      const httpError = error as HttpLikeError;
-      status = httpError.response?.status ?? httpError.status;
-      message = httpError.message ?? "";
-    }
+    const body = await res.json<{ message?: string }>();
+    expect(body.message).toBeDefined();
 
-    expect(status).toBe(404);
-    log(`Caught expected 404. Message: ${message}`);
+    log(`Got expected 404: ${body.message ?? "(no message)"}`);
   },
 );

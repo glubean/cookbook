@@ -14,10 +14,10 @@
  * then local files — local keys override shared ones.
  *
  * Run all examples:
- *   glubean run explore/dummyjson/search.test.ts --pick all
+ *   npx glubean run explore/dummyjson/search.test.ts --pick all
  *
  * Run a specific example:
- *   glubean run explore/dummyjson/search.test.ts --pick by-name
+ *   npx glubean run explore/dummyjson/search.test.ts --pick by-name
  */
 import { fromDir, test } from "@glubean/sdk";
 

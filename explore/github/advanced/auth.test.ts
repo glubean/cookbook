@@ -2,12 +2,13 @@
  * GitHub Authenticated API — requires a personal access token.
  *
  * Setup:
- *   1. Copy .env.example to .env.secrets
- *   2. Add your token: GITHUB_TOKEN=ghp_...
+ *   1. Copy .env.secrets.example to .env.secrets
+ *   2. Export GITHUB_TOKEN in your host shell, or replace the value locally
+ *   3. Example: GITHUB_TOKEN=${GITHUB_TOKEN}
  *      Get one at: https://github.com/settings/tokens (read:user, public_repo)
  *
  * Run:
- *   glubean run explore/github/advanced
+ *   npx glubean run explore/github/advanced
  */
 import { test } from "@glubean/sdk";
 import { githubAuthApi } from "../../../config/github-api.ts";

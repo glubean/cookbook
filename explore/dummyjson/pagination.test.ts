@@ -2,7 +2,7 @@
  * DummyJSON pagination pattern.
  *
  * Run:
- *   glubean run explore/dummyjson/pagination.test.ts
+ *   npx glubean run explore/dummyjson/pagination.test.ts
  */
 import { test } from "@glubean/sdk";
 

@@ -8,7 +8,7 @@
  *   { "username": "octocat", "expectReposGte": 1 }
  *
  * Run:
- *   glubean run explore/github/smoke/users.test.ts
+ *   npx glubean run explore/github/smoke/users.test.ts
  */
 import { fromDir, test } from "@glubean/sdk";
 import { githubApi } from "../../../config/github-api.ts";

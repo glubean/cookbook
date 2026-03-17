@@ -8,7 +8,7 @@
  * submit, and assert you land on the right page.
  *
  * Run:
- *   glubean run explore/browser/login.test.ts
+ *   npx glubean run explore/browser/login.test.ts
  */
 import { browserTest } from "../../config/browser.ts";
 

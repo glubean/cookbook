@@ -10,14 +10,14 @@
  *   6. Cleans up the webhook endpoint
  *
  * Setup:
- *   1. Copy .env.example to .env.secrets
+ *   1. Copy .env.secrets.example to .env.secrets
  *   2. Get a smee.io channel: https://smee.io/new → copy the URL
- *   3. Fill in .env.secrets:
- *        SMEE_URL=https://smee.io/your-channel
- *        STRIPE_SECRET_KEY=sk_test_...
+ *   3. Export SMEE_URL and STRIPE_SECRET_KEY in your host shell, or replace them locally:
+ *        SMEE_URL=${SMEE_URL}
+ *        STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
  *
  * Run:
- *   glubean run explore/stripe
+ *   npx glubean run explore/stripe
  */
 import { test } from "@glubean/sdk";
 import SmeeClient from "smee-client";

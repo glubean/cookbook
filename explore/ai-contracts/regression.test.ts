@@ -9,7 +9,7 @@
  *   { "label": "sarcasm", "input": "Oh great, another meeting", "expectedSentiment": "negative" }
  *
  * Run:
- *   glubean run explore/ai-contracts/regression.test.ts
+ *   npx glubean run explore/ai-contracts/regression.test.ts
  */
 import { fromDir, test } from "@glubean/sdk";
 import { z } from "zod";

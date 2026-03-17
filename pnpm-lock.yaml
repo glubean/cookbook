@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@glubean/browser':
-        specifier: ^0.1.6
-        version: 0.1.6(puppeteer-core@24.39.1)
+        specifier: ^0.1.9
+        version: 0.1.9(puppeteer-core@24.39.1)
       '@glubean/cli':
         specifier: ^0.1.14
         version: 0.1.14(@types/node@25.5.0)
@@ -183,8 +183,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@glubean/browser@0.1.6':
-    resolution: {integrity: sha512-Y15KDmYWIdnlvhf3WelUT1RS+7/1cBuDuxII3SQfvSDhwtdgozETFJ0xNQavQVsUQN+JFdpK8fHwsl3xQeet2A==}
+  '@glubean/browser@0.1.9':
+    resolution: {integrity: sha512-UILgT00V78epao9MygEHD5Imc7jwyqXg6K+y+BhC07CZ3V5jSkMYFnr4N8hPY+Y6tjMH+irJUj2VLRuWy+Mbvw==}
     peerDependencies:
       puppeteer-core: '>=22'
 
@@ -204,8 +204,8 @@ packages:
   '@glubean/sdk@0.1.14':
     resolution: {integrity: sha512-vbNt+eUnbS3maFgYOhhHPS0zhgBzmWpZ6ZGfHnew0gwkgiZtxfN+PJ6exrTAr+leVuPqISEc8N4bOZQoBISxgw==}
 
-  '@glubean/sdk@0.1.6':
-    resolution: {integrity: sha512-V/wUuA4p5yiW2wm68ysfT31kZ6UkFJWKbZCcicieim3r8mm1SOH+oT/hbjgRiiqxLQ9cKdsI73AezZXFOGOrwg==}
+  '@glubean/sdk@0.1.15':
+    resolution: {integrity: sha512-f1cv+LfLiBNDbC66EqIz++OgohZHB+oW0Lrk9VRxm3hcTNnwgM/soMJjTBmS9xbiIUPIpDib1cymSvMlMJk+MA==}
 
   '@inquirer/ansi@1.0.2':
     resolution: {integrity: sha512-S8qNSZiYzFd0wAcyG5AXCvUHC5Sr7xpZ9wZ2py9XR88jUz8wooStVx5M6dRzczbBWjic9NP7+rY0Xi7qqK/aMQ==}
@@ -1039,9 +1039,9 @@ snapshots:
   '@esbuild/win32-x64@0.27.4':
     optional: true
 
-  '@glubean/browser@0.1.6(puppeteer-core@24.39.1)':
+  '@glubean/browser@0.1.9(puppeteer-core@24.39.1)':
     dependencies:
-      '@glubean/sdk': 0.1.6
+      '@glubean/sdk': 0.1.15
       puppeteer-core: 24.39.1
 
   '@glubean/cli@0.1.14(@types/node@25.5.0)':
@@ -1076,7 +1076,7 @@ snapshots:
     dependencies:
       yaml: 2.8.2
 
-  '@glubean/sdk@0.1.6':
+  '@glubean/sdk@0.1.15':
     dependencies:
       yaml: 2.8.2
 

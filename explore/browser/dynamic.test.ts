@@ -9,7 +9,7 @@
  * dropdowns, checkboxes, elements that appear/disappear.
  *
  * Run:
- *   glubean run explore/browser/dynamic.test.ts
+ *   npx glubean run explore/browser/dynamic.test.ts
  */
 import { browserTest } from "../../config/browser.ts";
 
@@ -23,8 +23,8 @@ export const dropdown = browserTest(
   { id: "browser-dynamic-dropdown", name: "dropdown selection", tags: ["smoke"] },
   async ({ page }) => {
     await page.goto(`${BASE}/dropdown`);
-    await page.select("#dropdown", "2");
-    await page.expectAttribute("#dropdown", "value", "2");
+    const selected = await page.select("#dropdown", "2");
+    if (!selected.includes("2")) throw new Error(`expected "2" selected, got ${selected}`);
   },
 );
 

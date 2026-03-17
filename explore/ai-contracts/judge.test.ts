@@ -7,7 +7,7 @@
  * Requires OPENAI_API_KEY in .env.secrets.
  *
  * Run:
- *   glubean run explore/ai-contracts/judge.test.ts
+ *   npx glubean run explore/ai-contracts/judge.test.ts
  */
 import { test } from "@glubean/sdk";
 import { z } from "zod";

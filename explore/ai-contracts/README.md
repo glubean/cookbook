@@ -8,8 +8,9 @@ patterns work with any provider (Anthropic, Google, local models).
 
 ## Setup
 
-1. Copy `.env.example` to `.env.secrets`
-2. Add your OpenAI key: `OPENAI_API_KEY=sk-...`
+1. Copy `.env.secrets.example` to `.env.secrets`
+2. Make sure your host environment already has `OPENAI_API_KEY` exported, or replace the value locally
+3. The real `.env.secrets` file is gitignored and should never be committed
 
 ## Run
 

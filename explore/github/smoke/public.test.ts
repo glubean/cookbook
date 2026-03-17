@@ -2,7 +2,7 @@
  * GitHub Public API — no token required.
  *
  * Run:
- *   glubean run explore/github/smoke
+ *   npx glubean run explore/github/smoke
  *
  * What you'll see:
  *   - Trace viewer opens with full request/response for each test

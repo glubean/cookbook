@@ -9,7 +9,7 @@
  * or verifying rendered content that isn't in the DOM statically.
  *
  * Run:
- *   glubean run explore/browser/scrape.test.ts
+ *   npx glubean run explore/browser/scrape.test.ts
  */
 import { browserTest } from "../../config/browser.ts";
 

@@ -10,7 +10,7 @@ multi-step flows.
 ## smoke/ — No setup required
 
 ```bash
-glubean run explore/github/smoke
+npx glubean run explore/github/smoke
 ```
 
 Hits GitHub's public API. No token needed.
@@ -22,15 +22,18 @@ Hits GitHub's public API. No token needed.
 
 ## advanced/ — Requires a GitHub token
 
-1. Add your token to `.env.secrets` at the project root:
+1. Copy `.env.secrets.example` to `.env.secrets` at the project root.
+2. Make sure your host environment already has `GITHUB_TOKEN` exported, or replace the value locally.
+3. The real `.env.secrets` file is gitignored and should never be committed.
+4. Example:
    ```
-   GITHUB_TOKEN=ghp_...
+   GITHUB_TOKEN=${GITHUB_TOKEN}
    ```
    Get one at [github.com/settings/tokens](https://github.com/settings/tokens) —
    scopes: `read:user`, `public_repo`
 
 ```bash
-glubean run explore/github/advanced
+npx glubean run explore/github/advanced
 ```
 
 | Test                   | What it does                                   |
