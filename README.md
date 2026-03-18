@@ -36,6 +36,21 @@ The intended learning order is:
 If this is your first time with Glubean, stay in `explore/dummyjson/` until the
 editor loop feels natural.
 
+## AI Tools (optional, recommended)
+
+Set up MCP + AI skill so your editor can discover, run, and explain cookbook tests:
+
+```bash
+npx glubean@latest config mcp      # MCP server for structured test execution
+npx glubean@latest config skill    # AI test-writing skill (/glubean)
+```
+
+Supports Claude Code, Codex, and Cursor. After setup, try:
+
+```
+/glubean run the dummyjson smoke tests and explain what each one does
+```
+
 ## Start (recommended: click ▶ in editor)
 
 ### Option A: Editor-first (lowest friction)
