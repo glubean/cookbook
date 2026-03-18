@@ -6,7 +6,7 @@ import { test, configure } from "@glubean/sdk";
  */
 
 const { http } = configure({
-  http: { prefixUrl: "DUMMYJSON_API" },
+  http: { prefixUrl: "{{DUMMYJSON_API}}" },
 });
 
 export const getOwnProfile = test("get-own-profile", async (ctx) => {

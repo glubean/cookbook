@@ -12,7 +12,7 @@ import type { ZodType } from "zod";
  *   const { object } = await ai.generate(MySchema, "prompt", "gpt-4o");
  */
 export const { ai } = configure({
-  secrets: { key: "OPENAI_API_KEY" },
+  secrets: { key: "{{OPENAI_API_KEY}}" },
   plugins: {
     ai: definePlugin((rt) => {
       const openai = createOpenAI({
