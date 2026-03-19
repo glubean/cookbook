@@ -4,6 +4,9 @@ Zero-config recipes for learning core Glubean patterns.
 
 DummyJSON is a public fake API, so you can run everything here without tokens.
 
+Data-backed examples in this folder intentionally use bare `data/...` paths.
+That is the default cookbook style for shared project data.
+
 ## Start (recommended: click ▶ in editor)
 
 ### Option A: Editor-first (lowest friction)

@@ -1,0 +1,29 @@
+# Structured test data for product search.
+#
+# Structure per case:
+#   description  — human-readable label, printed in logs/results
+#   query        — drives the HTTP request (search params)
+#   expect       — drives assertions (what the response should satisfy)
+#
+# This is NOT flat key-value: nest as deep as you need.
+
+# Search by product name — basic keyword search
+- description: Search by product name
+  query:
+    q: phone
+  expect:
+    minResults: 1
+
+# Search by category — broader search
+- description: Search products by category keyword
+  query:
+    q: laptops
+  expect:
+    minResults: 1
+
+# Empty query — edge case
+- description: Empty search query
+  query:
+    q: ""
+  expect:
+    minResults: 0

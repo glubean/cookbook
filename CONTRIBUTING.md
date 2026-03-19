@@ -37,6 +37,8 @@ data/[recipe-name]/
 
 - **`test.pick` + `fromDir.merge()`** — for named examples (override semantics)
 - **`test.each` + `fromDir()`** — for test case lists (append semantics)
+- In cookbook examples, prefer bare paths like `data/search-queries/` so the
+  snippet still reads cleanly even when the test file lives several directories deep.
 
 Shared files load first, then `*.local.json` files. This way contributors and
 users can each have their own data without conflicts.

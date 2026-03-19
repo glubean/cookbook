@@ -8,21 +8,27 @@ importers:
 
   .:
     dependencies:
+      '@glubean/auth':
+        specifier: ^0.1.8
+        version: 0.1.8
       '@glubean/browser':
         specifier: ^0.1.9
         version: 0.1.9(puppeteer-core@24.39.1)
       '@glubean/cli':
-        specifier: ^0.1.14
-        version: 0.1.14(@types/node@25.5.0)
+        specifier: ^0.1.34
+        version: 0.1.34(@types/node@25.5.0)
+      '@glubean/runner':
+        specifier: ^0.1.20
+        version: 0.1.20
       '@glubean/sdk':
-        specifier: ^0.1.14
-        version: 0.1.14
+        specifier: ^0.1.20
+        version: 0.1.20
       zod:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
       typescript:
-        specifier: ^5.7.0
+        specifier: ^5.9.3
         version: 5.9.3
 
 packages:
@@ -183,29 +189,35 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@glubean/auth@0.1.8':
+    resolution: {integrity: sha512-FNQVvJwCu0p5K7FWw9nrhqDGmfm0lXOY3znFSthqmVyHlDcPnYDP+6Ead+cwaahsx4bS8fLjOvSMrhiNlHcv0A==}
+
   '@glubean/browser@0.1.9':
     resolution: {integrity: sha512-UILgT00V78epao9MygEHD5Imc7jwyqXg6K+y+BhC07CZ3V5jSkMYFnr4N8hPY+Y6tjMH+irJUj2VLRuWy+Mbvw==}
     peerDependencies:
       puppeteer-core: '>=22'
 
-  '@glubean/cli@0.1.14':
-    resolution: {integrity: sha512-SdppKmzakh0e8z5d1Yg7kKw2y3P/TyzUxat6K6y9F+qksR3IKuBwv6ZtfNzsujEKrf96RrWOyNlomtJpI9fF4Q==}
+  '@glubean/cli@0.1.34':
+    resolution: {integrity: sha512-iv0PhqX9Vk45/DM/MOSl6DfBboTyLMyPis404wQUA5YQqnL9uLuoBvth1f4PP/4wyBNTtTk1Fw/hV5ZulOn1VA==}
     hasBin: true
 
-  '@glubean/redaction@0.1.14':
-    resolution: {integrity: sha512-u6aXIXQsVNzr4m9obQXPZo/BSS1OwaoHqtp8Pf6gpMW97DqY/QLdeXLyX8ej3u0o3cQXN2WA2Ze8RrW7FydY2w==}
+  '@glubean/redaction@0.1.16':
+    resolution: {integrity: sha512-JvP42XWD+6DNQ5xZ9oJXd9qd1L/qhrR5zqYHWi/m4WKK6R7NbSPQ0z1fyXmXBgjWdV4wj+1Bxp1/GoRHe0Pvlg==}
 
-  '@glubean/runner@0.1.14':
-    resolution: {integrity: sha512-mtfE1edHgvnH2jFDQBDlsHaMYQM+xq9VGad8PW5jY31so4H4nzyE38GWMoofED4/ERuTTDquuPQ6+rdF0cqZcw==}
+  '@glubean/runner@0.1.20':
+    resolution: {integrity: sha512-QANvkI6mjEFDJuXqmGWU6sD5mGdbIpuPZejYOmR0fxSbCsGBrerSFNv+QrV6MGNq1c+fAvXdRNmzjkIaUCLPwg==}
 
-  '@glubean/scanner@0.1.14':
-    resolution: {integrity: sha512-pwGI73BAO9UbXzADFNVKXClCovpbcUFtVZ4axJ+2S9R9tKfHNH3U9lQbS+6izYpph6/8I2N1HZqtYVsXMybfwg==}
-
-  '@glubean/sdk@0.1.14':
-    resolution: {integrity: sha512-vbNt+eUnbS3maFgYOhhHPS0zhgBzmWpZ6ZGfHnew0gwkgiZtxfN+PJ6exrTAr+leVuPqISEc8N4bOZQoBISxgw==}
+  '@glubean/scanner@0.1.18':
+    resolution: {integrity: sha512-8AjpgChVmw2CuuTF5zzhJ59PP59fimlpoI50qxAKd4GNvvdusNoHd/vAJealLhIF7u0KgO3SNfjI9yHzlOYfxA==}
 
   '@glubean/sdk@0.1.15':
     resolution: {integrity: sha512-f1cv+LfLiBNDbC66EqIz++OgohZHB+oW0Lrk9VRxm3hcTNnwgM/soMJjTBmS9xbiIUPIpDib1cymSvMlMJk+MA==}
+
+  '@glubean/sdk@0.1.18':
+    resolution: {integrity: sha512-bqAuuT1TXGgeNQjFvUbX8dj0NTcIKDTgbtT+fXksCIbe8e72OvSdfagxOp+Smv8hwtB/qoOMNhRVnPppmC3DPA==}
+
+  '@glubean/sdk@0.1.20':
+    resolution: {integrity: sha512-BOvg+F3Wda52CRLSzMgvT1vbl5I3gYVaH0ZtfjSaS2tz6Q72qpgD3sHmJKTfRSdC+tpxinzv49yRoA+hOdeuMQ==}
 
   '@inquirer/ansi@1.0.2':
     resolution: {integrity: sha512-S8qNSZiYzFd0wAcyG5AXCvUHC5Sr7xpZ9wZ2py9XR88jUz8wooStVx5M6dRzczbBWjic9NP7+rY0Xi7qqK/aMQ==}
@@ -1039,17 +1051,21 @@ snapshots:
   '@esbuild/win32-x64@0.27.4':
     optional: true
 
+  '@glubean/auth@0.1.8':
+    dependencies:
+      '@glubean/sdk': 0.1.18
+
   '@glubean/browser@0.1.9(puppeteer-core@24.39.1)':
     dependencies:
       '@glubean/sdk': 0.1.15
       puppeteer-core: 24.39.1
 
-  '@glubean/cli@0.1.14(@types/node@25.5.0)':
+  '@glubean/cli@0.1.34(@types/node@25.5.0)':
     dependencies:
-      '@glubean/redaction': 0.1.14
-      '@glubean/runner': 0.1.14
-      '@glubean/scanner': 0.1.14
-      '@glubean/sdk': 0.1.14
+      '@glubean/redaction': 0.1.16
+      '@glubean/runner': 0.1.20
+      '@glubean/scanner': 0.1.18
+      '@glubean/sdk': 0.1.20
       '@inquirer/prompts': 7.10.1(@types/node@25.5.0)
       archiver: 7.0.1
       commander: 13.1.0
@@ -1062,21 +1078,25 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
-  '@glubean/redaction@0.1.14': {}
+  '@glubean/redaction@0.1.16': {}
 
-  '@glubean/runner@0.1.14':
+  '@glubean/runner@0.1.20':
     dependencies:
-      '@glubean/sdk': 0.1.14
+      '@glubean/sdk': 0.1.20
       ky: 1.14.3
       tsx: 4.21.0
 
-  '@glubean/scanner@0.1.14': {}
+  '@glubean/scanner@0.1.18': {}
 
-  '@glubean/sdk@0.1.14':
+  '@glubean/sdk@0.1.15':
     dependencies:
       yaml: 2.8.2
 
-  '@glubean/sdk@0.1.15':
+  '@glubean/sdk@0.1.18':
+    dependencies:
+      yaml: 2.8.2
+
+  '@glubean/sdk@0.1.20':
     dependencies:
       yaml: 2.8.2
 

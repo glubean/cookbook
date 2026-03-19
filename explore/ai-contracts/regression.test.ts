@@ -23,7 +23,7 @@ const goldenCases = await fromDir<{
   label: string;
   input: string;
   expectedSentiment: "positive" | "negative" | "neutral";
-}>("./data/ai-golden/");
+}>("data/ai-golden/");
 
 const SentimentSchema = z.object({
   sentiment: z.enum(["positive", "negative", "neutral"]),

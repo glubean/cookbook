@@ -24,7 +24,7 @@ import { fromDir, test } from "@glubean/sdk";
 const API = "https://dummyjson.com";
 
 const queries = await fromDir.merge<{ q: string; minResults: number }>(
-  "./data/search-queries/",
+  "data/search-queries/",
 );
 
 export const searchProducts = test.pick(queries)(

@@ -17,7 +17,7 @@ const rows = await fromCsv<{
   id: string;
   label: string;
   minPrice: string;
-}>("./data/dummyjson/products.csv");
+}>("data/dummyjson/products.csv");
 
 export const csvCases = test.each(rows)(
   { id: "dj-csv-$label", name: "CSV case: $label", tags: ["smoke", "csv"] },

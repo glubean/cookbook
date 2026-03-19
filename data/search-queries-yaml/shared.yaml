@@ -1,0 +1,25 @@
+# Structured test data for product search.
+# Each top-level key is a test case name used by test.each().
+#
+# Structure per case:
+#   description  — human-readable label, printed in logs/results
+#   query        — drives the HTTP request (search params)
+#   expect       — drives assertions (what the response should satisfy)
+#
+# This is NOT flat key-value: nest as deep as you need.
+
+# Search by product name — basic keyword search
+by-name:
+  description: Search by product name
+  query:
+    q: phone
+  expect:
+    minResults: 1
+
+# Search by category — broader search
+by-category:
+  description: Search products by category keyword
+  query:
+    q: laptops
+  expect:
+    minResults: 1
