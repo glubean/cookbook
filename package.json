@@ -14,9 +14,9 @@
   "dependencies": {
     "@glubean/auth": "^0.1.8",
     "@glubean/browser": "^0.1.9",
-    "@glubean/cli": "file:../glubean/packages/cli",
-    "@glubean/runner": "file:../glubean/packages/runner",
-    "@glubean/sdk": "file:../glubean/packages/sdk",
+    "@glubean/cli": "^0.1.25",
+    "@glubean/runner": "^0.1.27",
+    "@glubean/sdk": "^0.1.20",
     "zod": "^4.3.6"
   },
   "devDependencies": {
