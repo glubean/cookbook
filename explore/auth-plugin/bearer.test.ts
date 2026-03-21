@@ -26,7 +26,9 @@ const { http } = configure({
 export const loginThenAccess = test("auth-bearer-flow")
   .meta({ name: "Login then access profile with bearer", tags: ["auth", "plugin"] })
   .step("login", async ({ log }) => {
-    // Get a real token from dummyjson auth endpoint
+    // NOTE: Using raw fetch() here intentionally — this login step demonstrates
+    // getting a token before the bearer plugin is configured. In production tests,
+    // prefer ctx.http or the withLogin() helper from @glubean/auth.
     const raw = await fetch("https://dummyjson.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
