@@ -16,11 +16,10 @@ The best way to learn glubean is to **let your AI agent guide you through it**:
    ```bash
    npx glubean config mcp && npx glubean config skill
    ```
-4. Ask your AI anything:
+4. Ask your AI:
    ```
-   "what can glubean do? show me."
-   "run the dummyjson smoke tests and explain each one"
-   "write a test for the GitHub users API"
+   /glubean what can you do? show me.
+   /glubean write a test for the GitHub users API
    ```
 
 Your AI discovers tests, runs them via MCP, explains results, and teaches you patterns — all without leaving the editor. No docs required.
