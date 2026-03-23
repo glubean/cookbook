@@ -26,6 +26,10 @@ The best way to learn glubean is to **let your AI agent guide you through it**:
 
 Your AI discovers tests, runs them via MCP, explains results, and teaches you patterns — all without leaving the editor. No docs required.
 
+<p align="center">
+  <img src="https://3ese0ujr3e86dvfp.public.blob.vercel-storage.com/glubean-explore.gif" alt="Glubean explore mode" width="800">
+</p>
+
 > **Highlight**: [`stripe/webhook.test.ts`](explore/stripe/webhook.test.ts) —
 > one file that spins up a local server, opens a tunnel, registers a Stripe
 > webhook, triggers a real event, verifies payload + signature, and cleans up
