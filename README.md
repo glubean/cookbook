@@ -1,14 +1,29 @@
 # Glubean Cookbook
 
-Runnable pattern recipes for [Glubean](https://glubean.com).
+Runnable pattern recipes for [Glubean](https://glubean.com). For full documentation, visit [docs.glubean.com](https://docs.glubean.com).
 
-This repository is intentionally focused on learning and adoption:
+## Experience Glubean (strongly recommended)
 
-- Start from low setup
-- Learn one pattern at a time
-- Copy the pattern into your own project
+The best way to learn glubean is to **let your AI agent guide you through it**:
 
-For full documentation, visit [docs.glubean.com](https://docs.glubean.com).
+1. Install the [Glubean VS Code extension](https://marketplace.visualstudio.com/items?itemName=glubean.glubean)
+2. Clone and install:
+   ```bash
+   git clone https://github.com/glubean/cookbook
+   cd cookbook && npm install
+   ```
+3. Set up AI integration:
+   ```bash
+   npx glubean config mcp && npx glubean config skill
+   ```
+4. Ask your AI anything:
+   ```
+   "what can glubean do? show me."
+   "run the dummyjson smoke tests and explain each one"
+   "write a test for the GitHub users API"
+   ```
+
+Your AI discovers tests, runs them via MCP, explains results, and teaches you patterns — all without leaving the editor. No docs required.
 
 > **Highlight**: [`stripe/webhook.test.ts`](explore/stripe/webhook.test.ts) —
 > one file that spins up a local server, opens a tunnel, registers a Stripe
