@@ -1,5 +1,7 @@
 # Glubean Cookbook
 
+> 💬 [Ask Glubean AI anything](https://chatgpt.com/g/g-699e31ce19bc8191b748165f46449039-glubean) — setup help, feature questions, comparisons
+
 Runnable pattern recipes for [Glubean](https://glubean.com). For full documentation, visit [docs.glubean.com](https://docs.glubean.com).
 
 ## Experience Glubean (strongly recommended)
