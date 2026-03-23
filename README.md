@@ -8,8 +8,7 @@ This repository is intentionally focused on learning and adoption:
 - Learn one pattern at a time
 - Copy the pattern into your own project
 
-If you want full, production-oriented API suites, use a separate `collections`
-repository.
+For full documentation, visit [docs.glubean.com](https://docs.glubean.com).
 
 > **Highlight**: [`stripe/webhook.test.ts`](explore/stripe/webhook.test.ts) —
 > one file that spins up a local server, opens a tunnel, registers a Stripe
@@ -34,18 +33,21 @@ The intended learning order is:
 5. **Needs token or external setup:** `explore/github/advanced/*`, `explore/stripe/*`, `explore/ai-contracts/*`
 
 If this is your first time with Glubean, stay in `explore/dummyjson/` until the
-editor loop feels natural.
+editor loop feels natural. See [Quick Start](https://docs.glubean.com/extension/quick-start) for setup help.
 
 ## AI Tools (optional, recommended)
 
 Set up MCP + AI skill so your editor can discover, run, and explain cookbook tests:
 
 ```bash
-npx glubean@latest config mcp      # MCP server for structured test execution
-npx glubean@latest config skill    # AI test-writing skill (/glubean)
+npx glubean@latest config mcp      # AI can discover, run, and diagnose tests
+npx glubean@latest config skill    # AI learns glubean patterns to write tests
+npx glubean@latest docs pull       # download SDK reference for AI context
 ```
 
-Supports Claude Code, Codex, and Cursor. After setup, try:
+Supports Claude Code, Codex, and Cursor. [Learn more →](https://docs.glubean.com/extension/generate-with-ai)
+
+After setup, try:
 
 ```
 /glubean run the dummyjson smoke tests and explain what each one does
@@ -143,6 +145,10 @@ Then move to stateful workflows:
   explore/session-scope/profile.test.ts   session-backed auth reuse
   explore/session-scope/cart-workflow.test.ts multi-step + session state
 
+Auth plugin patterns:
+  explore/auth-plugin/bearer.test.ts      bearer token authentication
+  explore/auth-plugin/apikey-query.test.ts API key in query param
+
 Needs token or extra setup — leave these for later:
   explore/github/advanced/auth.test.ts    auth + multi-step
   explore/stripe/webhook.test.ts          webhook E2E (+ tunnel)
@@ -183,6 +189,8 @@ Project structure patterns:
 | Browser login flow               | [`browser/login.test.ts`](explore/browser/login.test.ts)               |
 | Browser data extraction          | [`browser/scrape.test.ts`](explore/browser/scrape.test.ts)             |
 | Browser dynamic content          | [`browser/dynamic.test.ts`](explore/browser/dynamic.test.ts)           |
+| Auth plugin: bearer token        | [`auth-plugin/bearer.test.ts`](explore/auth-plugin/bearer.test.ts)     |
+| Auth plugin: API key query       | [`auth-plugin/apikey-query.test.ts`](explore/auth-plugin/apikey-query.test.ts) |
 | Authenticated requests           | [`github/advanced/auth.test.ts`](explore/github/advanced/auth.test.ts) |
 | Multi-step state flow            | [`github/advanced/auth.test.ts`](explore/github/advanced/auth.test.ts) |
 | Error handling                   | [`dummyjson/errors.test.ts`](explore/dummyjson/errors.test.ts)         |
@@ -210,6 +218,14 @@ Example:
 echo '{ "gaming-laptop": { "q": "gaming laptop", "minResults": 1 } }' \
   > data/search-queries/mine.local.json
 ```
+
+## Learn more
+
+- [Documentation](https://docs.glubean.com) — full SDK, CLI, and extension docs
+- [SDK Reference](https://docs.glubean.com/sdk) — test API, configure, data loaders, assertions
+- [Data-Driven Testing](https://docs.glubean.com/sdk/data-driven) — test.each, test.pick, YAML/CSV
+- [Limitations](https://docs.glubean.com/reference/limitations) — trade-offs and known limitations
+- [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=glubean.glubean) — install from Marketplace
 
 ## Contributing
 
