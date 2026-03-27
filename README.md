@@ -16,7 +16,7 @@ The best way to learn glubean is to **let your AI agent guide you through it**:
    ```
 3. Set up AI integration:
    ```bash
-   npx glubean config mcp && npx glubean config skill
+   npx glubean config mcp && npx skills add glubean/skill
    ```
 4. Ask your AI:
    ```
@@ -61,9 +61,10 @@ Set up MCP + AI skill so your editor can discover, run, and explain cookbook tes
 
 ```bash
 npx glubean@latest config mcp      # AI can discover, run, and diagnose tests
-npx glubean@latest config skill    # AI learns glubean patterns to write tests
-npx glubean@latest docs pull       # download SDK reference for AI context
+npx skills add glubean/skill       # AI learns glubean patterns to write tests
 ```
+
+> **Note:** SDK reference docs are bundled with the skill — no separate download needed.
 
 Supports Claude Code, Codex, and Cursor. [Learn more →](https://docs.glubean.com/extension/generate-with-ai)
 
