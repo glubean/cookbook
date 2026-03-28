@@ -10,6 +10,7 @@
     "explore:ai-contracts": "glubean run explore/ai-contracts --result-json results/ai-contracts.result.json",
     "explore:session-scope": "glubean run explore/session-scope --result-json results/session-scope.result.json",
     "explore:sse": "glubean run explore/sse --result-json results/sse.result.json",
+    "explore:websocket": "glubean run explore/websocket --result-json results/websocket.result.json",
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "dependencies": {
@@ -19,9 +20,11 @@
     "@glubean/runner": "^0.1.33",
     "@glubean/sdk": "^0.1.25",
     "eventsource-parser": "^3.0.6",
+    "ws": "^8.20.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/ws": "^8.18.1",
     "typescript": "^5.9.3"
   },
   "pnpm": {
