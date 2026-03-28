@@ -9,6 +9,7 @@
     "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
     "explore:ai-contracts": "glubean run explore/ai-contracts --result-json results/ai-contracts.result.json",
     "explore:session-scope": "glubean run explore/session-scope --result-json results/session-scope.result.json",
+    "explore:sse": "glubean run explore/sse --result-json results/sse.result.json",
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "@glubean/cli": "0.1.52",
     "@glubean/runner": "^0.1.33",
     "@glubean/sdk": "^0.1.25",
+    "eventsource-parser": "^3.0.6",
     "zod": "^4.3.6"
   },
   "devDependencies": {
