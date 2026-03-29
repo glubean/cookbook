@@ -3,6 +3,7 @@
  * Uses `ws` library for Node 18/20 compatibility.
  *
  * Echo server: wss://echo.websocket.org (free, hosted by Ably)
+ * Note: this server sends a welcome message on connect, which we skip.
  *
  * Run:
  *   npx glubean run explore/websocket
@@ -11,14 +12,17 @@ import { test } from "@glubean/sdk";
 import WebSocket from "ws";
 
 // ---------------------------------------------------------------------------
-// Helper: open a WebSocket and wait for connection
+// Helper: open a WebSocket, wait for connection, skip welcome message
 // ---------------------------------------------------------------------------
 
 function connect(url: string): Promise<WebSocket> {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(url);
-    ws.once("open", () => resolve(ws));
     ws.once("error", reject);
+    ws.once("open", () => {
+      // echo.websocket.org sends a welcome message on connect — skip it
+      ws.once("message", () => resolve(ws));
+    });
   });
 }
 
