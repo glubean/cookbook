@@ -11,8 +11,7 @@
  */
 import { fromCsv, test } from "@glubean/sdk";
 import type { CatalogRow } from "../../types/dummyjson.ts";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 const rows = await fromCsv<CatalogRow>("data/dummyjson/products.csv");
 
@@ -22,8 +21,8 @@ export const csvCases = test.each(rows)(
     const id = Number(row.id);
     const minPrice = Number(row.minPrice);
 
-    const product = await ctx.http
-      .get(`${API}/products/${id}`)
+    const product = await dummyApi
+      .get(`products/${id}`)
       .json<{ id: number; title: string; price: number }>();
 
     ctx.expect(product.id).toBe(id);

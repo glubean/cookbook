@@ -21,16 +21,15 @@
  */
 import { fromDir, test } from "@glubean/sdk";
 import type { SearchQuery } from "../../types/dummyjson.ts";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 const queries = await fromDir.merge<SearchQuery>("data/search-queries/");
 
 export const searchProducts = test.pick(queries)(
   "dj-search-$_pick",
   async (ctx, { q, minResults }) => {
-    const result = await ctx.http
-      .get(`${API}/products/search`, { searchParams: { q } })
+    const result = await dummyApi
+      .get("products/search", { searchParams: { q } })
       .json<{ products: { id: number; title: string }[]; total: number }>();
 
     ctx.expect(result.total).toBeGreaterThanOrEqual(minResults);

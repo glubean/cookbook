@@ -10,8 +10,7 @@
  *   npx glubean run explore/dummyjson/diagnostics.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 export const diagnostics = test(
   {
@@ -22,8 +21,8 @@ export const diagnostics = test(
   async (ctx) => {
     const startedAt = Date.now();
 
-    const result = await ctx.http
-      .get(`${API}/products?limit=5`)
+    const result = await dummyApi
+      .get("products", { searchParams: { limit: "5" } })
       .json<{ products: { id: number; title: string; price: number }[] }>();
 
     const durationMs = Date.now() - startedAt;

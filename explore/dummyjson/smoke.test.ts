@@ -11,8 +11,7 @@
  *   npx glubean run explore/dummyjson
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 // ---------------------------------------------------------------------------
 // 1. Fetch a single product
@@ -20,9 +19,9 @@ const API = "https://dummyjson.com";
 
 export const getProduct = test(
   { id: "dj-get-product", name: "GET product", tags: ["smoke"] },
-  async ({ http, expect, log }) => {
-    const product = await http
-      .get(`${API}/products/1`)
+  async ({ expect, log }) => {
+    const product = await dummyApi
+      .get("products/1")
       .json<{ id: number; title: string; price: number; rating: number }>();
 
     expect(product.id).toBe(1);
@@ -39,9 +38,9 @@ export const getProduct = test(
 
 export const listProducts = test(
   { id: "dj-list-products", name: "GET products", tags: ["smoke"] },
-  async ({ http, expect, log }) => {
-    const result = await http
-      .get(`${API}/products`)
+  async ({ expect, log }) => {
+    const result = await dummyApi
+      .get("products")
       .json<{ products: { id: number; title: string }[]; total: number }>();
 
     expect(result.total).toBeGreaterThan(0);
@@ -60,9 +59,9 @@ export const listProducts = test(
 
 export const createProduct = test(
   { id: "dj-create-product", name: "POST product", tags: ["smoke"] },
-  async ({ http, expect, log }) => {
-    const created = await http
-      .post(`${API}/products/add`, {
+  async ({ expect, log }) => {
+    const created = await dummyApi
+      .post("products/add", {
         json: { title: "Test Product", price: 9.99, stock: 100 },
       })
       .json<{ id: number; title: string; price: number }>();

@@ -9,8 +9,7 @@
  *   npx glubean run explore/dummyjson/skip.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 export const activeCheck = test(
   {
@@ -19,8 +18,8 @@ export const activeCheck = test(
     tags: ["skip"],
   },
   async (ctx) => {
-    const product = await ctx.http
-      .get(`${API}/products/1`)
+    const product = await dummyApi
+      .get("products/1")
       .json<{ id: number; title: string }>();
 
     ctx.expect(product.id).toBe(1);
@@ -35,8 +34,8 @@ export const optionalCheck = test.skip(
     tags: ["skip"],
   },
   async (ctx) => {
-    const product = await ctx.http
-      .get(`${API}/products/1`)
+    const product = await dummyApi
+      .get("products/1")
       .json<{ id: number; title: string }>();
 
     ctx.expect(product.id).toBe(1);

@@ -9,8 +9,7 @@
  *   npx glubean run explore/dummyjson/retry.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 // ---------------------------------------------------------------------------
 // 1. HTTP retry — retry on transient status codes
@@ -20,8 +19,8 @@ export const httpRetrySimple = test(
   { id: "http-retry-simple", name: "HTTP retry (simple)", tags: ["smoke", "retry"] },
   async (ctx) => {
     // Simple: retry up to 3 times on 408/429/500/502/503/504
-    const product = await ctx.http
-      .get(`${API}/products/1`, { retry: 3 })
+    const product = await dummyApi
+      .get("products/1", { retry: 3 })
       .json<{ id: number; title: string }>();
 
     ctx.expect(product.id).toBe(1);
@@ -33,8 +32,8 @@ export const httpRetryAdvanced = test(
   { id: "http-retry-advanced", name: "HTTP retry (advanced)", tags: ["retry"] },
   async (ctx) => {
     // Advanced: control which status codes and methods trigger retry
-    const product = await ctx.http
-      .get(`${API}/products/2`, {
+    const product = await dummyApi
+      .get("products/2", {
         retry: {
           limit: 3,
           statusCodes: [429, 503],
@@ -55,8 +54,8 @@ export const httpRetryAdvanced = test(
 export const stepRetry = test("step-retry")
   .meta({ name: "Step-level retry", tags: ["retry"] })
   .step("fetch with retry", { retries: 2 }, async (ctx) => {
-    const product = await ctx.http
-      .get(`${API}/products/3`)
+    const product = await dummyApi
+      .get("products/3")
       .json<{ id: number; title: string; price: number }>();
 
     ctx.expect(product.id).toBe(3);

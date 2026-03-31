@@ -10,8 +10,7 @@
  */
 import { test } from "@glubean/sdk";
 import { z } from "zod";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 const ProductSchema = z.object({
   id: z.number(),
@@ -28,7 +27,7 @@ export const validateProductShape = test(
     tags: ["smoke", "validate"],
   },
   async (ctx) => {
-    const body = await ctx.http.get(`${API}/products/1`).json();
+    const body = await dummyApi.get("products/1").json();
 
     const product = ctx.validate(body, ProductSchema, "product response");
 

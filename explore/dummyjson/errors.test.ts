@@ -8,8 +8,7 @@
  *   npx glubean run explore/dummyjson/errors.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 export const assertNotFound = test(
   {
@@ -17,8 +16,8 @@ export const assertNotFound = test(
     name: "Error handling: assert 404",
     tags: ["smoke", "errors"],
   },
-  async ({ http, expect, log }) => {
-    const res = await http.get(`${API}/products/0`);
+  async ({ expect, log }) => {
+    const res = await dummyApi.get("products/0");
 
     expect(res).toHaveStatus(404);
 

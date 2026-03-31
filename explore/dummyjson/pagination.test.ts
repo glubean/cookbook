@@ -5,8 +5,7 @@
  *   npx glubean run explore/dummyjson/pagination.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 type ProductList = { products: { id: number; title: string }[]; total: number };
 
@@ -16,17 +15,17 @@ export const paginateProducts = test(
     name: "Pagination: compare two pages",
     tags: ["smoke", "pagination"],
   },
-  async ({ http, expect, log }) => {
+  async ({ expect, log }) => {
     const pageSize = 5;
 
-    const firstPage = await http
-      .get(`${API}/products`, {
+    const firstPage = await dummyApi
+      .get("products", {
         searchParams: { limit: String(pageSize), skip: "0" },
       })
       .json<ProductList>();
 
-    const secondPage = await http
-      .get(`${API}/products`, {
+    const secondPage = await dummyApi
+      .get("products", {
         searchParams: { limit: String(pageSize), skip: String(pageSize) },
       })
       .json<ProductList>();

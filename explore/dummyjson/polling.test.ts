@@ -10,8 +10,7 @@
  *   npx glubean run explore/dummyjson/polling.test.ts
  */
 import { test } from "@glubean/sdk";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 export const waitForSearchResults = test(
   {
@@ -30,8 +29,8 @@ export const waitForSearchResults = test(
       async () => {
         attempts += 1;
 
-        const result = await ctx.http
-          .get(`${API}/products/search`, { searchParams: { q: "phone" } })
+        const result = await dummyApi
+          .get("products/search", { searchParams: { q: "phone" } })
           .json<{ total: number }>();
 
         ctx.log(`Attempt ${attempts}: found ${result.total} matches`);

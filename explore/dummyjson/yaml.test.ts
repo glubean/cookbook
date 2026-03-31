@@ -11,8 +11,7 @@
  */
 import { fromYaml, test } from "@glubean/sdk";
 import type { CatalogCase, SearchCase } from "../../types/dummyjson.ts";
-
-const API = "https://dummyjson.com";
+import { dummyApi } from "../../config/dummyjson-api.ts";
 
 // ---------------------------------------------------------------------------
 // 1. Flat array YAML (pick a nested key)
@@ -25,8 +24,8 @@ const catalogCases = await fromYaml<CatalogCase>("data/dummyjson/catalog.yaml", 
 export const yamlCases = test.each(catalogCases)(
   { id: "dj-yaml-$label", name: "YAML case: $label", tags: ["smoke", "yaml"] },
   async (ctx, { id, minPrice, category }) => {
-    const product = await ctx.http
-      .get(`${API}/products/${id}`)
+    const product = await dummyApi
+      .get(`products/${id}`)
       .json<{ id: number; title: string; price: number; category: string }>();
 
     ctx.expect(product.id).toBe(id);
@@ -49,8 +48,8 @@ export const yamlSearch = test.each(searchCases)(
   async (ctx, { description, query, expect: exp }) => {
     ctx.log(description);
 
-    const result = await ctx.http
-      .get(`${API}/products/search`, { searchParams: { q: query.q } })
+    const result = await dummyApi
+      .get("products/search", { searchParams: { q: query.q } })
       .json<{ products: { id: number; title: string }[]; total: number }>();
 
     ctx.expect(result.total).toBeGreaterThanOrEqual(exp.minResults);
