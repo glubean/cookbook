@@ -11,9 +11,10 @@
  *   npx glubean run explore/github/smoke/users.test.ts
  */
 import { fromDir, test } from "@glubean/sdk";
+import type { GitHubUserCase } from "../../../types/github.ts";
 import { githubApi } from "../../../config/github-api.ts";
 
-const users = await fromDir<{ username: string; expectReposGte: number }>("data/github-users/");
+const users = await fromDir<GitHubUserCase>("data/github-users/");
 
 export const userLookup = test.each(users)("gh-user-$username", async (ctx, { username, expectReposGte }) => {
   const user = await githubApi

@@ -13,17 +13,14 @@
  */
 import { fromDir, test } from "@glubean/sdk";
 import { z } from "zod";
+import type { GoldenCase } from "../../types/ai-contracts.ts";
 import { ai } from "../../config/ai.ts";
 
 // ---------------------------------------------------------------------------
 // 1. Load golden dataset — each JSON file becomes one test case
 // ---------------------------------------------------------------------------
 
-const goldenCases = await fromDir<{
-  label: string;
-  input: string;
-  expectedSentiment: "positive" | "negative" | "neutral";
-}>("data/ai-golden/");
+const goldenCases = await fromDir<GoldenCase>("data/ai-golden/");
 
 const SentimentSchema = z.object({
   sentiment: z.enum(["positive", "negative", "neutral"]),

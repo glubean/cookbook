@@ -20,12 +20,11 @@
  *   npx glubean run explore/dummyjson/search.test.ts --pick by-name
  */
 import { fromDir, test } from "@glubean/sdk";
+import type { SearchQuery } from "../../types/dummyjson.ts";
 
 const API = "https://dummyjson.com";
 
-const queries = await fromDir.merge<{ q: string; minResults: number }>(
-  "data/search-queries/",
-);
+const queries = await fromDir.merge<SearchQuery>("data/search-queries/");
 
 export const searchProducts = test.pick(queries)(
   "dj-search-$_pick",

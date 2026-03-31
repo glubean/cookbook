@@ -10,6 +10,7 @@
  *   npx glubean run explore/dummyjson/yaml.test.ts
  */
 import { fromYaml, test } from "@glubean/sdk";
+import type { CatalogCase, SearchCase } from "../../types/dummyjson.ts";
 
 const API = "https://dummyjson.com";
 
@@ -17,12 +18,7 @@ const API = "https://dummyjson.com";
 // 1. Flat array YAML (pick a nested key)
 // ---------------------------------------------------------------------------
 
-const catalogCases = await fromYaml<{
-  id: number;
-  label: string;
-  minPrice: number;
-  category: string;
-}>("data/dummyjson/catalog.yaml", {
+const catalogCases = await fromYaml<CatalogCase>("data/dummyjson/catalog.yaml", {
   pick: "testCases",
 });
 
@@ -46,11 +42,7 @@ export const yamlCases = test.each(catalogCases)(
 //    Data simultaneously drives the request AND the assertions.
 // ---------------------------------------------------------------------------
 
-const searchCases = await fromYaml<{
-  description: string;
-  query: { q: string };
-  expect: { minResults: number };
-}>("data/search-queries-yaml/shared.yaml");
+const searchCases = await fromYaml<SearchCase>("data/search-queries-yaml/shared.yaml");
 
 export const yamlSearch = test.each(searchCases)(
   { id: "dj-yaml-search-$index", name: "YAML search: $description", tags: ["yaml"] },

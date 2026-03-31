@@ -10,14 +10,11 @@
  *   npx glubean run explore/dummyjson/csv.test.ts
  */
 import { fromCsv, test } from "@glubean/sdk";
+import type { CatalogRow } from "../../types/dummyjson.ts";
 
 const API = "https://dummyjson.com";
 
-const rows = await fromCsv<{
-  id: string;
-  label: string;
-  minPrice: string;
-}>("data/dummyjson/products.csv");
+const rows = await fromCsv<CatalogRow>("data/dummyjson/products.csv");
 
 export const csvCases = test.each(rows)(
   { id: "dj-csv-$label", name: "CSV case: $label", tags: ["smoke", "csv"] },
