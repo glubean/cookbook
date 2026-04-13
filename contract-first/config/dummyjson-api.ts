@@ -7,6 +7,6 @@ import { configure } from "@glubean/sdk";
 export const { http: dummyApi } = configure({
   http: {
     prefixUrl: "{{DUMMYJSON_API}}",
-    timeout: 10000000
+    timeout: 10000
   },
 });
