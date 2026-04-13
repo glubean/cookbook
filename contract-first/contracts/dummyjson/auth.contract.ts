@@ -15,7 +15,7 @@ const LoginResponseSchema = z.object({
   id: z.number(),
   username: z.string(),
   email: z.string(),
-  token: z.string(),
+  accessToken: z.string(),
 });
 
 export const login = contract.http("login", {

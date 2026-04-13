@@ -65,9 +65,8 @@ export const listProducts = contract.http("list-products", {
       description: "Default request returns first page with limit 30",
       expect: { status: 200, schema: ProductListSchema },
       verify: async (ctx, res) => {
-        const body = await res.json();
-        ctx.expect(body.products.length).toBeGreaterThan(0);
-        ctx.expect(body.skip).toBe(0);
+        ctx.expect(res.products.length).toBeGreaterThan(0);
+        ctx.expect(res.skip).toBe(0);
       },
     },
     withLimit: {
@@ -75,9 +74,8 @@ export const listProducts = contract.http("list-products", {
       query: { limit: "5" },
       expect: { status: 200, schema: ProductListSchema },
       verify: async (ctx, res) => {
-        const body = await res.json();
-        ctx.expect(body.products.length).toBe(5);
-        ctx.expect(body.limit).toBe(5);
+        ctx.expect(res.products.length).toBe(5);
+        ctx.expect(res.limit).toBe(5);
       },
     },
     withSkip: {
@@ -85,8 +83,7 @@ export const listProducts = contract.http("list-products", {
       query: { limit: "5", skip: "10" },
       expect: { status: 200 },
       verify: async (ctx, res) => {
-        const body = await res.json();
-        ctx.expect(body.skip).toBe(10);
+        ctx.expect(res.skip).toBe(10);
       },
     },
   },
@@ -105,8 +102,7 @@ export const searchProducts = contract.http("search-products", {
       query: { q: "phone" },
       expect: { status: 200 },
       verify: async (ctx, res) => {
-        const body = await res.json();
-        ctx.expect(body.products.length).toBeGreaterThan(0);
+        ctx.expect(res.products.length).toBeGreaterThan(0);
       },
     },
     noMatch: {
@@ -114,8 +110,7 @@ export const searchProducts = contract.http("search-products", {
       query: { q: "xyznonexistent999" },
       expect: { status: 200 },
       verify: async (ctx, res) => {
-        const body = await res.json();
-        ctx.expect(body.products.length).toBe(0);
+        ctx.expect(res.products.length).toBe(0);
       },
     },
   },
