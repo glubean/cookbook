@@ -16,3 +16,4 @@ package-lock.json
 results/
 *.result.json
 .claude/
+.DS_Store
