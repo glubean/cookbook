@@ -1,0 +1,43 @@
+/**
+ * DummyJSON Auth — contract-first example.
+ *
+ * Declares login endpoint behavior with success and error cases.
+ * Shows per-case body variations and schema validation.
+ *
+ * Run:
+ *   npx glubean run contracts/dummyjson/
+ */
+import { z } from "zod";
+import { contract } from "@glubean/sdk";
+import { dummyApi } from "../../config/dummyjson-api.ts";
+
+const LoginResponseSchema = z.object({
+  id: z.number(),
+  username: z.string(),
+  email: z.string(),
+  token: z.string(),
+});
+
+export const login = contract.http("login", {
+  endpoint: "POST /auth/login",
+  feature: "Authentication",
+  description: "User login with username and password",
+  client: dummyApi,
+  cases: {
+    success: {
+      description: "Valid credentials return user profile with auth token",
+      body: { username: "emilys", password: "emilyspass" },
+      expect: { status: 200, schema: LoginResponseSchema },
+    },
+    wrongPassword: {
+      description: "Incorrect password is rejected",
+      body: { username: "emilys", password: "wrongpassword" },
+      expect: { status: 400 },
+    },
+    unknownUser: {
+      description: "Non-existent username is rejected",
+      body: { username: "nonexistentuser999", password: "anything" },
+      expect: { status: 400 },
+    },
+  },
+});
