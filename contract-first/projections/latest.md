@@ -1,6 +1,6 @@
 # Contract Specification — DummyJSON API
 
-> Generated: 2026-04-13 | 10 cases | 10 active | 0 deferred
+> Generated: 2026-04-14 | 10 cases | 10 active | 0 deferred
 
 This project declares the expected behavior of the [DummyJSON](https://dummyjson.com) API using contract-first testing. Each contract defines what an endpoint should do — the runner validates the live API against these declarations.
 
@@ -11,6 +11,13 @@ This project declares the expected behavior of the [DummyJSON](https://dummyjson
 | Authentication | 1 | 3 | 3 active |
 | Product Catalog | 2 | 5 | 5 active |
 | Product Search | 1 | 2 | 2 active |
+
+## Artifacts
+
+| Output | Generated from | File |
+|--------|---------------|------|
+| Markdown spec | `glubean contracts` | this file |
+| OpenAPI 3.1 | `glubean_openapi` MCP tool | [openapi.json](openapi.json) |
 
 ---
 

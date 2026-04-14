@@ -1,0 +1,138 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DummyJSON API",
+    "version": "1.0.0"
+  },
+  "tags": [
+    { "name": "Authentication" },
+    { "name": "Product Catalog" },
+    { "name": "Product Search" }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "login",
+        "summary": "User login with username and password",
+        "tags": ["Authentication"],
+        "responses": {
+          "200": {
+            "description": "Valid credentials return user profile with auth token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "number" },
+                    "username": { "type": "string" },
+                    "email": { "type": "string" },
+                    "accessToken": { "type": "string" }
+                  },
+                  "required": ["id", "username", "email", "accessToken"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect password is rejected"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "operationId": "get-product",
+        "summary": "Retrieve a single product by ID",
+        "tags": ["Product Catalog"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Existing product returns full details with schema validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "number" },
+                    "title": { "type": "string" },
+                    "price": { "type": "number" },
+                    "rating": { "type": "number" },
+                    "brand": { "type": "string" },
+                    "category": { "type": "string" }
+                  },
+                  "required": ["id", "title", "price", "rating", "category"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Non-existent product ID returns error"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "list-products",
+        "summary": "List products with pagination",
+        "tags": ["Product Catalog"],
+        "responses": {
+          "200": {
+            "description": "Default request returns first page with limit 30",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "number" },
+                          "title": { "type": "string" },
+                          "price": { "type": "number" },
+                          "rating": { "type": "number" },
+                          "brand": { "type": "string" },
+                          "category": { "type": "string" }
+                        },
+                        "required": ["id", "title", "price", "rating", "category"],
+                        "additionalProperties": false
+                      }
+                    },
+                    "total": { "type": "number" },
+                    "skip": { "type": "number" },
+                    "limit": { "type": "number" }
+                  },
+                  "required": ["products", "total", "skip", "limit"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/search": {
+      "get": {
+        "operationId": "search-products",
+        "summary": "Full-text search across product catalog",
+        "tags": ["Product Search"],
+        "responses": {
+          "200": {
+            "description": "Known keyword returns matching products"
+          }
+        }
+      }
+    }
+  }
+}
