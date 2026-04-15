@@ -2,7 +2,7 @@
  * DummyJSON Products — contract-first example.
  *
  * Declares expected behavior for the products endpoints
- * using contract.http(). No test() wrapper needed.
+ * using contract.http.with(). No test() wrapper needed.
  *
  * Run:
  *   npx glubean run contracts/dummyjson/
@@ -13,6 +13,10 @@
 import { z } from "zod";
 import { contract } from "@glubean/sdk";
 import { dummyApi } from "../../config/dummyjson-api.ts";
+
+const dummyjson = contract.http.with("dummyjson", {
+  client: dummyApi,
+});
 
 // ── Schemas ────────────────────────────────────────────────────────────────
 
@@ -34,11 +38,11 @@ const ProductListSchema = z.object({
 
 // ── Get product by ID ──────────────────────────────────────────────────────
 
-export const getProduct = contract.http("get-product", {
+// @contract
+export const getProduct = dummyjson("get-product", {
   endpoint: "GET /products/:id",
   feature: "Product Catalog",
   description: "Retrieve a single product by ID",
-  client: dummyApi,
   cases: {
     found: {
       description: "Existing product returns full details with schema validation",
@@ -55,11 +59,11 @@ export const getProduct = contract.http("get-product", {
 
 // ── List products ──────────────────────────────────────────────────────────
 
-export const listProducts = contract.http("list-products", {
+// @contract
+export const listProducts = dummyjson("list-products", {
   endpoint: "GET /products",
   feature: "Product Catalog",
   description: "List products with pagination",
-  client: dummyApi,
   cases: {
     defaultPage: {
       description: "Default request returns first page with limit 30",
@@ -91,11 +95,11 @@ export const listProducts = contract.http("list-products", {
 
 // ── Search products ────────────────────────────────────────────────────────
 
-export const searchProducts = contract.http("search-products", {
+// @contract
+export const searchProducts = dummyjson("search-products", {
   endpoint: "GET /products/search",
   feature: "Product Search",
   description: "Full-text search across product catalog",
-  client: dummyApi,
   cases: {
     matchFound: {
       description: "Known keyword returns matching products",

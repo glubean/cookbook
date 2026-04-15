@@ -1,34 +1,59 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "DummyJSON API",
+    "title": "Glubean Cookbook API",
     "version": "1.0.0"
   },
   "tags": [
-    { "name": "Authentication" },
-    { "name": "Product Catalog" },
-    { "name": "Product Search" }
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Product Catalog"
+    },
+    {
+      "name": "Product Search"
+    },
+    {
+      "name": "Notification Tracking"
+    },
+    {
+      "name": "Notification Delivery"
+    }
   ],
   "paths": {
     "/auth/login": {
       "post": {
         "operationId": "login",
         "summary": "User login with username and password",
-        "tags": ["Authentication"],
         "responses": {
           "200": {
             "description": "Valid credentials return user profile with auth token",
             "content": {
               "application/json": {
                 "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "type": "object",
                   "properties": {
-                    "id": { "type": "number" },
-                    "username": { "type": "string" },
-                    "email": { "type": "string" },
-                    "accessToken": { "type": "string" }
+                    "id": {
+                      "type": "number"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    }
                   },
-                  "required": ["id", "username", "email", "accessToken"],
+                  "required": [
+                    "id",
+                    "username",
+                    "email",
+                    "accessToken"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -37,38 +62,51 @@
           "400": {
             "description": "Incorrect password is rejected"
           }
-        }
+        },
+        "tags": [
+          "Authentication"
+        ]
       }
     },
     "/products/{id}": {
       "get": {
         "operationId": "get-product",
         "summary": "Retrieve a single product by ID",
-        "tags": ["Product Catalog"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string" }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Existing product returns full details with schema validation",
             "content": {
               "application/json": {
                 "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "type": "object",
                   "properties": {
-                    "id": { "type": "number" },
-                    "title": { "type": "string" },
-                    "price": { "type": "number" },
-                    "rating": { "type": "number" },
-                    "brand": { "type": "string" },
-                    "category": { "type": "string" }
+                    "id": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "rating": {
+                      "type": "number"
+                    },
+                    "brand": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    }
                   },
-                  "required": ["id", "title", "price", "rating", "category"],
+                  "required": [
+                    "id",
+                    "title",
+                    "price",
+                    "rating",
+                    "category"
+                  ],
                   "additionalProperties": false
                 }
               }
@@ -77,20 +115,33 @@
           "404": {
             "description": "Non-existent product ID returns error"
           }
-        }
+        },
+        "tags": [
+          "Product Catalog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/products": {
       "get": {
         "operationId": "list-products",
         "summary": "List products with pagination",
-        "tags": ["Product Catalog"],
         "responses": {
           "200": {
             "description": "Default request returns first page with limit 30",
             "content": {
               "application/json": {
                 "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "type": "object",
                   "properties": {
                     "products": {
@@ -98,38 +149,601 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": { "type": "number" },
-                          "title": { "type": "string" },
-                          "price": { "type": "number" },
-                          "rating": { "type": "number" },
-                          "brand": { "type": "string" },
-                          "category": { "type": "string" }
+                          "id": {
+                            "type": "number"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "rating": {
+                            "type": "number"
+                          },
+                          "brand": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          }
                         },
-                        "required": ["id", "title", "price", "rating", "category"],
+                        "required": [
+                          "id",
+                          "title",
+                          "price",
+                          "rating",
+                          "category"
+                        ],
                         "additionalProperties": false
                       }
                     },
-                    "total": { "type": "number" },
-                    "skip": { "type": "number" },
-                    "limit": { "type": "number" }
+                    "total": {
+                      "type": "number"
+                    },
+                    "skip": {
+                      "type": "number"
+                    },
+                    "limit": {
+                      "type": "number"
+                    }
                   },
-                  "required": ["products", "total", "skip", "limit"],
+                  "required": [
+                    "products",
+                    "total",
+                    "skip",
+                    "limit"
+                  ],
                   "additionalProperties": false
                 }
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Product Catalog"
+        ]
       }
     },
     "/products/search": {
       "get": {
         "operationId": "search-products",
         "summary": "Full-text search across product catalog",
-        "tags": ["Product Search"],
         "responses": {
           "200": {
             "description": "Known keyword returns matching products"
+          }
+        },
+        "tags": [
+          "Product Search"
+        ]
+      }
+    },
+    "/notifications/{id}": {
+      "get": {
+        "operationId": "get-notification",
+        "summary": "Retrieve notification details including delivery status and channel-specific payload",
+        "responses": {
+          "200": {
+            "description": "Delivered notification includes delivery timestamp and full payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    },
+                    "channel": {
+                      "type": "string",
+                      "enum": [
+                        "email",
+                        "sms",
+                        "push"
+                      ]
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "sent",
+                        "delivered",
+                        "failed",
+                        "bounced"
+                      ]
+                    },
+                    "payload": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "channel": {
+                              "type": "string",
+                              "const": "email"
+                            },
+                            "to": {
+                              "type": "string",
+                              "format": "email",
+                              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                            },
+                            "subject": {
+                              "type": "string"
+                            },
+                            "body": {
+                              "type": "string"
+                            },
+                            "cc": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "format": "email",
+                                "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                              }
+                            }
+                          },
+                          "required": [
+                            "channel",
+                            "to",
+                            "subject",
+                            "body"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "channel": {
+                              "type": "string",
+                              "const": "sms"
+                            },
+                            "phone": {
+                              "type": "string"
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "channel",
+                            "phone",
+                            "message"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "channel": {
+                              "type": "string",
+                              "const": "push"
+                            },
+                            "deviceToken": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "body": {
+                              "type": "string"
+                            },
+                            "badge": {
+                              "type": "number"
+                            },
+                            "data": {
+                              "type": "object",
+                              "propertyNames": {
+                                "type": "string"
+                              },
+                              "additionalProperties": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": [
+                            "channel",
+                            "deviceToken",
+                            "title",
+                            "body"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                    },
+                    "deliveredAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                    },
+                    "failureReason": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "channel",
+                    "status",
+                    "payload",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Non-existent notification returns 404"
+          }
+        },
+        "tags": [
+          "Notification Tracking"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/notifications": {
+      "get": {
+        "operationId": "list-notifications",
+        "summary": "List notifications with pagination, filterable by channel and status",
+        "responses": {
+          "200": {
+            "description": "Returns first page of all notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "notifications": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                          },
+                          "channel": {
+                            "type": "string",
+                            "enum": [
+                              "email",
+                              "sms",
+                              "push"
+                            ]
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "queued",
+                              "sent",
+                              "delivered",
+                              "failed",
+                              "bounced"
+                            ]
+                          },
+                          "payload": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "channel": {
+                                    "type": "string",
+                                    "const": "email"
+                                  },
+                                  "to": {
+                                    "type": "string",
+                                    "format": "email",
+                                    "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                                  },
+                                  "subject": {
+                                    "type": "string"
+                                  },
+                                  "body": {
+                                    "type": "string"
+                                  },
+                                  "cc": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "format": "email",
+                                      "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "channel",
+                                  "to",
+                                  "subject",
+                                  "body"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "channel": {
+                                    "type": "string",
+                                    "const": "sms"
+                                  },
+                                  "phone": {
+                                    "type": "string"
+                                  },
+                                  "message": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "channel",
+                                  "phone",
+                                  "message"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "channel": {
+                                    "type": "string",
+                                    "const": "push"
+                                  },
+                                  "deviceToken": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "body": {
+                                    "type": "string"
+                                  },
+                                  "badge": {
+                                    "type": "number"
+                                  },
+                                  "data": {
+                                    "type": "object",
+                                    "propertyNames": {
+                                      "type": "string"
+                                    },
+                                    "additionalProperties": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "channel",
+                                  "deviceToken",
+                                  "title",
+                                  "body"
+                                ],
+                                "additionalProperties": false
+                              }
+                            ]
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                          },
+                          "deliveredAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                          },
+                          "failureReason": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "channel",
+                          "status",
+                          "payload",
+                          "createdAt"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "total": {
+                      "type": "number"
+                    },
+                    "page": {
+                      "type": "number"
+                    },
+                    "pageSize": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "notifications",
+                    "total",
+                    "page",
+                    "pageSize"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Notification Tracking"
+        ]
+      },
+      "post": {
+        "operationId": "send-notification",
+        "summary": "Send a notification through any supported channel",
+        "responses": {
+          "201": {
+            "description": "Send an email notification with subject and body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+                    },
+                    "channel": {
+                      "type": "string",
+                      "enum": [
+                        "email",
+                        "sms",
+                        "push"
+                      ]
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "sent",
+                        "failed"
+                      ]
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "channel",
+                    "status",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unknown channel type is rejected with validation error"
+          }
+        },
+        "tags": [
+          "Notification Delivery"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "channel": {
+                        "type": "string",
+                        "const": "email"
+                      },
+                      "to": {
+                        "type": "string",
+                        "format": "email",
+                        "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                      },
+                      "subject": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      },
+                      "cc": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "format": "email",
+                          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+                        }
+                      }
+                    },
+                    "required": [
+                      "channel",
+                      "to",
+                      "subject",
+                      "body"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "channel": {
+                        "type": "string",
+                        "const": "sms"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "channel",
+                      "phone",
+                      "message"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "channel": {
+                        "type": "string",
+                        "const": "push"
+                      },
+                      "deviceToken": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      },
+                      "badge": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "channel",
+                      "deviceToken",
+                      "title",
+                      "body"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
           }
         }
       }
