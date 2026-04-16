@@ -30,6 +30,7 @@ export const login = dummyjson("login", {
   cases: {
     success: {
       description: "Valid credentials return user profile with auth token",
+      severity: "critical",
       body: { username: "emilys", password: "emilyspass" },
       expect: { status: 200, schema: LoginResponseSchema },
     },
@@ -42,6 +43,12 @@ export const login = dummyjson("login", {
       description: "Non-existent username is rejected",
       body: { username: "nonexistentuser999", password: "anything" },
       expect: { status: 400 },
+    },
+    legacyTokenRefresh: {
+      description: "Legacy token refresh endpoint was removed in v2",
+      body: { username: "emilys", refreshToken: "old-token" },
+      expect: { status: 400 },
+      deprecated: "replaced by /auth/refresh in API v2",
     },
   },
 });

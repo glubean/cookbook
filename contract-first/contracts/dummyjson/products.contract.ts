@@ -51,6 +51,7 @@ export const getProduct = dummyjson("get-product", {
     },
     notFound: {
       description: "Non-existent product ID returns error",
+      severity: "info",
       params: { id: "99999" },
       expect: { status: 404 },
     },
