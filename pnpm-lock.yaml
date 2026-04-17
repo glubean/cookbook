@@ -12,13 +12,13 @@ importers:
     dependencies:
       '@glubean/cli':
         specifier: latest
-        version: 0.1.80(@types/node@25.6.0)
+        version: 0.1.82(@types/node@25.6.0)
       '@glubean/runner':
         specifier: latest
-        version: 0.1.49
+        version: 0.1.51
       '@glubean/sdk':
         specifier: latest
-        version: 0.1.37
+        version: 0.1.39
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -37,7 +37,7 @@ importers:
         version: 0.1.11(puppeteer-core@24.40.0)
       '@glubean/cli':
         specifier: latest
-        version: 0.1.80(@types/node@25.6.0)
+        version: 0.1.82(@types/node@25.6.0)
       '@glubean/graphql':
         specifier: ^0.1.6
         version: 0.1.6
@@ -46,10 +46,10 @@ importers:
         version: 0.1.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)
       '@glubean/runner':
         specifier: latest
-        version: 0.1.49
+        version: 0.1.51
       '@glubean/sdk':
         specifier: latest
-        version: 0.1.37
+        version: 0.1.39
       '@grpc/grpc-js':
         specifier: ^1.14.3
         version: 1.14.3
@@ -239,8 +239,8 @@ packages:
     peerDependencies:
       puppeteer-core: '>=22'
 
-  '@glubean/cli@0.1.80':
-    resolution: {integrity: sha512-h/O2CyXO0EicW/ZNqFFkuHk87xeiAVEIEtlywwrKCofAT9HHi+gYRAmbA5yGyIRvbNo/JJCXLleXUPSVwK75Eg==}
+  '@glubean/cli@0.1.82':
+    resolution: {integrity: sha512-YObGIzjhhre+SjKJL1fyeEytuQL58bqd26Dn9CP0Ua7NOwxtm7ZwJ3KlUpWxr3gEIV7aNYGD8oG8GKmxpFEDwQ==}
     hasBin: true
 
   '@glubean/graphql@0.1.6':
@@ -255,11 +255,11 @@ packages:
   '@glubean/redaction@0.1.27':
     resolution: {integrity: sha512-P9tdel8tVfpduWJmXWKxe2P2Tr0vod8LgZZmPvrKkqPapDMPTp7qsOzXbwCqVOrdHp6hMBDsgsnPnoZUVqgAmA==}
 
-  '@glubean/runner@0.1.49':
-    resolution: {integrity: sha512-odNwB4jEt4iPJBzzRqYr8jyj7HB9+bqF659lBLzHcwDsEkseRtz2CEZkCIuEjUUzKu3Fkad9KXEZnV9ZqrLoeA==}
+  '@glubean/runner@0.1.51':
+    resolution: {integrity: sha512-hnXVRI5awRbUuchMZfdesEKmf3zRuv0YuVXSvsd+D7pSf0xFTQujtIo8TjuGLzgRl1oqG7c2hDVQLcdO7s8JSQ==}
 
-  '@glubean/scanner@0.1.34':
-    resolution: {integrity: sha512-t/vMAbSEX69DA1zSAvtMT+tgxbOcWHchlcmLYIQ/NJxZPc336TH0P88YJ16Bmhluw+xRVGaACCJ2lsGu0Gu06g==}
+  '@glubean/scanner@0.1.36':
+    resolution: {integrity: sha512-9A3uOpWsB+RYNNYRghFjzUU+fm6I5mFscm5uiGzD2u7dkziAavJU+6dxuBbXPgwAh1gBPyAsrIIczejfAvLNtA==}
 
   '@glubean/sdk@0.1.25':
     resolution: {integrity: sha512-SmJUp2x/+UaTssoXRHIqqGWG/IVf7R6EPwaogiZvcuK7EA1pBYAu74iMmmh3dSooUln62PzUQrzUIzhnVDwiqQ==}
@@ -267,8 +267,8 @@ packages:
   '@glubean/sdk@0.1.26':
     resolution: {integrity: sha512-ZO+6+zQuV6EHfljLg1qWGNVNY0teBEs5fouOA7iULwsMJ6Gsnv9uZU+XLxSpCQkVIJ011MVsz2h8Kb8NBzLJ6g==}
 
-  '@glubean/sdk@0.1.37':
-    resolution: {integrity: sha512-a7lkRptGwol26d86L6YixLqhCtR+foH6CVBWhZw+sRn52u6vna2xM6hfwEPZAlyoYuolVqHxrwIGRncQFCo5sg==}
+  '@glubean/sdk@0.1.39':
+    resolution: {integrity: sha512-H98SrWY0vPMYy/M9hX+SXjlswJpxFdw3jD8kjKdaGM4VoZvln/YyC+9xYOIb8xgUpt38tGliPYF8eMXN2+Aj/A==}
 
   '@glubean/sdk@0.1.6':
     resolution: {integrity: sha512-V/wUuA4p5yiW2wm68ysfT31kZ6UkFJWKbZCcicieim3r8mm1SOH+oT/hbjgRiiqxLQ9cKdsI73AezZXFOGOrwg==}
@@ -1187,12 +1187,12 @@ snapshots:
       '@glubean/sdk': 0.1.26
       puppeteer-core: 24.40.0
 
-  '@glubean/cli@0.1.80(@types/node@25.6.0)':
+  '@glubean/cli@0.1.82(@types/node@25.6.0)':
     dependencies:
       '@glubean/redaction': 0.1.27
-      '@glubean/runner': 0.1.49
-      '@glubean/scanner': 0.1.34
-      '@glubean/sdk': 0.1.37
+      '@glubean/runner': 0.1.51
+      '@glubean/scanner': 0.1.36
+      '@glubean/sdk': 0.1.39
       '@inquirer/prompts': 7.10.1(@types/node@25.6.0)
       archiver: 7.0.1
       commander: 13.1.0
@@ -1217,14 +1217,14 @@ snapshots:
 
   '@glubean/redaction@0.1.27': {}
 
-  '@glubean/runner@0.1.49':
+  '@glubean/runner@0.1.51':
     dependencies:
-      '@glubean/sdk': 0.1.37
+      '@glubean/sdk': 0.1.39
       ky: 1.14.3
       p-queue: 9.1.2
       tsx: 4.21.0
 
-  '@glubean/scanner@0.1.34': {}
+  '@glubean/scanner@0.1.36': {}
 
   '@glubean/sdk@0.1.25':
     dependencies:
@@ -1234,7 +1234,7 @@ snapshots:
     dependencies:
       yaml: 2.8.3
 
-  '@glubean/sdk@0.1.37':
+  '@glubean/sdk@0.1.39':
     dependencies:
       yaml: 2.8.3
 
