@@ -1,18 +1,20 @@
 /**
  * DummyJSON Profile — authenticated GET /auth/me.
  *
- * Separate contract from auth/login so it can be reused by flows that
- * compose login → fetch-profile (see `flow.contract.ts`).
+ * Independently runnable: uses `dummyAuthApi`, which attaches
+ * `Authorization: Bearer {{DUMMYJSON_TOKEN}}` resolved from the session
+ * (see `session.ts`). The flow in `flow.contract.ts` composes this
+ * contract by overriding Authorization with a fresh token per run.
  *
  * Run:
  *   npx glubean run contracts/dummyjson/profile.contract.ts
  */
 import { z } from "zod";
 import { contract } from "@glubean/sdk";
-import { dummyApi } from "../../config/dummyjson-api.ts";
+import { dummyAuthApi } from "../../config/dummyjson-api.ts";
 
-const dummyjson = contract.http.with("dummyjson", {
-  client: dummyApi,
+const dummyjson = contract.http.with("dummyjson-auth", {
+  client: dummyAuthApi,
 });
 
 const ProfileSchema = z.object({
@@ -32,11 +34,13 @@ export const getProfile = dummyjson("get-profile", {
     authorized: {
       description: "Valid bearer token returns the caller's profile",
       severity: "critical",
-      // Authorization header injected by the flow lens at call time.
       expect: { status: 200, schema: ProfileSchema },
     },
     unauthorized: {
       description: "Missing or invalid token is rejected",
+      // Per-case Authorization overrides the baked-in session token via
+      // ky's header merge semantics — so this case forces a 401 even
+      // when DUMMYJSON_TOKEN is set.
       headers: { Authorization: "Bearer invalid-token" },
       expect: { status: 401 },
     },
