@@ -3,6 +3,7 @@
 .env.local.secrets
 .env.*.secrets
 .env.secrets
+.env
 
 # Local test data overrides (per-user, not committed)
 *.local.json

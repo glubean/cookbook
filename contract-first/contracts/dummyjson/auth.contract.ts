@@ -11,21 +11,26 @@ import { z } from "zod";
 import { contract } from "@glubean/sdk";
 import { dummyApi } from "../../config/dummyjson-api.ts";
 
+const dummyjson = contract.http.with("dummyjson", {
+  client: dummyApi,
+});
+
 const LoginResponseSchema = z.object({
   id: z.number(),
   username: z.string(),
   email: z.string(),
-  token: z.string(),
+  accessToken: z.string(),
 });
 
-export const login = contract.http("login", {
+// @contract
+export const login = dummyjson("login", {
   endpoint: "POST /auth/login",
   feature: "Authentication",
   description: "User login with username and password",
-  client: dummyApi,
   cases: {
     success: {
       description: "Valid credentials return user profile with auth token",
+      severity: "critical",
       body: { username: "emilys", password: "emilyspass" },
       expect: { status: 200, schema: LoginResponseSchema },
     },
@@ -38,6 +43,12 @@ export const login = contract.http("login", {
       description: "Non-existent username is rejected",
       body: { username: "nonexistentuser999", password: "anything" },
       expect: { status: 400 },
+    },
+    legacyTokenRefresh: {
+      description: "Legacy token refresh endpoint was removed in v2",
+      body: { username: "emilys", refreshToken: "old-token" },
+      expect: { status: 400 },
+      deprecated: "replaced by /auth/refresh in API v2",
     },
   },
 });

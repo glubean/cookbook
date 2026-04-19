@@ -1,0 +1,196 @@
+{
+  "generated": "2026-04-14T01:59:22.166Z",
+  "features": [
+    {
+      "name": "Authentication",
+      "contracts": [
+        {
+          "id": "login",
+          "endpoint": "POST /auth/login",
+          "description": "User login with username and password",
+          "feature": "Authentication",
+          "cases": [
+            {
+              "key": "success",
+              "description": "Valid credentials return user profile with auth token",
+              "status": 200
+            },
+            {
+              "key": "wrongPassword",
+              "description": "Incorrect password is rejected",
+              "status": 400
+            },
+            {
+              "key": "unknownUser",
+              "description": "Non-existent username is rejected",
+              "status": 400
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product Catalog",
+      "contracts": [
+        {
+          "id": "get-product",
+          "endpoint": "GET /products/:id",
+          "description": "Retrieve a single product by ID",
+          "feature": "Product Catalog",
+          "cases": [
+            {
+              "key": "found",
+              "description": "Existing product returns full details with schema validation",
+              "status": 200
+            },
+            {
+              "key": "notFound",
+              "description": "Non-existent product ID returns error",
+              "status": 404
+            }
+          ]
+        },
+        {
+          "id": "list-products",
+          "endpoint": "GET /products",
+          "description": "List products with pagination",
+          "feature": "Product Catalog",
+          "cases": [
+            {
+              "key": "defaultPage",
+              "description": "Default request returns first page with limit 30",
+              "status": 200
+            },
+            {
+              "key": "withLimit",
+              "description": "Custom limit restricts result count",
+              "status": 200
+            },
+            {
+              "key": "withSkip",
+              "description": "Skip parameter offsets results for pagination",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product Search",
+      "contracts": [
+        {
+          "id": "search-products",
+          "endpoint": "GET /products/search",
+          "description": "Full-text search across product catalog",
+          "feature": "Product Search",
+          "cases": [
+            {
+              "key": "matchFound",
+              "description": "Known keyword returns matching products",
+              "status": 200
+            },
+            {
+              "key": "noMatch",
+              "description": "Nonsense keyword returns empty result set",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notification Delivery",
+      "contracts": [
+        {
+          "id": "send-notification",
+          "endpoint": "POST /notifications",
+          "description": "Send a notification through any supported channel",
+          "feature": "Notification Delivery",
+          "cases": [
+            {
+              "key": "email",
+              "description": "Send an email notification with subject and body",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "sms",
+              "description": "Send an SMS notification to a phone number",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "push",
+              "description": "Send a push notification to a mobile device",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "invalidChannel",
+              "description": "Unknown channel type is rejected with validation error",
+              "status": 422,
+              "deferred": "API not implemented yet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notification Tracking",
+      "contracts": [
+        {
+          "id": "get-notification",
+          "endpoint": "GET /notifications/:id",
+          "description": "Retrieve notification details including delivery status and channel-specific payload",
+          "feature": "Notification Tracking",
+          "cases": [
+            {
+              "key": "delivered",
+              "description": "Delivered notification includes delivery timestamp and full payload",
+              "status": 200,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "failed",
+              "description": "Failed notification includes failure reason",
+              "status": 200,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "notFound",
+              "description": "Non-existent notification returns 404",
+              "status": 404,
+              "deferred": "API not implemented yet"
+            }
+          ]
+        },
+        {
+          "id": "list-notifications",
+          "endpoint": "GET /notifications",
+          "description": "List notifications with pagination, filterable by channel and status",
+          "feature": "Notification Tracking",
+          "cases": [
+            {
+              "key": "defaultPage",
+              "description": "Returns first page of all notifications",
+              "status": 200,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "filterByChannel",
+              "description": "Filter notifications by delivery channel",
+              "status": 200,
+              "deferred": "API not implemented yet"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "active": 10,
+    "deferred": 9,
+    "gated": 0
+  }
+}
