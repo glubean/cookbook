@@ -15,6 +15,12 @@ import { dummyAuthApi } from "../../config/dummyjson-api.ts";
 
 const dummyjson = contract.http.with("dummyjson-auth", {
   client: dummyAuthApi,
+  // Declaratively mark this instance as Bearer-authenticated so the
+  // scanner / OpenAPI / markdown projections record the requirement.
+  // Runtime: dummyAuthApi already injects the Authorization header via
+  // its configure() base. Documentation layer: emits
+  // `securitySchemes.bearerAuth` + per-operation `security` entries.
+  security: "bearer",
 });
 
 const ProfileSchema = z.object({

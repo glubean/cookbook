@@ -1,51 +1,69 @@
 {
-  "generated": "2026-04-14T01:59:22.166Z",
+  "generated": "2026-04-19T03:39:14.898Z",
   "features": [
     {
-      "name": "Authentication",
+      "name": "dummyjson: Authentication",
       "contracts": [
         {
           "id": "login",
           "endpoint": "POST /auth/login",
           "description": "User login with username and password",
-          "feature": "Authentication",
+          "feature": "dummyjson: Authentication",
           "cases": [
             {
               "key": "success",
               "description": "Valid credentials return user profile with auth token",
+              "lifecycle": "active",
+              "severity": "critical",
               "status": 200
             },
             {
               "key": "wrongPassword",
               "description": "Incorrect password is rejected",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 400
             },
             {
               "key": "unknownUser",
               "description": "Non-existent username is rejected",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 400
+            },
+            {
+              "key": "legacyTokenRefresh",
+              "description": "Legacy token refresh endpoint was removed in v2",
+              "lifecycle": "deprecated",
+              "severity": "warning",
+              "status": 400,
+              "deprecated": "replaced by /auth/refresh in API v2"
             }
           ]
         }
       ]
     },
     {
-      "name": "Product Catalog",
+      "name": "dummyjson: Product Catalog",
       "contracts": [
         {
           "id": "get-product",
           "endpoint": "GET /products/:id",
           "description": "Retrieve a single product by ID",
-          "feature": "Product Catalog",
+          "feature": "dummyjson: Product Catalog",
           "cases": [
             {
               "key": "found",
               "description": "Existing product returns full details with schema validation",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             },
             {
               "key": "notFound",
               "description": "Non-existent product ID returns error",
+              "lifecycle": "active",
+              "severity": "info",
               "status": 404
             }
           ]
@@ -54,21 +72,27 @@
           "id": "list-products",
           "endpoint": "GET /products",
           "description": "List products with pagination",
-          "feature": "Product Catalog",
+          "feature": "dummyjson: Product Catalog",
           "cases": [
             {
               "key": "defaultPage",
               "description": "Default request returns first page with limit 30",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             },
             {
               "key": "withLimit",
               "description": "Custom limit restricts result count",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             },
             {
               "key": "withSkip",
               "description": "Skip parameter offsets results for pagination",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             }
           ]
@@ -76,22 +100,26 @@
       ]
     },
     {
-      "name": "Product Search",
+      "name": "dummyjson: Product Search",
       "contracts": [
         {
           "id": "search-products",
           "endpoint": "GET /products/search",
           "description": "Full-text search across product catalog",
-          "feature": "Product Search",
+          "feature": "dummyjson: Product Search",
           "cases": [
             {
               "key": "matchFound",
               "description": "Known keyword returns matching products",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             },
             {
               "key": "noMatch",
               "description": "Nonsense keyword returns empty result set",
+              "lifecycle": "active",
+              "severity": "warning",
               "status": 200
             }
           ]
@@ -99,66 +127,62 @@
       ]
     },
     {
-      "name": "Notification Delivery",
+      "name": "dummyjson-auth: Authentication",
       "contracts": [
         {
-          "id": "send-notification",
-          "endpoint": "POST /notifications",
-          "description": "Send a notification through any supported channel",
-          "feature": "Notification Delivery",
+          "id": "get-profile",
+          "endpoint": "GET /auth/me",
+          "description": "Return the authenticated user's profile",
+          "feature": "dummyjson-auth: Authentication",
           "cases": [
             {
-              "key": "email",
-              "description": "Send an email notification with subject and body",
-              "status": 201,
-              "deferred": "API not implemented yet"
+              "key": "authorized",
+              "description": "Valid bearer token returns the caller's profile",
+              "lifecycle": "active",
+              "severity": "critical",
+              "status": 200
             },
             {
-              "key": "sms",
-              "description": "Send an SMS notification to a phone number",
-              "status": 201,
-              "deferred": "API not implemented yet"
-            },
-            {
-              "key": "push",
-              "description": "Send a push notification to a mobile device",
-              "status": 201,
-              "deferred": "API not implemented yet"
-            },
-            {
-              "key": "invalidChannel",
-              "description": "Unknown channel type is rejected with validation error",
-              "status": 422,
-              "deferred": "API not implemented yet"
+              "key": "unauthorized",
+              "description": "Missing or invalid token is rejected",
+              "lifecycle": "active",
+              "severity": "warning",
+              "status": 401
             }
           ]
         }
       ]
     },
     {
-      "name": "Notification Tracking",
+      "name": "notifications: Notification Tracking",
       "contracts": [
         {
           "id": "get-notification",
           "endpoint": "GET /notifications/:id",
           "description": "Retrieve notification details including delivery status and channel-specific payload",
-          "feature": "Notification Tracking",
+          "feature": "notifications: Notification Tracking",
           "cases": [
             {
               "key": "delivered",
               "description": "Delivered notification includes delivery timestamp and full payload",
+              "lifecycle": "deferred",
+              "severity": "warning",
               "status": 200,
               "deferred": "API not implemented yet"
             },
             {
               "key": "failed",
               "description": "Failed notification includes failure reason",
+              "lifecycle": "deferred",
+              "severity": "warning",
               "status": 200,
               "deferred": "API not implemented yet"
             },
             {
               "key": "notFound",
               "description": "Non-existent notification returns 404",
+              "lifecycle": "deferred",
+              "severity": "warning",
               "status": 404,
               "deferred": "API not implemented yet"
             }
@@ -168,18 +192,67 @@
           "id": "list-notifications",
           "endpoint": "GET /notifications",
           "description": "List notifications with pagination, filterable by channel and status",
-          "feature": "Notification Tracking",
+          "feature": "notifications: Notification Tracking",
           "cases": [
             {
               "key": "defaultPage",
               "description": "Returns first page of all notifications",
+              "lifecycle": "deferred",
+              "severity": "warning",
               "status": 200,
               "deferred": "API not implemented yet"
             },
             {
               "key": "filterByChannel",
               "description": "Filter notifications by delivery channel",
+              "lifecycle": "deferred",
+              "severity": "warning",
               "status": 200,
+              "deferred": "API not implemented yet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "notifications: Notification Delivery",
+      "contracts": [
+        {
+          "id": "send-notification",
+          "endpoint": "POST /notifications",
+          "description": "Send a notification through any supported channel",
+          "feature": "notifications: Notification Delivery",
+          "cases": [
+            {
+              "key": "email",
+              "description": "Send an email notification with subject and body",
+              "lifecycle": "deferred",
+              "severity": "warning",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "sms",
+              "description": "Send an SMS notification to a phone number",
+              "lifecycle": "deferred",
+              "severity": "warning",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "push",
+              "description": "Send a push notification to a mobile device",
+              "lifecycle": "deferred",
+              "severity": "warning",
+              "status": 201,
+              "deferred": "API not implemented yet"
+            },
+            {
+              "key": "invalidChannel",
+              "description": "Unknown channel type is rejected with validation error",
+              "lifecycle": "deferred",
+              "severity": "warning",
+              "status": 422,
               "deferred": "API not implemented yet"
             }
           ]
@@ -188,9 +261,69 @@
     }
   ],
   "summary": {
-    "total": 19,
-    "active": 10,
+    "total": 22,
+    "active": 12,
     "deferred": 9,
+    "deprecated": 1,
     "gated": 0
-  }
+  },
+  "flows": [
+    {
+      "id": "login-then-profile",
+      "description": "Login with valid credentials, then fetch the profile using the returned token",
+      "tags": [
+        "e2e"
+      ],
+      "steps": [
+        {
+          "kind": "contract-call",
+          "contractId": "login",
+          "caseKey": "success",
+          "protocol": "http",
+          "target": "POST /auth/login",
+          "outputs": [
+            {
+              "target": "state.token",
+              "source": {
+                "kind": "path",
+                "path": "response.body.accessToken"
+              }
+            },
+            {
+              "target": "state.userId",
+              "source": {
+                "kind": "path",
+                "path": "response.body.id"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "compute",
+          "reads": [
+            "state.token"
+          ],
+          "writes": [
+            "authHeader"
+          ]
+        },
+        {
+          "kind": "contract-call",
+          "contractId": "get-profile",
+          "caseKey": "authorized",
+          "protocol": "http",
+          "target": "GET /auth/me",
+          "inputs": [
+            {
+              "target": "headers.Authorization",
+              "source": {
+                "kind": "path",
+                "path": "state.authHeader"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Glubean Cookbook API",
+    "title": "DummyJSON + Notifications API",
     "version": "1.0.0"
   },
   "tags": [
@@ -21,6 +21,14 @@
       "name": "Notification Delivery"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
   "paths": {
     "/auth/login": {
       "post": {
@@ -216,6 +224,59 @@
         },
         "tags": [
           "Product Search"
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "operationId": "get-profile",
+        "summary": "Return the authenticated user's profile",
+        "responses": {
+          "200": {
+            "description": "Valid bearer token returns the caller's profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "firstName": {
+                      "type": "string"
+                    },
+                    "lastName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "username",
+                    "email"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid token is rejected"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },

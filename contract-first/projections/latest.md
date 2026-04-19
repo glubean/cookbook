@@ -1,21 +1,22 @@
 # Contract Specification
 
-Generated: 2026-04-14 | 19 cases | 10 active | 9 deferred
+Generated: 2026-04-19 | 22 cases | 12 active | 9 deferred | 1 deprecated
 
-## Authentication
+## dummyjson: Authentication
 
 User login with username and password
 
-- **success** — Valid credentials return user profile with auth token
+- **success** — Valid credentials return user profile with auth token 🔴
 - **wrongPassword** — Incorrect password is rejected
 - **unknownUser** — Non-existent username is rejected
+- ⊘ **legacyTokenRefresh** — deprecated: replaced by /auth/refresh in API v2
 
-## Product Catalog
+## dummyjson: Product Catalog
 
 Retrieve a single product by ID
 
 - **found** — Existing product returns full details with schema validation
-- **notFound** — Non-existent product ID returns error
+- **notFound** — Non-existent product ID returns error ℹ️
 
 List products with pagination
 
@@ -23,23 +24,21 @@ List products with pagination
 - **withLimit** — Custom limit restricts result count
 - **withSkip** — Skip parameter offsets results for pagination
 
-## Product Search
+## dummyjson: Product Search
 
 Full-text search across product catalog
 
 - **matchFound** — Known keyword returns matching products
 - **noMatch** — Nonsense keyword returns empty result set
 
-## Notification Delivery
+## dummyjson-auth: Authentication
 
-Send a notification through any supported channel
+Return the authenticated user's profile
 
-- ⊘ **email** — deferred: API not implemented yet
-- ⊘ **sms** — deferred: API not implemented yet
-- ⊘ **push** — deferred: API not implemented yet
-- ⊘ **invalidChannel** — deferred: API not implemented yet
+- **authorized** — Valid bearer token returns the caller's profile 🔴
+- **unauthorized** — Missing or invalid token is rejected
 
-## Notification Tracking
+## notifications: Notification Tracking
 
 Retrieve notification details including delivery status and channel-specific payload
 
@@ -51,3 +50,29 @@ List notifications with pagination, filterable by channel and status
 
 - ⊘ **defaultPage** — deferred: API not implemented yet
 - ⊘ **filterByChannel** — deferred: API not implemented yet
+
+## notifications: Notification Delivery
+
+Send a notification through any supported channel
+
+- ⊘ **email** — deferred: API not implemented yet
+- ⊘ **sms** — deferred: API not implemented yet
+- ⊘ **push** — deferred: API not implemented yet
+- ⊘ **invalidChannel** — deferred: API not implemented yet
+
+## Flows
+
+### login-then-profile *(e2e)*
+
+Login with valid credentials, then fetch the profile using the returned token
+
+1. **login#success** (http · POST /auth/login)
+   - outputs:
+     - state.token ← response.body.accessToken
+     - state.userId ← response.body.id
+2. **<compute>**
+   - reads: state.token
+   - writes: authHeader
+3. **get-profile#authorized** (http · GET /auth/me)
+   - inputs:
+     - headers.Authorization ← state.authHeader
