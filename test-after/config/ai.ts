@@ -1,4 +1,4 @@
-import { configure, definePlugin } from "@glubean/sdk";
+import { configure, defineClientFactory } from "@glubean/sdk";
 import { generateObject } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 import type { ZodType } from "zod";
@@ -14,7 +14,7 @@ import type { ZodType } from "zod";
 export const { ai } = configure({
   secrets: { key: "{{OPENAI_API_KEY}}" },
   plugins: {
-    ai: definePlugin((rt) => {
+    ai: defineClientFactory((rt) => {
       const openai = createOpenAI({
         apiKey: rt.requireSecret("OPENAI_API_KEY"),
       });
