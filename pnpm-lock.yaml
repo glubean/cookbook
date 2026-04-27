@@ -12,10 +12,10 @@ importers:
     dependencies:
       '@glubean/cli':
         specifier: latest
-        version: 0.2.4(@types/node@25.6.0)
+        version: 0.2.5(@types/node@25.6.0)
       '@glubean/runner':
         specifier: latest
-        version: 0.2.5
+        version: 0.2.6
       '@glubean/sdk':
         specifier: latest
         version: 0.2.3
@@ -37,7 +37,7 @@ importers:
         version: 0.1.11(puppeteer-core@24.40.0)
       '@glubean/cli':
         specifier: latest
-        version: 0.2.4(@types/node@25.6.0)
+        version: 0.2.5(@types/node@25.6.0)
       '@glubean/graphql':
         specifier: ^0.2.3
         version: 0.2.3
@@ -46,7 +46,7 @@ importers:
         version: 0.2.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)
       '@glubean/runner':
         specifier: latest
-        version: 0.2.5
+        version: 0.2.6
       '@glubean/sdk':
         specifier: latest
         version: 0.2.3
@@ -239,8 +239,8 @@ packages:
     peerDependencies:
       puppeteer-core: '>=22'
 
-  '@glubean/cli@0.2.4':
-    resolution: {integrity: sha512-PZ7A5BNijNT5dV2yjxsnt8HoLJ37PfhgyaIZdOgH9nRmnSW9CGkKRg5cctp8ECKGR20aAInyosmgQiSBCC6PFw==}
+  '@glubean/cli@0.2.5':
+    resolution: {integrity: sha512-g0c+zd3XTaMMQC1JCprkfaR1ZBvtTJx1Fs7UjlE/C9rH9ylyypT1S4o/+w/stCwKh/vukQnAe0uBCy93M3/uKQ==}
     hasBin: true
 
   '@glubean/graphql@0.2.3':
@@ -255,8 +255,8 @@ packages:
   '@glubean/redaction@0.2.0':
     resolution: {integrity: sha512-ZFaSbFFdWPcDMX8qua5GTTomzwde7BiwurFblikzSnQ2jRnUjuizQI5rXHsDITna/R/W5yrpgS+TPydcx8GX4g==}
 
-  '@glubean/runner@0.2.5':
-    resolution: {integrity: sha512-4IH2vGfzEhSTJx8k+HuGna1UDaS/u5qBAR3G3Z1eVH+5le8lISz7w9haVS0GOIGF0+tUA8NQzhBrtLhvVLnJeQ==}
+  '@glubean/runner@0.2.6':
+    resolution: {integrity: sha512-ktj6EOmzggviCycVbYyF6eKfs2rm2h1NVZSgWJfFA8hOJraBEtErZA5WckT0A0L3vGho66bjkrDp8Hkq8DhH4Q==}
 
   '@glubean/scanner@0.2.3':
     resolution: {integrity: sha512-bmfSNFAYmeWmlVMMSDatQ54gvzwi2ksltHvanMwpRnjetMc95qk0NC9Bq5Sbqq3/g/Aa9zq9rahCgwcxNSsYTQ==}
@@ -849,8 +849,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  p-queue@9.1.2:
-    resolution: {integrity: sha512-ktsDOALzTYTWWF1PbkNVg2rOt+HaOaMWJMUnt7T3qf5tvZ1L8dBW3tObzprBcXNMKkwj+yFSLqHso0x+UFcJXw==}
+  p-queue@9.2.0:
+    resolution: {integrity: sha512-dWgLE8AH0HjQ9fe74pUkKkvzzYT18Inp4zra3lKHnnwqGvcfcUBrvF2EAVX+envufDNBOzpPq/IBUONDbI7+3g==}
     engines: {node: '>=20'}
 
   p-timeout@7.0.1:
@@ -1184,10 +1184,10 @@ snapshots:
       '@glubean/sdk': 0.1.26
       puppeteer-core: 24.40.0
 
-  '@glubean/cli@0.2.4(@types/node@25.6.0)':
+  '@glubean/cli@0.2.5(@types/node@25.6.0)':
     dependencies:
       '@glubean/redaction': 0.2.0
-      '@glubean/runner': 0.2.5
+      '@glubean/runner': 0.2.6
       '@glubean/scanner': 0.2.3
       '@glubean/sdk': 0.2.3
       '@inquirer/prompts': 7.10.1(@types/node@25.6.0)
@@ -1214,13 +1214,13 @@ snapshots:
 
   '@glubean/redaction@0.2.0': {}
 
-  '@glubean/runner@0.2.5':
+  '@glubean/runner@0.2.6':
     dependencies:
       '@glubean/scanner': 0.2.3
       '@glubean/sdk': 0.2.3
       dotenv: 16.6.1
       ky: 1.14.3
-      p-queue: 9.1.2
+      p-queue: 9.2.0
       tsx: 4.21.0
 
   '@glubean/scanner@0.2.3': {}
@@ -1803,7 +1803,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  p-queue@9.1.2:
+  p-queue@9.2.0:
     dependencies:
       eventemitter3: 5.0.4
       p-timeout: 7.0.1
