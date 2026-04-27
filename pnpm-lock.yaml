@@ -39,11 +39,11 @@ importers:
         specifier: latest
         version: 0.2.4(@types/node@25.6.0)
       '@glubean/graphql':
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: ^0.2.3
+        version: 0.2.3
       '@glubean/grpc':
-        specifier: 0.1.3
-        version: 0.1.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)
+        specifier: ^0.2.3
+        version: 0.2.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)
       '@glubean/runner':
         specifier: latest
         version: 0.2.5
@@ -243,11 +243,11 @@ packages:
     resolution: {integrity: sha512-PZ7A5BNijNT5dV2yjxsnt8HoLJ37PfhgyaIZdOgH9nRmnSW9CGkKRg5cctp8ECKGR20aAInyosmgQiSBCC6PFw==}
     hasBin: true
 
-  '@glubean/graphql@0.1.6':
-    resolution: {integrity: sha512-s1d6+7yKxz9OsoIvfzWDAu06FRP0+2dNORFa+9zZD/o26WFnTn3QQqA+JCllCI/MnLKqqCzamAcXudDbG7hNpw==}
+  '@glubean/graphql@0.2.3':
+    resolution: {integrity: sha512-dI+f461YoPHAoM/QYIp/V4ZkmcIclI76gZeRornrcWuQJdnIeWrMw7nuChBBuP0Ly3NorJfbv3EPDnsqU9YLCw==}
 
-  '@glubean/grpc@0.1.3':
-    resolution: {integrity: sha512-ZcFGZXZ2rTE80qpwK3eHUlpm1dDwGltMmRCCXjMdZMk3Lu55HZgKcLjeVuhrIUfKEQBN8AgRKSnHTYFIs2DZrA==}
+  '@glubean/grpc@0.2.3':
+    resolution: {integrity: sha512-S8r5Lq8yo9YlyQAKq8T3EYx88B5SJmDdWYq0cfFrqkrYP2d5sHt5zMatzmJtGtGQ9XaizLx7/r06UK8NbVj6Jw==}
     peerDependencies:
       '@grpc/grpc-js': ^1.12.0
       '@grpc/proto-loader': ^0.7.0
@@ -266,9 +266,6 @@ packages:
 
   '@glubean/sdk@0.1.26':
     resolution: {integrity: sha512-ZO+6+zQuV6EHfljLg1qWGNVNY0teBEs5fouOA7iULwsMJ6Gsnv9uZU+XLxSpCQkVIJ011MVsz2h8Kb8NBzLJ6g==}
-
-  '@glubean/sdk@0.1.6':
-    resolution: {integrity: sha512-V/wUuA4p5yiW2wm68ysfT31kZ6UkFJWKbZCcicieim3r8mm1SOH+oT/hbjgRiiqxLQ9cKdsI73AezZXFOGOrwg==}
 
   '@glubean/sdk@0.2.3':
     resolution: {integrity: sha512-fUfW/LpnvYkPvZYML1roCk+DqGP0dhXjd2cP9Q8VJ/eUVppSY+wxOpcRJnvNbmhd8H4X1sCftpH/YabK9TLi6Q==}
@@ -1205,13 +1202,13 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
-  '@glubean/graphql@0.1.6':
+  '@glubean/graphql@0.2.3':
     dependencies:
-      '@glubean/sdk': 0.1.6
+      '@glubean/sdk': 0.2.3
 
-  '@glubean/grpc@0.1.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)':
+  '@glubean/grpc@0.2.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)':
     dependencies:
-      '@glubean/sdk': 0.1.26
+      '@glubean/sdk': 0.2.3
       '@grpc/grpc-js': 1.14.3
       '@grpc/proto-loader': 0.8.0
 
@@ -1233,10 +1230,6 @@ snapshots:
       yaml: 2.8.3
 
   '@glubean/sdk@0.1.26':
-    dependencies:
-      yaml: 2.8.3
-
-  '@glubean/sdk@0.1.6':
     dependencies:
       yaml: 2.8.3
 
