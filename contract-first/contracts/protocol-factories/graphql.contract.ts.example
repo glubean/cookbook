@@ -1,0 +1,52 @@
+/**
+ * Contract-first GraphQL case factory fixture.
+ *
+ * Copy to `graphql.contract.ts` in a project that has `@glubean/graphql`
+ * installed and its plugin manifest registered from `glubean.setup.ts`.
+ */
+
+import { z } from "zod";
+import { configure, contract } from "@glubean/sdk";
+import { defineGraphqlCase, graphql } from "@glubean/graphql";
+
+const { gql } = configure({
+  plugins: {
+    gql: graphql({
+      endpoint: "https://graphqlzero.almansi.me/api",
+    }),
+  },
+});
+
+const graphqlApi = contract.graphql.with("graphqlzero", {
+  client: gql,
+  endpoint: "https://graphqlzero.almansi.me/api",
+});
+
+const UserSchema = z.object({
+  user: z.object({
+    id: z.string(),
+    name: z.string(),
+  }),
+});
+
+const byId = defineGraphqlCase<{ userId: string }>({
+  description: "Fetches a user by id with typed variables input",
+  given: "a user id from the caller or a bootstrap overlay",
+  needs: z.object({ userId: z.string() }),
+  query: "query User($id: ID!) { user(id: $id) { id name } }",
+  variables: ({ userId }) => ({ id: userId }),
+  expect: {
+    httpStatus: 200,
+    errors: "absent",
+    schema: UserSchema,
+  },
+});
+
+// @contract
+export const getGraphqlUser = graphqlApi("graphql.user", {
+  feature: "GraphQL contracts",
+  description: "User lookup contract using defineGraphqlCase<Needs>",
+  cases: {
+    byId,
+  },
+});
