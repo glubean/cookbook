@@ -1,0 +1,113 @@
+import { contract, defineHttpCase } from "@glubean/sdk";
+import { defineGrpcCase } from "@glubean/grpc";
+import { defineGraphqlCase } from "@glubean/graphql";
+import { z } from "zod/v4";
+
+// Pseudo clients. Replace these with real clients from configure(), createGrpcClient(),
+// and createGraphQLClient() in a runnable project.
+declare const httpClient: any;
+declare const grpcClient: any;
+declare const graphqlClient: any;
+
+const orderApi = contract.http.with("orders", { client: httpClient });
+const payments = contract.grpc.with("payments", { client: grpcClient });
+const audit = contract.graphql.with("audit", {
+  client: graphqlClient,
+  endpoint: "/graphql",
+});
+
+const createOrderOk = defineHttpCase({
+  description: "A valid checkout request creates an order.",
+  body: { sku: "sku-1", quantity: 1 },
+  expect: {
+    status: 201,
+    schema: z.object({
+      id: z.string(),
+      total: z.number(),
+    }),
+  },
+});
+
+const capturePayment = defineGrpcCase<
+  { orderId: string; amount: number },
+  { orderId: string; amount: number },
+  { paymentId: string }
+>({
+  description: "The payment service captures the order total.",
+  needs: z.object({ orderId: z.string(), amount: z.number() }),
+  request: ({ orderId, amount }) => ({ orderId, amount }),
+  expect: {
+    statusCode: 0,
+    schema: z.object({ paymentId: z.string() }),
+  },
+});
+
+const auditLookup = defineGraphqlCase<
+  { orderId: string; paymentId: string },
+  { orderId: string; paymentId: string },
+  { order: { id: string; paymentId: string } }
+>({
+  description: "The audit graph exposes the captured payment for the order.",
+  needs: z.object({ orderId: z.string(), paymentId: z.string() }),
+  query: `query AuditOrder($orderId: ID!, $paymentId: ID!) {
+    order(id: $orderId) { id paymentId }
+  }`,
+  variables: ({ orderId, paymentId }) => ({ orderId, paymentId }),
+  expect: {
+    httpStatus: 200,
+    schema: z.object({
+      order: z.object({
+        id: z.string(),
+        paymentId: z.string(),
+      }),
+    }),
+  },
+});
+
+// @contract
+export const createOrder = orderApi("create-order", {
+  endpoint: "POST /orders",
+  cases: { ok: createOrderOk },
+});
+
+// @contract
+export const captureOrderPayment = payments("capture-order-payment", {
+  target: "PaymentService/Capture",
+  cases: { capture: capturePayment },
+});
+
+// @contract
+export const readOrderAudit = audit("read-order-audit", {
+  cases: { lookup: auditLookup },
+});
+
+// @flow
+export const checkoutCrossProtocol = contract
+  .flow("checkout-cross-protocol")
+  .meta({
+    description:
+      "Create an order over HTTP, capture payment over gRPC, then verify the GraphQL audit view.",
+    tags: ["cross-protocol"],
+  })
+  .step(createOrder.case("ok"), {
+    out: (_state, res) => ({
+      orderId: (res as { body: { id: string } }).body.id,
+      amount: (res as { body: { total: number } }).body.total,
+    }),
+  })
+  .step(captureOrderPayment.case("capture"), {
+    in: (state) => ({
+      orderId: state.orderId,
+      amount: state.amount,
+    }),
+    out: (state, res) => ({
+      ...state,
+      paymentId: (res as { message: { paymentId: string } }).message.paymentId,
+    }),
+  })
+  .step(readOrderAudit.case("lookup"), {
+    in: (state) => ({
+      orderId: state.orderId,
+      paymentId: state.paymentId,
+    }),
+  });

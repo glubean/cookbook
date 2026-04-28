@@ -1,0 +1,5 @@
+import { installPlugin } from "@glubean/sdk";
+import grpcPlugin from "@glubean/grpc";
+import graphqlPlugin from "@glubean/graphql";
+
+await installPlugin(grpcPlugin, graphqlPlugin);
