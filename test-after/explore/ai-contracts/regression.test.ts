@@ -32,11 +32,19 @@ const SentimentSchema = z.object({
 // ---------------------------------------------------------------------------
 
 export const sentimentRegression = test.each(goldenCases)(
-  { id: "ai-golden-$label", name: "golden: $label", tags: ["ai", "regression"] },
+  {
+    id: "ai-golden-$label",
+    name: "golden: $label",
+    tags: ["ai", "regression", "provider:openai"],
+  },
   async (ctx, { label: _label, input, expectedSentiment }) => {
     const { object } = await ai.generate(
       SentimentSchema,
-      `Analyze the sentiment of this text: "${input}"`,
+      `Classify this text as exactly one of positive, negative, or neutral.
+
+Use neutral when the text only states factual delivery, contents, or functionality without praise or complaint.
+
+Text: "${input}"`,
     );
 
     ctx.expect(object.sentiment).toBe(expectedSentiment);

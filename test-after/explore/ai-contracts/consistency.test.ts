@@ -23,7 +23,11 @@ const CategorySchema = z.object({
 // ---------------------------------------------------------------------------
 
 export const clearCaseConsistency = test(
-  { id: "ai-consistent-clear", name: "consistency: clear case", tags: ["ai"] },
+  {
+    id: "ai-consistent-clear",
+    name: "consistency: clear case",
+    tags: ["ai", "consistency", "provider:openai"],
+  },
   async ({ expect, log }) => {
     const prompt =
       'Classify this GitHub issue: "App crashes on login with null pointer exception in auth.ts line 42"';
@@ -46,7 +50,11 @@ export const clearCaseConsistency = test(
 // ---------------------------------------------------------------------------
 
 export const ambiguousCaseConsistency = test(
-  { id: "ai-consistent-ambiguous", name: "consistency: ambiguous case", tags: ["ai"] },
+  {
+    id: "ai-consistent-ambiguous",
+    name: "consistency: ambiguous case",
+    tags: ["ai", "consistency", "provider:openai"],
+  },
   async ({ expect, log }) => {
     const prompt =
       'Classify this GitHub issue: "Would be nice to have dark mode, the current light theme hurts my eyes"';

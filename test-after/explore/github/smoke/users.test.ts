@@ -16,13 +16,20 @@ import { githubApi } from "../../../config/github-api.ts";
 
 const users = await fromDir<GitHubUserCase>("data/github-users/");
 
-export const userLookup = test.each(users)("gh-user-$username", async (ctx, { username, expectReposGte }) => {
-  const user = await githubApi
-    .get(`users/${username}`)
-    .json<{ login: string; public_repos: number; followers: number }>();
+export const userLookup = test.each(users)(
+  {
+    id: "gh-user-$username",
+    name: "GitHub user: $username",
+    tags: ["smoke", "github", "data"],
+  },
+  async (ctx, { username, expectReposGte }) => {
+    const user = await githubApi
+      .get(`users/${username}`)
+      .json<{ login: string; public_repos: number; followers: number }>();
 
-  ctx.expect(user.login).toBe(username);
-  ctx.expect(user.public_repos).toBeGreaterThanOrEqual(expectReposGte);
+    ctx.expect(user.login).toBe(username);
+    ctx.expect(user.public_repos).toBeGreaterThanOrEqual(expectReposGte);
 
-  ctx.log(`${user.login} — ${user.public_repos} repos, ${user.followers} followers`);
-});
+    ctx.log(`${user.login} — ${user.public_repos} repos, ${user.followers} followers`);
+  },
+);

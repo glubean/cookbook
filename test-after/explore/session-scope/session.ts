@@ -1,4 +1,8 @@
-import { defineSession } from "@glubean/sdk";
+import { configure, defineSession } from "@glubean/sdk";
+
+const { http } = configure({
+  http: { prefixUrl: "{{DUMMYJSON_API}}" },
+});
 
 /**
  * Session setup runs once before all test files in this directory.
@@ -10,8 +14,7 @@ import { defineSession } from "@glubean/sdk";
 export default defineSession({
   async setup(ctx) {
     // Create a test user and store the auth token for all tests
-    const api = ctx.vars.require("DUMMYJSON_API");
-    const res = await ctx.http.post(`${api}/auth/login`, {
+    const res = await http.post("auth/login", {
       json: {
         username: "emilys",
         password: "emilyspass",

@@ -15,8 +15,12 @@
 import { test, configure } from "@glubean/sdk";
 import { bearer } from "@glubean/auth";
 
-// Quick prototype: literal base URL, no .env needed
-const { http } = configure({
+// Quick prototype: literal base URL, no .env needed.
+const { http: publicHttp } = configure({
+  http: { prefixUrl: "https://dummyjson.com" },
+});
+
+const { http: bearerHttp } = configure({
   http: bearer({
     prefixUrl: "https://dummyjson.com",
     token: "placeholder", // will be overridden per-request
@@ -26,21 +30,18 @@ const { http } = configure({
 export const loginThenAccess = test("auth-bearer-flow")
   .meta({ name: "Login then access profile with bearer", tags: ["auth", "plugin"] })
   .step("login", async ({ log }) => {
-    // NOTE: Using raw fetch() here intentionally — this login step demonstrates
-    // getting a token before the bearer plugin is configured. In production tests,
-    // prefer ctx.http or the withLogin() helper from @glubean/auth.
-    const raw = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: "emilys", password: "emilyspass" }),
-    });
-    const { accessToken } = await raw.json() as { accessToken: string };
+    const { accessToken } = await publicHttp
+      .post("auth/login", {
+        json: { username: "emilys", password: "emilyspass" },
+      })
+      .json<{ accessToken: string }>();
+
     log(`Got token: ${accessToken.slice(0, 20)}...`);
     return { token: accessToken };
   })
   .step("access profile", async ({ expect, log }, { token }) => {
     // Override bearer token with the real one
-    const authed = http.extend({
+    const authed = bearerHttp.extend({
       headers: { Authorization: `Bearer ${token}` },
     });
     const profile = await authed.get("auth/me").json<{ id: number; username: string }>();

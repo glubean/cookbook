@@ -16,5 +16,6 @@ package-lock.json
 .glubean/
 results/
 *.result.json
+metadata.json
 .claude/
 .DS_Store

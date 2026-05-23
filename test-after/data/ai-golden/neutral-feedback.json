@@ -1,5 +1,5 @@
 {
   "label": "neutral-feedback",
-  "input": "The package arrived on time. It works as described in the listing.",
+  "input": "The package arrived on Tuesday. The box contains one charging cable and a user manual.",
   "expectedSentiment": "neutral"
 }

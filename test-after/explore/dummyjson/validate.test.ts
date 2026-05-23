@@ -30,6 +30,9 @@ export const validateProductShape = test(
     const body = await dummyApi.get("products/1").json();
 
     const product = ctx.validate(body, ProductSchema, "product response");
+    if (!product) {
+      throw new Error("product response did not match ProductSchema");
+    }
 
     ctx.expect(product.id).toBe(1);
     ctx.expect(product.price).toBeGreaterThan(0);

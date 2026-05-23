@@ -21,20 +21,47 @@
  */
 import { test } from "@glubean/sdk";
 import SmeeClient from "smee-client";
+import { createServer } from "node:http";
 import { stripeApi } from "../../config/stripe-api.ts";
 import { verifyStripeSignature } from "../../utils/stripe.ts";
 
 type HookPayload = { headers: Record<string, string>; body: string };
+type WebhookState = {
+  server: import("node:http").Server;
+  smee: SmeeClient;
+  hookReceived: Promise<HookPayload>;
+  smeeUrl: string;
+  endpointId?: string;
+  webhookSecret?: string;
+};
 
 // ---------------------------------------------------------------------------
 // Test
 // ---------------------------------------------------------------------------
 
 export const webhookDelivery = test("stripe-webhook-delivery")
-  .meta({ name: "Webhook end-to-end delivery", tags: ["webhook"] })
+  .meta({
+    name: "Webhook end-to-end delivery",
+    tags: ["stripe", "webhook", "out-of-band"],
+  })
   // 1. Spin up local server + smee tunnel, return shared state
-  .setup(async ({ vars, log }) => {
-    const smeeUrl = vars.require("SMEE_URL");
+  .setup<WebhookState>(async ({ secrets, log }) => {
+    const stripeSecret = secrets.get("STRIPE_SECRET_KEY");
+    const smeeUrl = secrets.get("SMEE_URL");
+
+    if (!stripeSecret || !smeeUrl) {
+      const missing = [
+        stripeSecret ? undefined : "STRIPE_SECRET_KEY",
+        smeeUrl ? undefined : "SMEE_URL",
+      ].filter((name): name is string => Boolean(name));
+      throw new Error(`Missing required secrets: ${missing.join(", ")}`);
+    }
+    if (!stripeSecret.startsWith("sk_test_")) {
+      throw new Error("STRIPE_SECRET_KEY must be a Stripe test mode secret key");
+    }
+    if (!smeeUrl.startsWith("https://smee.io/")) {
+      throw new Error("SMEE_URL must be a smee.io channel URL");
+    }
 
     let resolveHook!: (p: HookPayload) => void;
     const hookReceived = new Promise<HookPayload>((res) => {
@@ -42,22 +69,19 @@ export const webhookDelivery = test("stripe-webhook-delivery")
     });
 
     const server = await new Promise<import("node:http").Server>((resolve) => {
-      const srv = import("node:http").then(({ createServer }) => {
-        const s = createServer((req, res) => {
-          let body = "";
-          req.on("data", (c) => (body += c));
-          req.on("end", () => {
-            const headers: Record<string, string> = {};
-            for (const [k, v] of Object.entries(req.headers)) {
-              if (typeof v === "string") headers[k] = v;
-            }
-            resolveHook({ headers, body });
-            res.end("ok");
-          });
+      const s = createServer((req, res) => {
+        let body = "";
+        req.on("data", (c) => (body += c));
+        req.on("end", () => {
+          const headers: Record<string, string> = {};
+          for (const [k, v] of Object.entries(req.headers)) {
+            if (typeof v === "string") headers[k] = v;
+          }
+          resolveHook({ headers, body });
+          res.end("ok");
         });
-        s.listen(0, () => resolve(s));
-        return s;
       });
+      s.listen(0, () => resolve(s));
     });
 
     const port = (server.address() as { port: number }).port;
@@ -67,10 +91,10 @@ export const webhookDelivery = test("stripe-webhook-delivery")
       source: smeeUrl,
       target: `http://localhost:${port}`,
     });
-    const events = smee.start();
+    await smee.start();
     log(`Smee tunnel: ${smeeUrl} → localhost:${port}`);
 
-    return { server, events, hookReceived, smeeUrl };
+    return { server, smee, hookReceived, smeeUrl };
   })
   // 2. Register a webhook endpoint on Stripe pointing to the smee URL
   .step("register webhook endpoint", async ({ log }, state) => {
@@ -118,7 +142,13 @@ export const webhookDelivery = test("stripe-webhook-delivery")
     expect(payload.data.object.currency).toBe("usd");
 
     const sig = headers["stripe-signature"];
-    expect(sig).toBeDefined();
+    if (!sig) {
+      throw new Error("missing stripe-signature header");
+    }
+
+    if (!state.webhookSecret) {
+      throw new Error("missing webhook secret from Stripe endpoint registration");
+    }
 
     const valid = await verifyStripeSignature(body, sig, state.webhookSecret);
     expect(valid).toBe(true);
@@ -128,11 +158,14 @@ export const webhookDelivery = test("stripe-webhook-delivery")
     log("Signature verified ✓");
   })
   // 5. Always clean up, even on failure
-  .teardown(async ({ log }, state) => {
+  .teardown(async ({ log }, state: WebhookState | undefined) => {
+    if (!state) {
+      return;
+    }
     if (state.endpointId) {
       await stripeApi.delete(`v1/webhook_endpoints/${state.endpointId}`).json();
       log(`Deleted webhook endpoint: ${state.endpointId}`);
     }
-    state.events.close();
+    await state.smee.stop();
     state.server.close();
   });

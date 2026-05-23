@@ -10,4 +10,4 @@ testCases:
   - id: 3
     label: powder
     minPrice: 1
-    category: fragrances
+    category: beauty

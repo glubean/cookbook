@@ -3,18 +3,25 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check": "tsc --noEmit",
+    "test": "pnpm run check && pnpm run contracts:json && pnpm run contracts:openapi && pnpm run run",
+    "test:public": "pnpm run check && pnpm run run:dummyjson && pnpm run run:attachment",
     "contracts": "glubean contracts --dir .",
     "contracts:json": "glubean contracts --dir . --format json",
+    "contracts:openapi": "node scripts/openapi.mjs --title 'Glubean Cookbook API'",
+    "projections:write": "glubean contracts --dir . > projections/latest.md && glubean contracts --dir . --format json > projections/contracts.json && node scripts/openapi.mjs --title 'Glubean Cookbook API' > projections/openapi.json",
     "run": "glubean run contracts/",
-    "run:dummyjson": "glubean run contracts/dummyjson"
+    "run:dummyjson": "glubean run contracts/dummyjson",
+    "run:attachment": "glubean run contracts/attachment-model"
   },
   "dependencies": {
-    "@glubean/cli": "latest",
-    "@glubean/runner": "latest",
-    "@glubean/sdk": "latest",
-    "zod": "^4.3.6"
+    "@glubean/cli": "0.2.5",
+    "@glubean/runner": "0.2.6",
+    "@glubean/scanner": "0.2.3",
+    "@glubean/sdk": "0.2.3",
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "5.9.3"
   }
 }

@@ -47,7 +47,9 @@ export const searchRepos = test(
     const query = githubVars.searchQuery;
 
     const result = await githubApi
-      .get(`search/repositories?q=${query}&sort=stars`)
+      .get("search/repositories", {
+        searchParams: { q: query, sort: "stars" },
+      })
       .json<
         {
           total_count: number;

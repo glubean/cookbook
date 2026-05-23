@@ -1,6 +1,33 @@
 {
-  "generated": "2026-04-19T03:39:14.898Z",
+  "generated": "2026-04-27T13:55:55.775Z",
   "features": [
+    {
+      "name": "dummyjson-attachment-model: Authentication (v10 attachment model)",
+      "contracts": [
+        {
+          "id": "auth.me",
+          "endpoint": "GET /auth/me",
+          "description": "Return the authenticated user's profile via overlay-supplied token",
+          "feature": "dummyjson-attachment-model: Authentication (v10 attachment model)",
+          "cases": [
+            {
+              "key": "authorized",
+              "description": "Valid bearer token returns the caller's profile",
+              "lifecycle": "active",
+              "severity": "critical",
+              "status": 200
+            },
+            {
+              "key": "requiresAttachment",
+              "description": "Case marked requireAttachment — bare runs blocked; --input-json + overlay both OK because `needs` is declared",
+              "lifecycle": "active",
+              "severity": "warning",
+              "status": 200
+            }
+          ]
+        }
+      ]
+    },
     {
       "name": "dummyjson: Authentication",
       "contracts": [
@@ -33,7 +60,7 @@
             },
             {
               "key": "legacyTokenRefresh",
-              "description": "Legacy token refresh endpoint was removed in v2",
+              "description": "Outdated refresh attempts are rejected",
               "lifecycle": "deprecated",
               "severity": "warning",
               "status": 400,
@@ -159,12 +186,12 @@
         {
           "id": "get-notification",
           "endpoint": "GET /notifications/:id",
-          "description": "Retrieve notification details including delivery status and channel-specific payload",
+          "description": "Show a notification's delivery outcome and message content",
           "feature": "notifications: Notification Tracking",
           "cases": [
             {
               "key": "delivered",
-              "description": "Delivered notification includes delivery timestamp and full payload",
+              "description": "Delivered notification shows when it arrived and what was sent",
               "lifecycle": "deferred",
               "severity": "warning",
               "status": 200,
@@ -180,7 +207,7 @@
             },
             {
               "key": "notFound",
-              "description": "Non-existent notification returns 404",
+              "description": "Unknown notification id is reported as missing",
               "lifecycle": "deferred",
               "severity": "warning",
               "status": 404,
@@ -261,8 +288,8 @@
     }
   ],
   "summary": {
-    "total": 22,
-    "active": 12,
+    "total": 24,
+    "active": 14,
     "deferred": 9,
     "deprecated": 1,
     "gated": 0
@@ -299,15 +326,6 @@
           ]
         },
         {
-          "kind": "compute",
-          "reads": [
-            "state.token"
-          ],
-          "writes": [
-            "authHeader"
-          ]
-        },
-        {
           "kind": "contract-call",
           "contractId": "get-profile",
           "caseKey": "authorized",
@@ -315,10 +333,10 @@
           "target": "GET /auth/me",
           "inputs": [
             {
-              "target": "headers.Authorization",
+              "target": "token",
               "source": {
                 "kind": "path",
-                "path": "state.authHeader"
+                "path": "state.token"
               }
             }
           ]

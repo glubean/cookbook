@@ -3,17 +3,18 @@ import { test, configure } from "@glubean/sdk";
 /**
  * Multi-step workflow using builder API.
  * Each .step() has its own trace, duration, and return state visible in the report.
- * Steps share state via module-level variables within this file.
+ * Steps share state through returned values, not module-level mutable variables.
  */
 
 const { http } = configure({
   http: { prefixUrl: "{{DUMMYJSON_API}}" },
 });
 
-// Module-level shared state (within this file only)
-let cartId: number;
-
 export const cartWorkflow = test("cart-workflow")
+  .meta({
+    name: "Session-scoped cart workflow",
+    tags: ["session", "workflow"],
+  })
   .step("create-cart", async (ctx) => {
     const token = ctx.session.require("authToken");
     const userId = ctx.session.require("userId");
@@ -29,11 +30,9 @@ export const cartWorkflow = test("cart-workflow")
     ctx.expect(res).toHaveStatus(201);
 
     const body = await res.json<{ id: number; totalProducts: number }>();
-    cartId = body.id;
-
-    return { cartId, totalProducts: body.totalProducts };
+    return { cartId: body.id, totalProducts: body.totalProducts };
   })
-  .step("verify-cart-exists", async (ctx) => {
+  .step("verify-cart-exists", async (ctx, { cartId }) => {
     // dummyjson mock: new cart IDs aren't queryable, so we fetch cart 1 instead
     const token = ctx.session.require("authToken");
 

@@ -27,7 +27,11 @@ const JudgeSchema = z.object({
 // ---------------------------------------------------------------------------
 
 export const judgedSummary = test(
-  { id: "ai-judge-summary", name: "LLM-as-judge: summary quality", tags: ["ai"] },
+  {
+    id: "ai-judge-summary",
+    name: "LLM-as-judge: summary quality",
+    tags: ["ai", "judge", "provider:openai", "judge_model:gpt-4o", "judge_version:v1"],
+  },
   async ({ expect, log }) => {
     const article = `
 The European Space Agency's Euclid telescope has completed its first survey
@@ -75,7 +79,11 @@ Score 1 = completely wrong, 5 = perfect. Be strict.`,
 // ---------------------------------------------------------------------------
 
 export const judgedExtraction = test(
-  { id: "ai-judge-facts", name: "LLM-as-judge: factual accuracy", tags: ["ai"] },
+  {
+    id: "ai-judge-facts",
+    name: "LLM-as-judge: factual accuracy",
+    tags: ["ai", "judge", "provider:openai", "judge_model:gpt-4o", "judge_version:v1"],
+  },
   async ({ expect, log }) => {
     const input = `
 Order #12345 was placed on 2024-01-15 by customer Alice Johnson.

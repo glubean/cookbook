@@ -3,7 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "explore:dummyjson": "glubean run explore/dummyjson --result-json results/dummyjson.result.json",
+    "check": "tsc --noEmit",
+    "test": "pnpm run check && pnpm run test:public && pnpm run test:secrets",
+    "test:public": "pnpm run explore:dummyjson && pnpm run explore:github:smoke && pnpm run explore:auth-plugin && pnpm run explore:graphql && pnpm run explore:browser && pnpm run explore:session-scope && pnpm run explore:sse && pnpm run explore:websocket && pnpm run explore:grpc",
+    "test:secrets": "pnpm run explore:github:advanced && pnpm run explore:ai-contracts && pnpm run explore:stripe:webhook",
+    "explore:all": "glubean run explore --include-browser --include-out-of-band --include-opt-in --result-json results/all.result.json",
+    "explore:dummyjson": "glubean run explore/dummyjson --pick all --result-json results/dummyjson.result.json",
+    "explore:auth-plugin": "glubean run explore/auth-plugin --result-json results/auth-plugin.result.json",
+    "explore:browser": "glubean run explore/browser --include-browser --result-json results/browser.result.json",
+    "explore:graphql": "glubean run explore/graphql --result-json results/graphql.result.json",
     "explore:github:smoke": "glubean run explore/github/smoke --result-json results/github-smoke.result.json",
     "explore:github:advanced": "glubean run explore/github/advanced --result-json results/github-advanced.result.json",
     "explore:stripe:webhook": "glubean run explore/stripe/webhook.test.ts --result-json results/stripe-webhook.result.json",
@@ -15,21 +23,24 @@
     "explore:smoke": "glubean run explore --tag smoke --result-json results/smoke.result.json"
   },
   "dependencies": {
-    "@glubean/auth": "^0.1.9",
-    "@glubean/browser": "^0.1.10",
-    "@glubean/cli": "latest",
-    "@glubean/graphql": "^0.2.3",
-    "@glubean/grpc": "^0.2.3",
-    "@glubean/runner": "latest",
-    "@glubean/sdk": "latest",
-    "@grpc/grpc-js": "^1.14.3",
-    "@grpc/proto-loader": "^0.8.0",
-    "eventsource-parser": "^3.0.6",
-    "ws": "^8.20.0",
-    "zod": "^4.3.6"
+    "@ai-sdk/openai": "3.0.53",
+    "@glubean/auth": "0.1.9",
+    "@glubean/browser": "0.1.11",
+    "@glubean/cli": "0.2.5",
+    "@glubean/graphql": "0.2.3",
+    "@glubean/grpc": "0.2.3",
+    "@glubean/runner": "0.2.6",
+    "@glubean/sdk": "0.2.3",
+    "@grpc/grpc-js": "1.14.3",
+    "@grpc/proto-loader": "0.7.15",
+    "ai": "6.0.168",
+    "eventsource-parser": "3.0.6",
+    "smee-client": "5.0.0",
+    "ws": "8.20.0",
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "@types/ws": "^8.18.1",
-    "typescript": "^5.9.3"
+    "@types/ws": "8.18.1",
+    "typescript": "5.9.3"
   }
 }

@@ -14,10 +14,10 @@
   expect:
     minResults: 1
 
-# Search by category — broader search
-- description: Search products by category keyword
+# Search by brand — broader search
+- description: Search products by brand keyword
   query:
-    q: laptops
+    q: apple
   expect:
     minResults: 1
 

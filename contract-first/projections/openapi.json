@@ -1,10 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "DummyJSON + Notifications API",
+    "title": "Glubean Cookbook API",
     "version": "1.0.0"
   },
   "tags": [
+    {
+      "name": "Authentication (v10 attachment model)"
+    },
     {
       "name": "Authentication"
     },
@@ -30,6 +33,50 @@
     }
   },
   "paths": {
+    "/auth/me": {
+      "get": {
+        "operationId": "auth.me",
+        "summary": "Return the authenticated user's profile via overlay-supplied token",
+        "responses": {
+          "200": {
+            "description": "Valid bearer token returns the caller's profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "username",
+                    "email"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Authentication (v10 attachment model)"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/auth/login": {
       "post": {
         "operationId": "login",
@@ -227,66 +274,13 @@
         ]
       }
     },
-    "/auth/me": {
-      "get": {
-        "operationId": "get-profile",
-        "summary": "Return the authenticated user's profile",
-        "responses": {
-          "200": {
-            "description": "Valid bearer token returns the caller's profile",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "username": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "firstName": {
-                      "type": "string"
-                    },
-                    "lastName": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "username",
-                    "email"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Missing or invalid token is rejected"
-          }
-        },
-        "tags": [
-          "Authentication"
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/notifications/{id}": {
       "get": {
         "operationId": "get-notification",
-        "summary": "Retrieve notification details including delivery status and channel-specific payload",
+        "summary": "Show a notification's delivery outcome and message content",
         "responses": {
           "200": {
-            "description": "Delivered notification includes delivery timestamp and full payload",
+            "description": "Delivered notification shows when it arrived and what was sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -440,7 +434,7 @@
             }
           },
           "404": {
-            "description": "Non-existent notification returns 404"
+            "description": "Unknown notification id is reported as missing"
           }
         },
         "tags": [

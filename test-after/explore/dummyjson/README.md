@@ -61,7 +61,7 @@ npm run explore:dummyjson
 | [`validate.test.ts`](validate.test.ts)     | Zero setup | `ctx.validate()` + Zod         |
 | [`diagnostics.test.ts`](diagnostics.test.ts) | Zero setup | metrics + events + warnings    |
 | [`polling.test.ts`](polling.test.ts)       | Zero setup | `ctx.pollUntil()`              |
-| [`skip.test.ts`](skip.test.ts)             | Zero setup | `ctx.skip()`                   |
+| [`skip.test.ts`](skip.test.ts)             | Zero setup | `test.skip()`                  |
 
 ## When to use
 

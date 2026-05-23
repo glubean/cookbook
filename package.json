@@ -2,6 +2,12 @@
   "name": "@glubean/cookbook",
   "private": true,
   "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "check": "pnpm -r run check",
+    "test": "pnpm -r run test",
+    "test:public": "pnpm --filter @glubean/cookbook-test-after run test:public && pnpm --filter @glubean/cookbook-contract-first run test:public",
+    "test:secrets": "pnpm --filter @glubean/cookbook-test-after run test:secrets"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"

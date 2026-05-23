@@ -29,7 +29,11 @@ const SentimentSchema = z.object({
 });
 
 export const sentimentCheck = test(
-  { id: "ai-sentiment", name: "sentiment analysis contract", tags: ["ai"] },
+  {
+    id: "ai-sentiment",
+    name: "sentiment analysis contract",
+    tags: ["ai", "structured-output", "provider:openai"],
+  },
   async ({ expect, log }) => {
     const { object, usage } = await ai.generate(
       SentimentSchema,
@@ -62,13 +66,17 @@ const ExtractionSchema = z.object({
     company: z.string(),
   }),
   contact: z.object({
-    email: z.string().email().optional(),
-    phone: z.string().optional(),
+    email: z.string().email().nullable(),
+    phone: z.string().nullable(),
   }),
 });
 
 export const extractionCheck = test(
-  { id: "ai-extraction", name: "entity extraction contract", tags: ["ai"] },
+  {
+    id: "ai-extraction",
+    name: "entity extraction contract",
+    tags: ["ai", "structured-output", "provider:openai"],
+  },
   async ({ expect, log }) => {
     const { object } = await ai.generate(
       ExtractionSchema,

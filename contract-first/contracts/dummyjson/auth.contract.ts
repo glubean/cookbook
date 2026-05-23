@@ -45,7 +45,7 @@ export const login = dummyjson("login", {
       expect: { status: 400 },
     },
     legacyTokenRefresh: {
-      description: "Legacy token refresh endpoint was removed in v2",
+      description: "Outdated refresh attempts are rejected",
       body: { username: "emilys", refreshToken: "old-token" },
       expect: { status: 400 },
       deprecated: "replaced by /auth/refresh in API v2",

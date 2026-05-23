@@ -16,6 +16,8 @@ Contract-first examples using the free [DummyJSON API](https://dummyjson.com). N
 |------|---------|
 | `products.contract.ts` | Single-endpoint contracts with success, error, and pagination cases |
 | `auth.contract.ts` | Login contract with valid/invalid credential cases |
+| `profile.contract.ts` | Auth-required case with declared `needs` input |
+| `profile.bootstrap.ts` | Bootstrap overlay that logs in for standalone profile runs |
 | `flow.contract.ts` | Login → get profile flow with state passing |
 
 ## Run

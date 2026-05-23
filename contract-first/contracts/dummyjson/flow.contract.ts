@@ -11,10 +11,8 @@
  *   - Steps compose existing contract cases instead of declaring new ad-hoc
  *     specs — `login` and `getProfile` are imported from their own files.
  *   - `.compute(fn)` handles pure synchronous computation (e.g. string
- *     concatenation) that lenses can't express. Lenses are strict
- *     "select & repack" — template literals and method calls throw a
- *     LensPurityError at projection time, so `"Bearer ${token}"` must
- *     be built in a compute step.
+ *     reshaping. Lenses are strict "select & repack" — template literals
+ *     and method calls throw a LensPurityError at projection time.
  *
  * Run:
  *   npx glubean run contracts/dummyjson/flow.contract.ts
@@ -35,20 +33,13 @@ export const loginThenGetProfile = contract
   // `body: { username, password }` — no need to repeat it here.
   // The `out` lens captures the access token into flow state.
   .step(login.case("success"), {
-    out: (_s, res: any) => ({
-      token: res.body.accessToken as string,
-      userId: res.body.id as number,
+    out: (_s, res) => ({
+      token: (res as { body: { accessToken: string } }).body.accessToken,
+      userId: (res as { body: { id: number } }).body.id,
     }),
   })
-  // Build the Authorization header via `.compute()`. String concatenation
-  // is not a lens operation (it would call `.toString()` on the traced
-  // state), so compute is the canonical place for it.
-  .compute((s) => ({
-    ...s,
-    authHeader: `Bearer ${s.token}`,
-  }))
-  // Step 2: call `getProfile.case("authorized")`. The lens injects the
-  // pre-built authHeader as a pure field lookup — no computation in the lens.
+  // Step 2: call `getProfile.case("authorized")`. The lens passes the
+  // logical input declared by the case's `needs` schema.
   .step(getProfile.case("authorized"), {
-    in: (s) => ({ headers: { Authorization: s.authHeader } }),
+    in: (s) => ({ token: s.token }),
   });

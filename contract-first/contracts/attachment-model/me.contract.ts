@@ -1,10 +1,9 @@
 /**
  * v10 Attachment-Model — `GET /auth/me` redone as a pure contract case.
  *
- * Compare with `../dummyjson/profile.contract.ts`, which gets its auth
- * token via `dummyAuthApi`'s ky-base `Authorization` header that the
- * session pre-bakes. That works but couples the case to the client
- * configuration; the token isn't part of the case's declared input.
+ * Compare with `../dummyjson/profile.contract.ts`, which uses the same
+ * logical-input idea in a smaller feature folder. This example goes deeper
+ * on `runnability.requireAttachment` and runner input channels.
  *
  * Here the case declares `needs: { token }` as its **logical input**.
  * The contract is pure semantics — no setup, no ky-base header magic.

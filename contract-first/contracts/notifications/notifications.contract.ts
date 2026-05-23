@@ -121,7 +121,7 @@ export const sendNotification = notifications("send-notification", {
     },
     invalidChannel: {
       description: "Unknown channel type is rejected with validation error",
-      body: { channel: "carrier-pigeon", message: "hello" },
+      body: { channel: "fax", message: "hello" },
       expect: { status: 422 },
       deferred: "API not implemented yet",
     },
@@ -134,10 +134,10 @@ export const sendNotification = notifications("send-notification", {
 export const getNotification = notifications("get-notification", {
   endpoint: "GET /notifications/:id",
   feature: "Notification Tracking",
-  description: "Retrieve notification details including delivery status and channel-specific payload",
+  description: "Show a notification's delivery outcome and message content",
   cases: {
     delivered: {
-      description: "Delivered notification includes delivery timestamp and full payload",
+      description: "Delivered notification shows when it arrived and what was sent",
       params: { id: "550e8400-e29b-41d4-a716-446655440000" },
       expect: { status: 200, schema: NotificationDetailSchema },
       deferred: "API not implemented yet",
@@ -149,7 +149,7 @@ export const getNotification = notifications("get-notification", {
       deferred: "API not implemented yet",
     },
     notFound: {
-      description: "Non-existent notification returns 404",
+      description: "Unknown notification id is reported as missing",
       params: { id: "00000000-0000-0000-0000-000000000000" },
       expect: { status: 404 },
       deferred: "API not implemented yet",

@@ -1,6 +1,13 @@
 # Contract Specification
 
-Generated: 2026-04-19 | 22 cases | 12 active | 9 deferred | 1 deprecated
+Generated: 2026-04-27 | 24 cases | 14 active | 9 deferred | 1 deprecated
+
+## dummyjson-attachment-model: Authentication (v10 attachment model)
+
+Return the authenticated user's profile via overlay-supplied token
+
+- **authorized** — Valid bearer token returns the caller's profile 🔴
+- **requiresAttachment** — Case marked requireAttachment — bare runs blocked; --input-json + overlay both OK because `needs` is declared
 
 ## dummyjson: Authentication
 
@@ -40,7 +47,7 @@ Return the authenticated user's profile
 
 ## notifications: Notification Tracking
 
-Retrieve notification details including delivery status and channel-specific payload
+Show a notification's delivery outcome and message content
 
 - ⊘ **delivered** — deferred: API not implemented yet
 - ⊘ **failed** — deferred: API not implemented yet
@@ -70,9 +77,6 @@ Login with valid credentials, then fetch the profile using the returned token
    - outputs:
      - state.token ← response.body.accessToken
      - state.userId ← response.body.id
-2. **<compute>**
-   - reads: state.token
-   - writes: authHeader
-3. **get-profile#authorized** (http · GET /auth/me)
+2. **get-profile#authorized** (http · GET /auth/me)
    - inputs:
-     - headers.Authorization ← state.authHeader
+     - token ← state.token

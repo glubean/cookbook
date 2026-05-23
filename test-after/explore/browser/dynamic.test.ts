@@ -81,7 +81,11 @@ export const dynamicLoading = browserTest(
 // ---------------------------------------------------------------------------
 
 export const addRemove = browserTest(
-  { id: "browser-dynamic-add-remove", name: "add/remove elements" },
+  {
+    id: "browser-dynamic-add-remove",
+    name: "add/remove elements",
+    tags: ["smoke", "browser"],
+  },
   async ({ page }) => {
     await page.goto(`${BASE}/add_remove_elements/`);
 

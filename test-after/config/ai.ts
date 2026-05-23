@@ -23,7 +23,7 @@ export const { ai } = configure({
           schema: ZodType<T>,
           prompt: string,
           model = "gpt-4o-mini",
-        ) => generateObject({ model: openai(model), schema, prompt }),
+        ) => generateObject({ model: openai(model), schema, prompt, temperature: 0 }),
       };
     }),
   },

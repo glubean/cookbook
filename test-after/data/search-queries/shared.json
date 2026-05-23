@@ -3,8 +3,8 @@
     "q": "phone",
     "minResults": 1
   },
-  "by-category": {
-    "q": "laptops",
+  "by-brand": {
+    "q": "apple",
     "minResults": 1
   },
   "empty-query": {

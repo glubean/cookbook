@@ -28,7 +28,11 @@ const { http } = configure({
 });
 
 export const apiKeyInQuery = test(
-  { id: "auth-apikey-query", name: "API key appears in query string", tags: ["auth", "plugin"] },
+  {
+    id: "auth-apikey-query",
+    name: "API key appears in query string",
+    tags: ["auth", "plugin"],
+  },
   async ({ expect, log }) => {
     const res = await http.get("get").json<{
       args: Record<string, string>;
@@ -59,7 +63,11 @@ const { http: combined } = configure({
 });
 
 export const apiKeyWithCustomHeaders = test(
-  { id: "auth-apikey-combined", name: "API key + custom headers combined", tags: ["auth", "plugin"] },
+  {
+    id: "auth-apikey-combined",
+    name: "API key + custom headers combined",
+    tags: ["auth", "plugin"],
+  },
   async ({ expect, log }) => {
     const res = await combined.get("get").json<{
       args: Record<string, string>;

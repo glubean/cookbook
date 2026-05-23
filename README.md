@@ -38,6 +38,33 @@ cd cookbook
 pnpm install    # installs both packages
 ```
 
+## Run the cookbook
+
+```bash
+pnpm run check        # TypeScript checks for both packages
+pnpm run test:public  # public examples only, no secrets required
+pnpm run test:secrets # examples that intentionally require real secrets
+pnpm test             # check + public + secret-backed examples
+```
+
+The secret-backed examples are not optionalized or silently skipped. They are
+expected to fail fast when required credentials are missing.
+
+Create `test-after/.env.secrets` from the template when you want to run them:
+
+```bash
+cp test-after/.env.secrets.example test-after/.env.secrets
+```
+
+`test-after/.env.secrets` is gitignored and must stay local. The template maps
+host environment variables into the cookbook's secret names:
+
+| Command | Required secrets |
+|---|---|
+| `pnpm --filter @glubean/cookbook-test-after run explore:github:advanced` | `GITHUB_TOKEN` |
+| `pnpm --filter @glubean/cookbook-test-after run explore:ai-contracts` | `OPENAI_API_KEY` |
+| `pnpm --filter @glubean/cookbook-test-after run explore:stripe:webhook` | `STRIPE_SECRET_KEY`, `SMEE_URL` |
+
 ## AI Tools (optional, recommended)
 
 ```bash
