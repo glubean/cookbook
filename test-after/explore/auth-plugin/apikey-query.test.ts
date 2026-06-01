@@ -19,12 +19,15 @@ import { apiKey } from "@glubean/auth";
 
 // Simple: apiKey in query string, literal values for demo
 const { http } = configure({
-  http: apiKey({
-    prefixUrl: "https://httpbin.org",
-    param: "apiKey",
-    value: "demo-key-123",
-    location: "query",
-  }),
+  http: {
+    ...apiKey({
+      prefixUrl: "https://httpbin.org",
+      param: "apiKey",
+      value: "demo-key-123",
+      location: "query",
+    }),
+    retry: { limit: 2, retryOnTimeout: true },
+  },
 });
 
 export const apiKeyInQuery = test(
@@ -59,6 +62,7 @@ const { http: combined } = configure({
       ...base.headers, // preserve apiKey's internal marker header
       "X-Custom": "my-value",
     },
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });
 

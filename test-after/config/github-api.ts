@@ -14,6 +14,7 @@ export const { http: githubApi, vars: githubVars } = configure({
   http: {
     prefixUrl: "{{GITHUB_API}}",
     headers: { Accept: "application/vnd.github+json" },
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });
 
@@ -29,5 +30,6 @@ export const { http: githubAuthApi } = configure({
       Authorization: "Bearer {{GITHUB_TOKEN}}",
       Accept: "application/vnd.github+json",
     },
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });

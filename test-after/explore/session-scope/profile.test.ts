@@ -6,7 +6,10 @@ import { test, configure } from "@glubean/sdk";
  */
 
 const { http } = configure({
-  http: { prefixUrl: "{{DUMMYJSON_API}}" },
+  http: {
+    prefixUrl: "{{DUMMYJSON_API}}",
+    retry: { limit: 2, retryOnTimeout: true },
+  },
 });
 
 export const getOwnProfile = test(

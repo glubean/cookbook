@@ -17,14 +17,20 @@ import { bearer } from "@glubean/auth";
 
 // Quick prototype: literal base URL, no .env needed.
 const { http: publicHttp } = configure({
-  http: { prefixUrl: "https://dummyjson.com" },
+  http: {
+    prefixUrl: "https://dummyjson.com",
+    retry: { limit: 2, retryOnTimeout: true },
+  },
 });
 
 const { http: bearerHttp } = configure({
-  http: bearer({
-    prefixUrl: "https://dummyjson.com",
-    token: "placeholder", // will be overridden per-request
-  }),
+  http: {
+    ...bearer({
+      prefixUrl: "https://dummyjson.com",
+      token: "placeholder", // will be overridden per-request
+    }),
+    retry: { limit: 2, retryOnTimeout: true },
+  },
 });
 
 export const loginThenAccess = test("auth-bearer-flow")

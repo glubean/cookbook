@@ -12,5 +12,7 @@ export const { http: stripeApi } = configure({
     headers: {
       Authorization: "Bearer {{STRIPE_SECRET_KEY}}",
     },
+    // Idempotent methods only — Stripe POSTs (charges etc.) are NOT retried.
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });

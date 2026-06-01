@@ -7,5 +7,6 @@ import { configure } from "@glubean/sdk";
 export const { http: dummyApi } = configure({
   http: {
     prefixUrl: "{{DUMMYJSON_API}}",
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });

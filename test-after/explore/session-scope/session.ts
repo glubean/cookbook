@@ -1,7 +1,10 @@
 import { configure, defineSession } from "@glubean/sdk";
 
 const { http } = configure({
-  http: { prefixUrl: "{{DUMMYJSON_API}}" },
+  http: {
+    prefixUrl: "{{DUMMYJSON_API}}",
+    retry: { limit: 2, retryOnTimeout: true },
+  },
 });
 
 /**

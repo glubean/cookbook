@@ -9,5 +9,8 @@ export const { http: dummyApi } = configure({
   http: {
     prefixUrl: "{{DUMMYJSON_API}}",
     timeout: 10000,
+    // Public demo API — absorb transient timeouts. retryOnTimeout is required
+    // because ky does not retry TimeoutError by default. Idempotent methods only.
+    retry: { limit: 2, retryOnTimeout: true },
   },
 });

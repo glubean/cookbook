@@ -11,17 +11,17 @@ importers:
   contract-first:
     dependencies:
       '@glubean/cli':
-        specifier: 0.2.5
-        version: 0.2.5(@types/node@25.6.0)
+        specifier: 0.3.2
+        version: 0.3.2(@types/node@25.6.0)(typescript@5.9.3)
       '@glubean/runner':
-        specifier: 0.2.6
-        version: 0.2.6
+        specifier: 0.3.2
+        version: 0.3.2
       '@glubean/scanner':
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.3.2
+        version: 0.3.2
       '@glubean/sdk':
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.3.2
+        version: 0.3.2
       zod:
         specifier: 4.3.6
         version: 4.3.6
@@ -39,23 +39,23 @@ importers:
         specifier: 0.1.9
         version: 0.1.9
       '@glubean/browser':
-        specifier: 0.1.11
-        version: 0.1.11(puppeteer-core@24.40.0)
+        specifier: 0.1.13
+        version: 0.1.13(puppeteer-core@24.40.0)
       '@glubean/cli':
-        specifier: 0.2.5
-        version: 0.2.5(@types/node@25.6.0)
+        specifier: 0.3.2
+        version: 0.3.2(@types/node@25.6.0)(typescript@5.9.3)
       '@glubean/graphql':
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.2.4
+        version: 0.2.4
       '@glubean/grpc':
-        specifier: 0.2.3
-        version: 0.2.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)
+        specifier: 0.2.4
+        version: 0.2.4(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)
       '@glubean/runner':
-        specifier: 0.2.6
-        version: 0.2.6
+        specifier: 0.3.2
+        version: 0.3.2
       '@glubean/sdk':
-        specifier: 0.2.3
-        version: 0.2.3
+        specifier: 0.3.2
+        version: 0.3.2
       '@grpc/grpc-js':
         specifier: 1.14.3
         version: 1.14.3
@@ -268,20 +268,25 @@ packages:
   '@glubean/auth@0.1.9':
     resolution: {integrity: sha512-MZD0X5xXvsWwFhJHEPkjixmEe0NbaGkUCaV9TCqGipk2u3zfJaITwCVuO6k4jDmDAza8G8LF+K22uEyDnV/tNA==}
 
-  '@glubean/browser@0.1.11':
-    resolution: {integrity: sha512-6L+R7HGzI1tKGj4swyf7tkbVzoBitsTtNWpqMIezARfXDmGqBc0iqPBi5ZuG2QuGlhz4TY1sRQN17273xEStrw==}
+  '@glubean/browser@0.1.13':
+    resolution: {integrity: sha512-EA1HX8WQFT13lU5nceDzM+xNPtqVeV6UivQeMo1V9vVfnYIPXTty9bgmN48ahxJ6k1+jVwsQ0ZIqoUGJjhXUvQ==}
     peerDependencies:
       puppeteer-core: '>=22'
 
-  '@glubean/cli@0.2.5':
-    resolution: {integrity: sha512-g0c+zd3XTaMMQC1JCprkfaR1ZBvtTJx1Fs7UjlE/C9rH9ylyypT1S4o/+w/stCwKh/vukQnAe0uBCy93M3/uKQ==}
+  '@glubean/cli@0.3.2':
+    resolution: {integrity: sha512-A3krz5/Ya/JuzFVmEGOYK9bZWdaevvPVZvpU90QbjR6hwLn6z4tudLtgDEFJ6Hp5Rc3m0/HNjNyiFRRG/oTwOw==}
     hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
-  '@glubean/graphql@0.2.3':
-    resolution: {integrity: sha512-dI+f461YoPHAoM/QYIp/V4ZkmcIclI76gZeRornrcWuQJdnIeWrMw7nuChBBuP0Ly3NorJfbv3EPDnsqU9YLCw==}
+  '@glubean/graphql@0.2.4':
+    resolution: {integrity: sha512-QQ0yCXkJXdQNqC6SmFqPTWOVlG10EYf8rvk+ebVnaTnXGj+QY9B33K3Yv176OyWWtrHwq7OBYahN7cBWQce4lA==}
 
-  '@glubean/grpc@0.2.3':
-    resolution: {integrity: sha512-S8r5Lq8yo9YlyQAKq8T3EYx88B5SJmDdWYq0cfFrqkrYP2d5sHt5zMatzmJtGtGQ9XaizLx7/r06UK8NbVj6Jw==}
+  '@glubean/grpc@0.2.4':
+    resolution: {integrity: sha512-3QnPfsyw0CSeY3K2yqmpoSRGsCbGdTWbqE5L05xfz9ThU56mnhhvld0qG+EI5H8Oi194yxvxI5Z4dfOtjPOitA==}
     peerDependencies:
       '@grpc/grpc-js': ^1.12.0
       '@grpc/proto-loader': ^0.7.0
@@ -289,20 +294,23 @@ packages:
   '@glubean/redaction@0.2.0':
     resolution: {integrity: sha512-ZFaSbFFdWPcDMX8qua5GTTomzwde7BiwurFblikzSnQ2jRnUjuizQI5rXHsDITna/R/W5yrpgS+TPydcx8GX4g==}
 
-  '@glubean/runner@0.2.6':
-    resolution: {integrity: sha512-ktj6EOmzggviCycVbYyF6eKfs2rm2h1NVZSgWJfFA8hOJraBEtErZA5WckT0A0L3vGho66bjkrDp8Hkq8DhH4Q==}
+  '@glubean/runner@0.3.2':
+    resolution: {integrity: sha512-1Nd8K0CeNmdU+YCnkZ3MKt+fqeoHnVQJVAkQLAj3NfeKXaJ6RfYLti/QAJvX4WqIv1hOKbiNx3Wpg1QUIylD1g==}
 
-  '@glubean/scanner@0.2.3':
-    resolution: {integrity: sha512-bmfSNFAYmeWmlVMMSDatQ54gvzwi2ksltHvanMwpRnjetMc95qk0NC9Bq5Sbqq3/g/Aa9zq9rahCgwcxNSsYTQ==}
+  '@glubean/scanner@0.3.2':
+    resolution: {integrity: sha512-lI3N+QKlK9uNrJT1CV4g7UJ6dT3QRz3T14aXWCGY4SjsRvU9UxzWSdyKTCvsnY/xuksi28lvifMgldZsXLnUrQ==}
 
   '@glubean/sdk@0.1.25':
     resolution: {integrity: sha512-SmJUp2x/+UaTssoXRHIqqGWG/IVf7R6EPwaogiZvcuK7EA1pBYAu74iMmmh3dSooUln62PzUQrzUIzhnVDwiqQ==}
 
-  '@glubean/sdk@0.1.26':
-    resolution: {integrity: sha512-ZO+6+zQuV6EHfljLg1qWGNVNY0teBEs5fouOA7iULwsMJ6Gsnv9uZU+XLxSpCQkVIJ011MVsz2h8Kb8NBzLJ6g==}
+  '@glubean/sdk@0.2.2':
+    resolution: {integrity: sha512-DqUGdNM6Z9sOc8nsoO4rhq3jxPf0ig/oXJn3+t6zb/MV4iKANei+IZz9p/C5SNjuqUQZwoZcNd5oeuRM+Td2kw==}
 
   '@glubean/sdk@0.2.3':
     resolution: {integrity: sha512-fUfW/LpnvYkPvZYML1roCk+DqGP0dhXjd2cP9Q8VJ/eUVppSY+wxOpcRJnvNbmhd8H4X1sCftpH/YabK9TLi6Q==}
+
+  '@glubean/sdk@0.3.2':
+    resolution: {integrity: sha512-1tNDVUfCSvcuFntV/t7cN1cTylyvnSQCoP+CRrEvDT0N9Dj4142VaDlqa3VYSBVmfinGlY5uQoY0473m2gapkA==}
 
   '@grpc/grpc-js@1.14.3':
     resolution: {integrity: sha512-Iq8QQQ/7X3Sac15oB6p0FmUg/klxQvXLeileoqrTRGJYLV+/9tubbr9ipz0GKHjmXVsgFPo/+W+2cA8eNcR+XA==}
@@ -1275,34 +1283,36 @@ snapshots:
     dependencies:
       '@glubean/sdk': 0.1.25
 
-  '@glubean/browser@0.1.11(puppeteer-core@24.40.0)':
+  '@glubean/browser@0.1.13(puppeteer-core@24.40.0)':
     dependencies:
-      '@glubean/sdk': 0.1.26
+      '@glubean/sdk': 0.2.2
       puppeteer-core: 24.40.0
 
-  '@glubean/cli@0.2.5(@types/node@25.6.0)':
+  '@glubean/cli@0.3.2(@types/node@25.6.0)(typescript@5.9.3)':
     dependencies:
       '@glubean/redaction': 0.2.0
-      '@glubean/runner': 0.2.6
-      '@glubean/scanner': 0.2.3
-      '@glubean/sdk': 0.2.3
+      '@glubean/runner': 0.3.2
+      '@glubean/scanner': 0.3.2
+      '@glubean/sdk': 0.3.2
       '@inquirer/prompts': 7.10.1(@types/node@25.6.0)
       archiver: 7.0.1
       commander: 13.1.0
       dotenv: 16.6.1
       tsx: 4.21.0
       yaml: 2.8.3
+    optionalDependencies:
+      typescript: 5.9.3
     transitivePeerDependencies:
       - '@types/node'
       - bare-abort-controller
       - bare-buffer
       - react-native-b4a
 
-  '@glubean/graphql@0.2.3':
+  '@glubean/graphql@0.2.4':
     dependencies:
       '@glubean/sdk': 0.2.3
 
-  '@glubean/grpc@0.2.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)':
+  '@glubean/grpc@0.2.4(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)':
     dependencies:
       '@glubean/sdk': 0.2.3
       '@grpc/grpc-js': 1.14.3
@@ -1310,27 +1320,32 @@ snapshots:
 
   '@glubean/redaction@0.2.0': {}
 
-  '@glubean/runner@0.2.6':
+  '@glubean/runner@0.3.2':
     dependencies:
-      '@glubean/scanner': 0.2.3
-      '@glubean/sdk': 0.2.3
+      '@glubean/scanner': 0.3.2
+      '@glubean/sdk': 0.3.2
       dotenv: 16.6.1
       ky: 1.14.3
       p-queue: 9.2.0
       tsx: 4.21.0
 
-  '@glubean/scanner@0.2.3': {}
+  '@glubean/scanner@0.3.2': {}
 
   '@glubean/sdk@0.1.25':
     dependencies:
       yaml: 2.8.3
 
-  '@glubean/sdk@0.1.26':
+  '@glubean/sdk@0.2.2':
     dependencies:
       yaml: 2.8.3
 
   '@glubean/sdk@0.2.3':
     dependencies:
+      yaml: 2.8.3
+
+  '@glubean/sdk@0.3.2':
+    dependencies:
+      ky: 1.14.3
       yaml: 2.8.3
 
   '@grpc/grpc-js@1.14.3':
