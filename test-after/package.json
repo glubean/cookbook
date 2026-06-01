@@ -5,9 +5,10 @@
   "scripts": {
     "check": "tsc --noEmit",
     "test": "pnpm run check && pnpm run test:public && pnpm run test:secrets",
-    "test:public": "pnpm run explore:dummyjson && pnpm run explore:github:smoke && pnpm run explore:auth-plugin && pnpm run explore:graphql && pnpm run explore:browser && pnpm run explore:session-scope && pnpm run explore:sse && pnpm run explore:websocket && pnpm run explore:grpc",
+    "test:public": "pnpm run explore:dummyjson && pnpm run explore:github:smoke && pnpm run explore:auth-plugin && pnpm run explore:graphql && pnpm run explore:browser && pnpm run explore:session-scope && pnpm run explore:sse && pnpm run explore:websocket && pnpm run explore:grpc && pnpm run explore:mocking",
     "test:secrets": "pnpm run explore:github:advanced && pnpm run explore:ai-contracts && pnpm run explore:stripe:webhook",
-    "explore:all": "glubean run explore --include-browser --include-out-of-band --include-opt-in --result-json results/all.result.json",
+    "explore:all": "GLUBEAN_MOCK=1 glubean run explore --include-browser --include-out-of-band --include-opt-in --result-json results/all.result.json",
+    "explore:mocking": "STRIPE_SECRET_KEY=sk_test_dummy_for_mocked_run GLUBEAN_MOCK=1 glubean run explore/mocking --result-json results/mocking.result.json",
     "explore:dummyjson": "glubean run explore/dummyjson --pick all --result-json results/dummyjson.result.json",
     "explore:auth-plugin": "glubean run explore/auth-plugin --result-json results/auth-plugin.result.json",
     "explore:browser": "glubean run explore/browser --include-browser --result-json results/browser.result.json",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@types/ws": "8.18.1",
+    "msw": "^2.14.6",
     "typescript": "5.9.3"
   }
 }
