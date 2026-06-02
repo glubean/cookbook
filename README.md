@@ -14,8 +14,10 @@ Write tests against live APIs. You explore endpoints, assert on responses, and b
 
 ```bash
 cd test-after && pnpm install
-npx glubean run explore/dummyjson
+npx glubean run tests/dummyjson
 ```
+
+The worked examples live in [`test-after/tests/`](test-after/tests/); [`test-after/explore/`](test-after/explore/) is your scratchpad for work-in-progress drafts.
 
 Best for: learning Glubean, testing existing APIs, exploratory testing, CI regression suites.
 
@@ -61,9 +63,9 @@ host environment variables into the cookbook's secret names:
 
 | Command | Required secrets |
 |---|---|
-| `pnpm --filter @glubean/cookbook-test-after run explore:github:advanced` | `GITHUB_TOKEN` |
-| `pnpm --filter @glubean/cookbook-test-after run explore:ai-contracts` | `OPENAI_API_KEY` |
-| `pnpm --filter @glubean/cookbook-test-after run explore:stripe:webhook` | `STRIPE_SECRET_KEY`, `SMEE_URL` |
+| `pnpm --filter @glubean/cookbook-test-after run test:github:advanced` | `GITHUB_TOKEN` |
+| `pnpm --filter @glubean/cookbook-test-after run test:ai-contracts` | `OPENAI_API_KEY` |
+| `pnpm --filter @glubean/cookbook-test-after run test:stripe:webhook` | `STRIPE_SECRET_KEY`, `SMEE_URL` |
 
 ## AI Tools (optional, recommended)
 

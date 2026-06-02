@@ -5,7 +5,7 @@
  * while the real dependency is unreachable — no sandbox key yet, offline, or
  * in CI. It is OFF by default: `glubean.setup.ts` only starts it when the
  * GLUBEAN_MOCK env var is set. Drop the flag to hit the real API. Same test,
- * no edits — see explore/mocking/README.md.
+ * no edits — see tests/mocking/README.md.
  *
  * Boundary: mock ONLY third parties you don't control. NEVER mock your own
  * backend / the system under test — a test that mocks its own subject proves
