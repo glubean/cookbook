@@ -14,10 +14,11 @@ Write tests against live APIs. You explore endpoints, assert on responses, and b
 
 ```bash
 cd test-after && pnpm install
-npx glubean run tests/dummyjson
+glubean run --profile public                     # all no-secret suites
+glubean run --profile public --suite dummyjson   # narrow to one suite
 ```
 
-The worked examples live in [`test-after/tests/`](test-after/tests/); [`test-after/explore/`](test-after/explore/) is your scratchpad for work-in-progress drafts.
+Suites (one per topic) and run profiles (`public` / `secrets` / `all` / `smoke`) are declared in [`test-after/glubean.yaml`](test-after/glubean.yaml) — the canonical way to organize a Glubean project. The worked examples live in [`test-after/tests/`](test-after/tests/); [`test-after/explore/`](test-after/explore/) is your scratchpad for work-in-progress drafts.
 
 Best for: learning Glubean, testing existing APIs, exploratory testing, CI regression suites.
 
@@ -27,8 +28,11 @@ Define contracts that describe what your API *should* do. Glubean validates the 
 
 ```bash
 cd contract-first && pnpm install
-npx glubean run contracts/dummyjson
+glubean run --profile public                 # validate the public domains
+glubean run --profile all --suite dummyjson  # one domain
 ```
+
+Contract domains are suites in [`contract-first/glubean.yaml`](contract-first/glubean.yaml); `glubean contracts` projects them to Markdown / JSON / OpenAPI.
 
 Best for: API design reviews, spec-driven development, generating documentation from intent.
 
@@ -61,11 +65,14 @@ cp test-after/.env.secrets.example test-after/.env.secrets
 `test-after/.env.secrets` is gitignored and must stay local. The template maps
 host environment variables into the cookbook's secret names:
 
-| Command | Required secrets |
+All three run via `pnpm run test:secrets` (the `secrets` profile); narrow to one
+with `--suite`:
+
+| Suite (`glubean run --profile secrets --suite <name>`) | Required secrets |
 |---|---|
-| `pnpm --filter @glubean/cookbook-test-after run test:github:advanced` | `GITHUB_TOKEN` |
-| `pnpm --filter @glubean/cookbook-test-after run test:ai-contracts` | `OPENAI_API_KEY` |
-| `pnpm --filter @glubean/cookbook-test-after run test:stripe:webhook` | `STRIPE_SECRET_KEY`, `SMEE_URL` |
+| `github-advanced` | `GITHUB_TOKEN` |
+| `ai-contracts` | `OPENAI_API_KEY` |
+| `stripe` | `STRIPE_SECRET_KEY`, `SMEE_URL` |
 
 ## AI Tools (optional, recommended)
 

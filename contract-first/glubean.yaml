@@ -1,0 +1,26 @@
+version: 1
+
+# Canonical project config. Each contract domain is a `suite`; `profiles`
+# pick which suites a run covers. Run with `glubean run --profile <name>`,
+# or narrow with `--suite <name>`. (Projection commands — `glubean
+# contracts ...` — read the same contracts and aren't profile-driven.)
+
+suites:
+  dummyjson:        { target: ./contracts/dummyjson,        kinds: [contract, flow] }
+  attachment-model: { target: ./contracts/attachment-model, kinds: [contract] }
+  notifications:    { target: ./contracts/notifications,    kinds: [contract] }
+
+profiles:
+  # Domains that validate against public endpoints — no extra setup.
+  public:
+    suites: [dummyjson, attachment-model]
+    reporters:
+      console: summary
+      resultJson: results/public.result.json
+
+  # Everything, including domains that point at a configured backend.
+  all:
+    suites: [dummyjson, attachment-model, notifications]
+    reporters:
+      console: summary
+      resultJson: results/all.result.json

@@ -5,17 +5,17 @@
   "scripts": {
     "check": "tsc --noEmit",
     "test": "pnpm run check && pnpm run contracts:json && pnpm run contracts:openapi && pnpm run run",
-    "test:public": "pnpm run check && pnpm run run:dummyjson && pnpm run run:attachment",
+    "test:public": "pnpm run check && glubean run --profile public",
     "contracts": "glubean contracts --dir .",
     "contracts:json": "glubean contracts --dir . --format json",
     "contracts:openapi": "node scripts/openapi.mjs --title 'Glubean Cookbook API'",
     "projections:write": "glubean contracts --dir . > projections/latest.md && glubean contracts --dir . --format json > projections/contracts.json && node scripts/openapi.mjs --title 'Glubean Cookbook API' > projections/openapi.json",
-    "run": "glubean run contracts/",
-    "run:dummyjson": "glubean run contracts/dummyjson",
-    "run:attachment": "glubean run contracts/attachment-model"
+    "run": "glubean run --profile all",
+    "run:dummyjson": "glubean run --profile all --suite dummyjson",
+    "run:attachment": "glubean run --profile public --suite attachment-model"
   },
   "dependencies": {
-    "@glubean/cli": "0.3.2",
+    "glubean": "0.3.3",
     "@glubean/runner": "0.3.2",
     "@glubean/scanner": "0.3.2",
     "@glubean/sdk": "0.3.2",

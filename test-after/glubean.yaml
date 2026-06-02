@@ -1,0 +1,70 @@
+version: 1
+
+# Canonical project config. Each topic is a `suite`; `profiles` compose
+# suites + capabilities + reporters into named run plans. Run one with
+# `glubean run --profile <name>`, or narrow to a single suite with
+# `--suite <name>`. This replaces the long per-topic package.json scripts.
+
+defaults:
+  redaction:
+    replacementFormat: simple
+
+suites:
+  dummyjson:       { target: ./tests/dummyjson,       kinds: [test] }   # core HTTP patterns
+  github-smoke:    { target: ./tests/github/smoke,    kinds: [test] }   # public API, no token
+  github-advanced: { target: ./tests/github/advanced, kinds: [test] }   # needs GITHUB_TOKEN
+  auth-plugin:     { target: ./tests/auth-plugin,     kinds: [test] }
+  graphql:         { target: ./tests/graphql,         kinds: [test] }
+  browser:         { target: ./tests/browser,         kinds: [test] }   # needs a browser
+  session-scope:   { target: ./tests/session-scope,   kinds: [test] }
+  sse:             { target: ./tests/sse,             kinds: [test] }
+  websocket:       { target: ./tests/websocket,       kinds: [test] }
+  grpc:            { target: ./tests/grpc,            kinds: [test] }    # needs a local greeter server
+  mocking:         { target: ./tests/mocking,         kinds: [test] }   # offline via GLUBEAN_MOCK=1
+  ai-contracts:    { target: ./tests/ai-contracts,    kinds: [test] }   # needs OPENAI_API_KEY
+  stripe:          { target: ./tests/stripe,          kinds: [test] }   # needs STRIPE_SECRET_KEY + SMEE_URL
+
+profiles:
+  # Everything that runs without real secrets. `npm run test:public`
+  # passes GLUBEAN_MOCK=1 so the `mocking` suite runs offline.
+  public:
+    suites: [dummyjson, github-smoke, auth-plugin, graphql, browser, session-scope, sse, websocket, grpc, mocking]
+    capabilities:
+      browser: true
+    execution:
+      failFast: false
+    reporters:
+      console: summary
+      resultJson: results/public.result.json
+
+  # Suites that intentionally require real credentials — they fail fast
+  # when the secrets are missing (see .env.secrets.example).
+  secrets:
+    suites: [github-advanced, ai-contracts, stripe]
+    capabilities:
+      outOfBand: true        # stripe webhook capture
+    reporters:
+      console: summary
+      resultJson: results/secrets.result.json
+
+  # The full suite, all capability gates open.
+  all:
+    suites: [dummyjson, github-smoke, github-advanced, auth-plugin, graphql, browser, session-scope, sse, websocket, grpc, mocking, ai-contracts, stripe]
+    capabilities:
+      browser: true
+      outOfBand: true
+      optIn: true
+    execution:
+      failFast: false
+    reporters:
+      console: summary
+      resultJson: results/all.result.json
+
+  # Fast sanity pass: only `smoke`-tagged tests in the no-extra-setup suites.
+  smoke:
+    suites: [dummyjson, github-smoke, graphql, sse, websocket]
+    selection:
+      tags: [smoke]
+    reporters:
+      console: summary
+      resultJson: results/smoke.result.json

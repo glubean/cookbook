@@ -18,9 +18,14 @@ Each subdirectory is one topic:
 | `mocking/` | Offline drafting with `GLUBEAN_MOCK=1` |
 | `ai-contracts/`, `stripe/` | LLM-backed assertions + webhook capture (need secrets) |
 
+Each topic is a `suite` in [`../glubean.yaml`](../glubean.yaml); run them through
+the profiles declared there:
+
 ```bash
-glubean run                  # runs tests/ (this dir) by default
-glubean run tests/dummyjson  # one topic
+glubean run --profile public                     # all no-secret suites
+glubean run --profile public --suite dummyjson   # narrow to one topic
+glubean run --profile smoke                      # fast smoke-tagged pass
+glubean run --profile secrets                    # suites that need real creds
 ```
 
 Need a scratchpad for work-in-progress? That's what [`../explore/`](../explore/)
