@@ -15,7 +15,6 @@
     "run:attachment": "glubean run --profile public --suite attachment-model"
   },
   "dependencies": {
-    "glubean": "0.3.3",
     "@glubean/runner": "0.3.2",
     "@glubean/scanner": "0.3.2",
     "@glubean/sdk": "0.3.2",

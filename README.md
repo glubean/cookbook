@@ -41,8 +41,14 @@ Best for: API design reviews, spec-driven development, generating documentation 
 ```bash
 git clone https://github.com/glubean/cookbook
 cd cookbook
-pnpm install    # installs both packages
+pnpm install      # installs both packages (the @glubean/* libraries)
+npm i -g glubean  # the CLI tool, installed separately (or use `npx glubean`)
 ```
+
+A project depends on the **`@glubean/*` libraries** its test code imports
+(`@glubean/sdk`, `@glubean/runner`, and any plugins like `@glubean/graphql`),
+**not** on the `glubean` CLI package — that's a tool you run (`glubean` /
+`npx glubean`), not a library you depend on.
 
 ## Run the cookbook
 
