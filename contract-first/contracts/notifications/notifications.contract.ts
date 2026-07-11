@@ -138,19 +138,19 @@ export const getNotification = notifications("get-notification", {
   cases: {
     delivered: {
       description: "Delivered notification shows when it arrived and what was sent",
-      params: { id: "550e8400-e29b-41d4-a716-446655440000" },
+      pathParams: { id: "550e8400-e29b-41d4-a716-446655440000" },
       expect: { status: 200, schema: NotificationDetailSchema },
       deferred: "API not implemented yet",
     },
     failed: {
       description: "Failed notification includes failure reason",
-      params: { id: "550e8400-e29b-41d4-a716-446655440001" },
+      pathParams: { id: "550e8400-e29b-41d4-a716-446655440001" },
       expect: { status: 200, schema: NotificationDetailSchema },
       deferred: "API not implemented yet",
     },
     notFound: {
       description: "Unknown notification id is reported as missing",
-      params: { id: "00000000-0000-0000-0000-000000000000" },
+      pathParams: { id: "00000000-0000-0000-0000-000000000000" },
       expect: { status: 404 },
       deferred: "API not implemented yet",
     },

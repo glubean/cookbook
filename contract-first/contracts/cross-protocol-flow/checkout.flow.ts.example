@@ -1,4 +1,4 @@
-import { contract, defineHttpCase } from "@glubean/sdk";
+import { contract, defineHttpCase, workflow } from "@glubean/sdk";
 import { defineGrpcCase } from "@glubean/grpc";
 import { defineGraphqlCase } from "@glubean/graphql";
 import { z } from "zod/v4";
@@ -71,31 +71,41 @@ export const createOrder = orderApi("create-order", {
 });
 
 // @contract
-export const captureOrderPayment = payments("capture-order-payment", {
+// NOTE: the explicit factory generics <Req, Res, Cases> are required on
+// gRPC/GraphQL contracts for now — without them TS collapses the cases to
+// GrpcContractCase<unknown, unknown, any> and the workflow `in` lens loses
+// its input type (HTTP's factory preserves case types automatically).
+export const captureOrderPayment = payments<
+  { orderId: string; amount: number },
+  { paymentId: string },
+  { capture: typeof capturePayment }
+>("capture-order-payment", {
   target: "PaymentService/Capture",
   cases: { capture: capturePayment },
 });
 
 // @contract
-export const readOrderAudit = audit("read-order-audit", {
+export const readOrderAudit = audit<
+  { orderId: string; paymentId: string },
+  { order: { id: string; paymentId: string } },
+  { lookup: typeof auditLookup }
+>("read-order-audit", {
   cases: { lookup: auditLookup },
 });
 
-// @flow
-export const checkoutCrossProtocol = contract
-  .flow("checkout-cross-protocol")
-  .meta({
-    description:
-      "Create an order over HTTP, capture payment over gRPC, then verify the GraphQL audit view.",
-    tags: ["cross-protocol"],
-  })
-  .step(createOrder.case("ok"), {
+export const checkoutCrossProtocol = workflow({
+  id: "checkout-cross-protocol",
+  description:
+    "Create an order over HTTP, capture payment over gRPC, then verify the GraphQL audit view.",
+  tags: ["cross-protocol"],
+})
+  .call("create-order", createOrder.case("ok"), {
     out: (_state, res) => ({
       orderId: (res as { body: { id: string } }).body.id,
       amount: (res as { body: { total: number } }).body.total,
     }),
   })
-  .step(captureOrderPayment.case("capture"), {
+  .call("capture-payment", captureOrderPayment.case("capture"), {
     in: (state) => ({
       orderId: state.orderId,
       amount: state.amount,
@@ -105,7 +115,7 @@ export const checkoutCrossProtocol = contract
       paymentId: (res as { message: { paymentId: string } }).message.paymentId,
     }),
   })
-  .step(readOrderAudit.case("lookup"), {
+  .call("read-audit", readOrderAudit.case("lookup"), {
     in: (state) => ({
       orderId: state.orderId,
       paymentId: state.paymentId,

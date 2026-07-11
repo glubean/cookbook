@@ -38,6 +38,8 @@ Best for: API design reviews, spec-driven development, generating documentation 
 
 ## Setup
 
+Requires **Node.js 22+** (the `@glubean/*` packages declare `engines.node >=22`).
+
 ```bash
 git clone https://github.com/glubean/cookbook
 cd cookbook

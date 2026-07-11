@@ -46,13 +46,13 @@ export const getProduct = dummyjson("get-product", {
   cases: {
     found: {
       description: "Existing product returns full details with schema validation",
-      params: { id: "1" },
+      pathParams: { id: "1" },
       expect: { status: 200, schema: ProductSchema },
     },
     notFound: {
       description: "Non-existent product ID returns error",
       severity: "info",
-      params: { id: "99999" },
+      pathParams: { id: "99999" },
       expect: { status: 404 },
     },
   },

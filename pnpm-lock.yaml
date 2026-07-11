@@ -11,14 +11,14 @@ importers:
   contract-first:
     dependencies:
       '@glubean/runner':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.10.3
+        version: 0.10.3
       '@glubean/scanner':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.10.3
+        version: 0.10.3
       '@glubean/sdk':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.10.3
+        version: 0.10.3
       zod:
         specifier: 4.3.6
         version: 4.3.6
@@ -33,23 +33,23 @@ importers:
         specifier: 3.0.53
         version: 3.0.53(zod@4.3.6)
       '@glubean/auth':
-        specifier: 0.1.9
-        version: 0.1.9
+        specifier: 0.10.3
+        version: 0.10.3
       '@glubean/browser':
-        specifier: 0.1.13
-        version: 0.1.13(puppeteer-core@24.40.0)
+        specifier: 0.10.3
+        version: 0.10.3(puppeteer-core@24.40.0)
       '@glubean/graphql':
-        specifier: 0.2.4
-        version: 0.2.4
+        specifier: 0.10.3
+        version: 0.10.3
       '@glubean/grpc':
-        specifier: 0.2.4
-        version: 0.2.4(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)
+        specifier: 0.10.3
+        version: 0.10.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)
       '@glubean/runner':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.10.3
+        version: 0.10.3
       '@glubean/sdk':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.10.3
+        version: 0.10.3
       '@grpc/grpc-js':
         specifier: 1.14.3
         version: 1.14.3
@@ -105,6 +105,23 @@ packages:
   '@ai-sdk/provider@3.0.8':
     resolution: {integrity: sha512-oGMAgGoQdBXbZqNG0Ze56CHjDZ1IDYOwGYxYjO5KLSlz5HiNQ9udIXsPZ61VWaHGZ5XW/jyjmr6t2xz2jGVwbQ==}
     engines: {node: '>=18'}
+
+  '@babel/helper-string-parser@7.29.7':
+    resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@7.29.7':
+    resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/parser@7.29.7':
+    resolution: {integrity: sha512-hnORnjP/1P/zFEndoeX+n+t1RwWRJiJpM/jO7FW32Kn9r5+sJB2JWOdYo4L6k78j15eCwY3Gm/7364B1EMwtNg==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  '@babel/types@7.29.7':
+    resolution: {integrity: sha512-4zBIxpPzowiZpusoFkyGVwakdRJUyuH5PxQ/PrqghfdFWWasvnCdPfQXHrenDai+gyLARulZjZowCOj6fjT4pA==}
+    engines: {node: '>=6.9.0'}
 
   '@esbuild/aix-ppc64@0.28.0':
     resolution: {integrity: sha512-lhRUCeuOyJQURhTxl4WkpFTjIsbDayJHih5kZC1giwE+MhIzAb7mEsQMqMf18rHLsrb5qI1tafG20mLxEWcWlA==}
@@ -262,40 +279,42 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@glubean/auth@0.1.9':
-    resolution: {integrity: sha512-MZD0X5xXvsWwFhJHEPkjixmEe0NbaGkUCaV9TCqGipk2u3zfJaITwCVuO6k4jDmDAza8G8LF+K22uEyDnV/tNA==}
+  '@glubean/auth@0.10.3':
+    resolution: {integrity: sha512-VlcL6fwpSaLUGpv137yH86Wim7O68JK5ekwk0xc/zcfqlzoM5bB6+2m2iRdVxKKT1RVAXcKnJ3XW/ZWGT6k1gQ==}
+    engines: {node: '>=22'}
 
-  '@glubean/browser@0.1.13':
-    resolution: {integrity: sha512-EA1HX8WQFT13lU5nceDzM+xNPtqVeV6UivQeMo1V9vVfnYIPXTty9bgmN48ahxJ6k1+jVwsQ0ZIqoUGJjhXUvQ==}
+  '@glubean/browser@0.10.3':
+    resolution: {integrity: sha512-DNZgnxOAXOOs8E7rXs/sPw9ZkpmxrCKRgECOTCsNc1dZRilfCazTHzzMZhzqtUlFLTPkSsuxIxC3/sJrvahlFQ==}
+    engines: {node: '>=22'}
     peerDependencies:
       puppeteer-core: '>=22'
 
-  '@glubean/graphql@0.2.4':
-    resolution: {integrity: sha512-QQ0yCXkJXdQNqC6SmFqPTWOVlG10EYf8rvk+ebVnaTnXGj+QY9B33K3Yv176OyWWtrHwq7OBYahN7cBWQce4lA==}
+  '@glubean/engine@0.10.3':
+    resolution: {integrity: sha512-1s7AKQah5RdT+quqKFqO8Cpd5ZoIAkG/kzbre5x5xkVNihTKY/FjKEIw4doU+CnG4xQS6MzgUkvoKmDLGa/oCw==}
+    engines: {node: '>=22'}
 
-  '@glubean/grpc@0.2.4':
-    resolution: {integrity: sha512-3QnPfsyw0CSeY3K2yqmpoSRGsCbGdTWbqE5L05xfz9ThU56mnhhvld0qG+EI5H8Oi194yxvxI5Z4dfOtjPOitA==}
+  '@glubean/graphql@0.10.3':
+    resolution: {integrity: sha512-266SMqmxUzJegyG7BxCYIrcJLVMPo+k8VsuUPr640VfEuI8QKVMaTiNfbMm+c1ttPVFdBGfmOaEva1U0S6TusA==}
+    engines: {node: '>=22'}
+
+  '@glubean/grpc@0.10.3':
+    resolution: {integrity: sha512-ykUNvBTK5cc12IQBQlxeODzzaNJPNKCT0IMPEGOkk+QPX1CjELTCAfqJuUycO8UnsTMvXbAMdZdRLohsFSnFaw==}
+    engines: {node: '>=22'}
     peerDependencies:
       '@grpc/grpc-js': ^1.12.0
       '@grpc/proto-loader': ^0.7.0
 
-  '@glubean/runner@0.3.2':
-    resolution: {integrity: sha512-1Nd8K0CeNmdU+YCnkZ3MKt+fqeoHnVQJVAkQLAj3NfeKXaJ6RfYLti/QAJvX4WqIv1hOKbiNx3Wpg1QUIylD1g==}
+  '@glubean/runner@0.10.3':
+    resolution: {integrity: sha512-7i8SEgXErbm/6ERhQKcmutH7j6IkySUPxH+NPi5yW+o/NNMX3b6d6MgYTgge+dW4QgSXYb/PAUhJaU3pqTd68Q==}
+    engines: {node: '>=22'}
 
-  '@glubean/scanner@0.3.2':
-    resolution: {integrity: sha512-lI3N+QKlK9uNrJT1CV4g7UJ6dT3QRz3T14aXWCGY4SjsRvU9UxzWSdyKTCvsnY/xuksi28lvifMgldZsXLnUrQ==}
+  '@glubean/scanner@0.10.3':
+    resolution: {integrity: sha512-aM3bXjJAPrHSWS9hks5l46h3d+xjctL7S5gqSSSowuNPdPiLpJIeCQAnWLEGaP0HcRdOwBEdX3LuePS/rXOdJw==}
+    engines: {node: '>=22'}
 
-  '@glubean/sdk@0.1.25':
-    resolution: {integrity: sha512-SmJUp2x/+UaTssoXRHIqqGWG/IVf7R6EPwaogiZvcuK7EA1pBYAu74iMmmh3dSooUln62PzUQrzUIzhnVDwiqQ==}
-
-  '@glubean/sdk@0.2.2':
-    resolution: {integrity: sha512-DqUGdNM6Z9sOc8nsoO4rhq3jxPf0ig/oXJn3+t6zb/MV4iKANei+IZz9p/C5SNjuqUQZwoZcNd5oeuRM+Td2kw==}
-
-  '@glubean/sdk@0.2.3':
-    resolution: {integrity: sha512-fUfW/LpnvYkPvZYML1roCk+DqGP0dhXjd2cP9Q8VJ/eUVppSY+wxOpcRJnvNbmhd8H4X1sCftpH/YabK9TLi6Q==}
-
-  '@glubean/sdk@0.3.2':
-    resolution: {integrity: sha512-1tNDVUfCSvcuFntV/t7cN1cTylyvnSQCoP+CRrEvDT0N9Dj4142VaDlqa3VYSBVmfinGlY5uQoY0473m2gapkA==}
+  '@glubean/sdk@0.10.3':
+    resolution: {integrity: sha512-Csv7z0RMa+RHruJ2GRUSmo5UvraWmQkhLl4nD4wWr5dpP+auKkqaBy3Stm113zdPlC7qqA1dPSE36vBpbtPH5Q==}
+    engines: {node: '>=22'}
 
   '@grpc/grpc-js@1.14.3':
     resolution: {integrity: sha512-Iq8QQQ/7X3Sac15oB6p0FmUg/klxQvXLeileoqrTRGJYLV+/9tubbr9ipz0GKHjmXVsgFPo/+W+2cA8eNcR+XA==}
@@ -668,9 +687,9 @@ packages:
   json-schema@0.4.0:
     resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
 
-  ky@1.14.3:
-    resolution: {integrity: sha512-9zy9lkjac+TR1c2tG+mkNSVlyOpInnWdSMiue4F+kq8TwJSgv6o8jhLRg8Ho6SnZ9wOYUq/yozts9qQCfk7bIw==}
-    engines: {node: '>=18'}
+  ky@2.0.2:
+    resolution: {integrity: sha512-/GmXpo9F9W+f8n4Ivr2iH+7h7wL7jLbLKWkMlpflcCRb6kGjBfTlASEXaZ9qUgNTn4VgS0P2pwxxzQ4EM6Ulgg==}
+    engines: {node: '>=22'}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -948,6 +967,19 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
+  '@babel/helper-string-parser@7.29.7': {}
+
+  '@babel/helper-validator-identifier@7.29.7': {}
+
+  '@babel/parser@7.29.7':
+    dependencies:
+      '@babel/types': 7.29.7
+
+  '@babel/types@7.29.7':
+    dependencies:
+      '@babel/helper-string-parser': 7.29.7
+      '@babel/helper-validator-identifier': 7.29.7
+
   '@esbuild/aix-ppc64@0.28.0':
     optional: true
 
@@ -1026,51 +1058,47 @@ snapshots:
   '@esbuild/win32-x64@0.28.0':
     optional: true
 
-  '@glubean/auth@0.1.9':
+  '@glubean/auth@0.10.3':
     dependencies:
-      '@glubean/sdk': 0.1.25
+      '@glubean/sdk': 0.10.3
 
-  '@glubean/browser@0.1.13(puppeteer-core@24.40.0)':
+  '@glubean/browser@0.10.3(puppeteer-core@24.40.0)':
     dependencies:
-      '@glubean/sdk': 0.2.2
+      '@glubean/sdk': 0.10.3
       puppeteer-core: 24.40.0
 
-  '@glubean/graphql@0.2.4':
+  '@glubean/engine@0.10.3':
     dependencies:
-      '@glubean/sdk': 0.2.3
+      '@glubean/sdk': 0.10.3
+      ky: 2.0.2
 
-  '@glubean/grpc@0.2.4(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)':
+  '@glubean/graphql@0.10.3':
     dependencies:
-      '@glubean/sdk': 0.2.3
+      '@glubean/sdk': 0.10.3
+
+  '@glubean/grpc@0.10.3(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.7.15)':
+    dependencies:
+      '@glubean/sdk': 0.10.3
       '@grpc/grpc-js': 1.14.3
       '@grpc/proto-loader': 0.7.15
 
-  '@glubean/runner@0.3.2':
+  '@glubean/runner@0.10.3':
     dependencies:
-      '@glubean/scanner': 0.3.2
-      '@glubean/sdk': 0.3.2
+      '@glubean/engine': 0.10.3
+      '@glubean/scanner': 0.10.3
+      '@glubean/sdk': 0.10.3
       dotenv: 16.6.1
-      ky: 1.14.3
+      ky: 2.0.2
       p-queue: 9.3.0
       tsx: 4.22.4
 
-  '@glubean/scanner@0.3.2': {}
-
-  '@glubean/sdk@0.1.25':
+  '@glubean/scanner@0.10.3':
     dependencies:
-      yaml: 2.8.3
+      '@babel/parser': 7.29.7
 
-  '@glubean/sdk@0.2.2':
+  '@glubean/sdk@0.10.3':
     dependencies:
-      yaml: 2.8.3
-
-  '@glubean/sdk@0.2.3':
-    dependencies:
-      yaml: 2.8.3
-
-  '@glubean/sdk@0.3.2':
-    dependencies:
-      ky: 1.14.3
+      ky: 2.0.2
       yaml: 2.8.3
 
   '@grpc/grpc-js@1.14.3':
@@ -1439,7 +1467,7 @@ snapshots:
 
   json-schema@0.4.0: {}
 
-  ky@1.14.3: {}
+  ky@2.0.2: {}
 
   lodash.camelcase@4.3.0: {}
 

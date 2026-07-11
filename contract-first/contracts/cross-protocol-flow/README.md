@@ -1,6 +1,6 @@
 # Cross-Protocol Flow
 
-This example shows the intended shape for a single `contract.flow()` that
+This example shows the intended shape for a single `workflow()` that
 composes first-party protocol adapters:
 
 1. HTTP creates an order.
@@ -14,10 +14,9 @@ by the default cookbook test scripts — for two reasons:
    actually wire `contract.grpc.with(...)` / `contract.graphql.with(...)`
    you need `@glubean/grpc`, `@glubean/graphql`, plus gRPC peer deps
    (`@grpc/grpc-js`, `@grpc/proto-loader`).
-2. **`defineGrpcCase` / `defineGraphqlCase`**: shipped in the SDK
-   workspace but not yet published as `@glubean/grpc 0.2.4` /
-   `@glubean/graphql 0.2.4`. Once those release, the example becomes
-   runnable end-to-end (with backends).
+2. **Backends**: the flow needs live HTTP / gRPC / GraphQL services;
+   `defineGrpcCase` / `defineGraphqlCase` ship in the published
+   `@glubean/grpc` / `@glubean/graphql` packages (0.10.3+).
 
 To run this pattern in a real project:
 
@@ -34,9 +33,9 @@ Files:
 | File | Purpose |
 |---|---|
 | `glubean.setup.ts.example` | Installs the gRPC and GraphQL plugin manifests |
-| `checkout.flow.ts.example` | HTTP → gRPC → GraphQL flow composition |
+| `checkout.flow.ts.example` | HTTP → gRPC → GraphQL workflow composition |
 
-The flow uses each protocol's `defineXCase<Needs>(...)` factory so the
+The workflow uses each protocol's `defineXCase<Needs>(...)` factory so the
 case `needs` schema and the action input (`request`/`variables`) stay
 type-correlated — typos in the input destructuring become compile
 errors, not runtime errors.
